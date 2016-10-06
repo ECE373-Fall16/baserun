@@ -1,6 +1,6 @@
 
 
-public Game{
+public class Game{
 	int playerCount;
 	int radius;
 	int baseCount;
@@ -27,20 +27,20 @@ public Game{
 	public int getBaseCount(){
 		return baseCount;
 	}
-
+	
 	public void addBase(double[] location, int radius){
 		int i=0;
 		while(bases[i] != null)
 			i++;
-		Base bases[i] = new Base(location,radius);
+		bases[i] = new Base(location,radius);
 	}
 
 	private boolean onBase(){
-		double latitude = getLatitude();
-		double longitude = getLongitude();
+		double latitude = Location.getLatitude();
+		double longitude = Location.getLongitude();
 		for(int i = 0; i<baseCount; i++){
-			if(latitude == bases[i]){
-				if(longitude == bases[i]){
+			if(latitude == bases[i].getLatitude()){
+				if(longitude == bases[i].getLongitude()){
 					return true;
 				}
 				else return false;
@@ -49,7 +49,7 @@ public Game{
 		}
 	}
 
-	public double distanceToBase(Base a){
+	public float distanceToBase(Base a){
 		return a.getDistance();
 	}
 
@@ -61,8 +61,12 @@ public Game{
 
 	public void drawUserLoc(){
 		double[] currentLoc = new double[2];
-		currentLoc[1] = getLatitude();
-		currentLoc[2] = getLongitude();
+		currentLoc[1] = Location.getLatitude();
+		currentLoc[2] = Location.getLongitude();
 		//Draw currentLoc
+	}
+	
+	public void joinGame(User userID){
+		
 	}
 }

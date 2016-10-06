@@ -1,4 +1,4 @@
 
-public GameList{
+public class GameList{
 
 }
