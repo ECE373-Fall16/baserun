@@ -6,7 +6,9 @@ public class Game{
 	int radius;
 	int baseCount;
 	double[] location = new double[2];
-	int[] players = new int[playerCount];
+	User[] players = new User[playerCount];
+	User[] Team1 = new User[playerCount/2];
+	User[] Team2 = new User[playerCount/2];
 	Base[] bases;
 
 	public Game(int ID, int playerCount, int radius, int baseCount, double startLat, double startLong){
@@ -22,11 +24,39 @@ public class Game{
 	public boolean joinGame(int pid){
 		for(int i=0; i<playerCount; i++){
 			if(players[i] == null){
-				players[i] = pid;
+				players[i].setID() == pid;
 				return true;
 			}
 		}
 		return false;
+	}
+
+	public int joinTeam(int pid){
+		for(int i=0; i<playercount; i++){
+			if(players[i].getID() == pid)
+				if(getTeam2Size() > getTeam1Size()){
+					players[i].setTeam(1);
+					return 1;
+				} else {
+					players[i].setTeam(0);
+					return 0;
+				}
+		}
+
+	}
+
+	public int getTeam1Size(){
+		for(int i=0; i<playercount/2; i++){
+			if(Team1[i] == null)
+				return i;
+		}
+	}
+
+	public int getTeam2Size(){
+		for(int i=0; i<playercount/2; i++{
+			if(Team2[i] == null)
+				return i;
+		}
 	}
 
 	public int getPlayerCount(){
