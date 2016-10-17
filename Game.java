@@ -33,6 +33,13 @@ public class Game{
 		return playerCount;
 	}
 
+	public int getCurrPlayCount(){
+		for(int i=0; i<playerCount; i++){
+			if(players[i] == null)
+				return i;
+		}
+	}
+
 	public int getRadius(){
 		return radius;
 	}

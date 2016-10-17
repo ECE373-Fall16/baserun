@@ -56,8 +56,9 @@ public class TestSuite {
 							id[i] = (int)Math.random()*99999999;
 					}
 					test[i] = new Game(id[i],8,10,10,100,100);
-					System.out.println(test[i].getGameID());
 				}
+				GameList games = new GameList(test);
+				games.printGames();
 				int gameChoice;
 				System.out.println("Please enter Game ID you would like to join:");
 				int gameID = Integer.parseInt(scan.nextLine());
