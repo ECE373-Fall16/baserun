@@ -1,19 +1,32 @@
 
 
 public class Game{
+	int GameID;
 	int playerCount;
 	int radius;
 	int baseCount;
 	double[] location = new double[2];
+	int[] players = new int[playerCount];
 	Base[] bases;
 
-	public Game(int playerCount, int radius, int baseCount, double startLat, double startLong){
+	public Game(int ID, int playerCount, int radius, int baseCount, double startLat, double startLong){
 		this.playerCount = playerCount;
 		this.radius = radius;
 		this.baseCount = baseCount;
 		bases = new Base[baseCount];
 		location[1] = startLat;
 		location[2] = startLong;
+		GameID = ID;
+	}
+
+	public boolean joinGame(int pid){
+		for(int i=0; i<playerCount; i++){
+			if(players[i] == null){
+				players[i] = pid;
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public int getPlayerCount(){
@@ -28,6 +41,10 @@ public class Game{
 		return baseCount;
 	}
 	
+	public int getGameID(){
+		return GameID;
+	}
+
 	public void addBase(double[] location, int radius){
 		int i=0;
 		while(bases[i] != null)

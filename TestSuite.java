@@ -32,7 +32,7 @@ public class TestSuite {
 					System.out.println("1- Print playerCount");
 					System.out.println("2- Print radius");
 					System.out.println("3- Print baseCount");
-					System.out.println("0- Exit");
+					System.out.println("0- Main Menu");
 					switch (choice1) {
 					case 1:
 						System.out.println(test.getPlayerCount());
@@ -47,11 +47,32 @@ public class TestSuite {
 				}
 				break;
 			case 2:
-				System.out.println("Please enter Game ID:");
+				Game[] test = new Game[5];
+				int[] id = new int[5];
+				for(int i=0; i<5; i++){
+					id[i] = (int)Math.random()*99999999;
+					for(int j=0; j<5; j++){
+						while(id[i] == id[j])
+							id[i] = (int)Math.random()*99999999;
+					}
+					test[i] = new Game(id[i],8,10,10,100,100);
+					System.out.println(test[i].getGameID());
+				}
+				int gameChoice;
+				System.out.println("Please enter Game ID you would like to join:");
 				int gameID = Integer.parseInt(scan.nextLine());
+				for(int i=0; i<5; i++){
+					if(gameID == test[i].getGameID())
+						gameChoice == i;
+				}
 				System.out.println("Please enter User ID:");
 				int userID = Integer.parseInt(scan.nextLine());
-				
+				System.out.println("Joining Game...");
+				boolean join = test[i].joinGame(userID);
+				if(join)
+					System.out.println("Joined game!");
+				else
+					System.out.println("Game full!");
 				break;
 			case 3:
 
