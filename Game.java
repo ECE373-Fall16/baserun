@@ -24,7 +24,7 @@ public class Game{
 	public boolean joinGame(int pid){
 		for(int i=0; i<playerCount; i++){
 			if(players[i] == null){
-				players[i].setID() == pid;
+				players[i].setID(pid);
 				return true;
 			}
 		}
@@ -32,7 +32,7 @@ public class Game{
 	}
 
 	public int joinTeam(int pid){
-		for(int i=0; i<playercount; i++){
+		for(int i=0; i<playerCount; i++){
 			if(players[i].getID() == pid)
 				if(getTeam2Size() > getTeam1Size()){
 					players[i].setTeam(1);
@@ -46,14 +46,14 @@ public class Game{
 	}
 
 	public int getTeam1Size(){
-		for(int i=0; i<playercount/2; i++){
+		for(int i=0; i<playerCount/2; i++){
 			if(Team1[i] == null)
 				return i;
 		}
 	}
 
 	public int getTeam2Size(){
-		for(int i=0; i<playercount/2; i++{
+		for(int i=0; i<playerCount/2; i++){
 			if(Team2[i] == null)
 				return i;
 		}

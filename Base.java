@@ -16,10 +16,10 @@ public class Base{
 		own = 0;
 	}
 
-	public  getDistance(Base a){
+//	public  getDistance(Base a){
 		//get distance from location of base a to current location
 		
-	}
+//	}
 	
 	public void setOwner(int own){
 		this.own = own;

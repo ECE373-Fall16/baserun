@@ -13,6 +13,8 @@ public class TestSuite {
 			choice = Integer.parseInt(scan.nextLine());
 			switch (choice) {
 			case 1:
+				System.out.println("Please enter a player ID:");
+				int pid = Integer.parseInt(scan.nextLine());
 				System.out.println("Please enter a player count:");
 				int playerCount = Integer.parseInt(scan.nextLine());
 				System.out.println("Please enter a game radius:");
@@ -24,7 +26,7 @@ public class TestSuite {
 				System.out.println("Please enter a start longitude:");
 				double lon = Double.parseDouble(scan.nextLine());
 				System.out.println("Creating game...");
-				Game test = new Game(playerCount, radius, baseCount, lat, lon);
+				Game test = new Game(pid,playerCount, radius, baseCount, lat, lon);
 				System.out.println("Game created! Printing test menu...");
 				int choice1 = -1;
 				while (choice1 != 0) {
@@ -47,7 +49,7 @@ public class TestSuite {
 				}
 				break;
 			case 2:
-				Game[] test = new Game[5];
+				Game[] tests = new Game[5];
 				int[] id = new int[5];
 				for(int i=0; i<5; i++){
 					id[i] = (int)Math.random()*99999999;
@@ -55,21 +57,28 @@ public class TestSuite {
 						while(id[i] == id[j])
 							id[i] = (int)Math.random()*99999999;
 					}
-					test[i] = new Game(id[i],8,10,10,100,100);
+					tests[i] = new Game(id[i],8,10,10,100,100);
 				}
-				GameList games = new GameList(test);
+				GameList games = new GameList(tests.length,tests);
 				games.printGames();
 				int gameChoice;
 				System.out.println("Please enter Game ID you would like to join:");
 				int gameID = Integer.parseInt(scan.nextLine());
+				int a = -1;
 				for(int i=0; i<5; i++){
-					if(gameID == test[i].getGameID())
-						gameChoice == i;
+					if(gameID == tests[i].getGameID()){
+						gameChoice = i;
+						a = i;
+					}
+				}
+				if(a == -1){
+					System.out.println("Game Not Found!");
+					break;
 				}
 				System.out.println("Please enter User ID:");
 				int userID = Integer.parseInt(scan.nextLine());
 				System.out.println("Joining Game...");
-				boolean join = test[i].joinGame(userID);
+				boolean join = tests[a].joinGame(userID);
 				if(join)
 					System.out.println("Joined game!");
 				else
