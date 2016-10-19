@@ -85,7 +85,21 @@ public class TestSuite {
 					System.out.println("Game full!");
 				break;
 			case 3:
-
+				Game testGame = new Game(9999,10,1000,10,10,10);
+				System.out.println("Please enter a Base Longitude:");
+				double bLon = Double.parseDouble(scan.nextLine());
+				System.out.println("Please enter a Base Latitude:");
+				int bLat = Double.parseDouble(scan.nextLine());
+				System.out.println("Please enter a User Longitude:");
+				int uLon = Double.parseDouble(scan.nextLine());
+				System.out.println("Please enter a User Latitude:");
+				int uLat = Double.parseDouble(scan.nextLine());
+				double[] location = {bLon,bLat};
+				testGame.addBase(location,10);
+				if(testGame.onBase(uLon,uLat))
+					System.out.println("On Base!");
+				else
+					System.out.println("Off Base!");
 				break;
 			}
 		}

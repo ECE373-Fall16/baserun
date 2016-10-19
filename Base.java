@@ -9,7 +9,7 @@ public class Base{
 		radius = rad;
 	}
 	
-	public Base(double centerLat, double centerLong, int rad){
+	public Base(double centerLat, double centerLong, double rad){
 		location[1]=centerLat;
 		location[2]=centerLong;
 		radius = rad;

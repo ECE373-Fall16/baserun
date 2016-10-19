@@ -84,14 +84,16 @@ public class Game{
 
 	public void addBase(double[] location, int radius){
 		int i=0;
-		while(bases[i] != null)
-			i++;
+		while(bases[i] != null){
+			if(i < baseCount)
+				i++;
+			else
+				return;
+		}
 		bases[i] = new Base(location,radius);
 	}
 
-	private boolean onBase(){
-		double latitude = Location.getLatitude();
-		double longitude = Location.getLongitude();
+	private boolean onBase(double longitude, double latitiude){
 		for(int i = 0; i<baseCount; i++){
 			if(latitude == bases[i].getLatitude()){
 				if(longitude == bases[i].getLongitude()){
