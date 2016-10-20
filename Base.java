@@ -1,7 +1,7 @@
 
 public class Base{
 	double[] location = new double[2];
-	int radius;
+	double radius;
 	int own;
 
 	public Base(double[] location,int rad){

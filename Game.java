@@ -3,12 +3,13 @@
 public class Game{
 	int GameID;
 	int playerCount;
-	int radius;
+	int currPlayerCount = 0;
+	double radius;
 	int baseCount;
 	double[] location = new double[2];
-	User[] players = new User[playerCount];
-	User[] Team1 = new User[playerCount/2];
-	User[] Team2 = new User[playerCount/2];
+	User[] players;
+	User[] Team1;
+	User[] Team2;
 	Base[] bases;
 
 	public Game(int ID, int playerCount, int radius, int baseCount, double startLat, double startLong){
@@ -16,15 +17,19 @@ public class Game{
 		this.radius = radius;
 		this.baseCount = baseCount;
 		bases = new Base[baseCount];
-		location[1] = startLat;
-		location[2] = startLong;
+		players = new User[playerCount];
+		Team1 = new User[playerCount/2];
+		Team2 = new User[playerCount/2];
+		location[0] = startLat;
+		location[1] = startLong;
 		GameID = ID;
 	}
 
 	public boolean joinGame(int pid){
 		for(int i=0; i<playerCount; i++){
 			if(players[i] == null){
-				players[i].setID(pid);
+				players[i] = new User(pid);
+				currPlayerCount++;
 				return true;
 			}
 		}
@@ -33,7 +38,7 @@ public class Game{
 
 	public int joinTeam(int pid){
 		for(int i=0; i<playerCount; i++){
-			if(players[i].getID() == pid)
+			if(players[i].getID() == pid){
 				if(getTeam2Size() > getTeam1Size()){
 					players[i].setTeam(1);
 					return 1;
@@ -41,7 +46,9 @@ public class Game{
 					players[i].setTeam(0);
 					return 0;
 				}
+			}
 		}
+		return -1;
 
 	}
 
@@ -50,6 +57,7 @@ public class Game{
 			if(Team1[i] == null)
 				return i;
 		}
+		return Team1.length;
 	}
 
 	public int getTeam2Size(){
@@ -57,6 +65,7 @@ public class Game{
 			if(Team2[i] == null)
 				return i;
 		}
+		return Team2.length;
 	}
 
 	public int getPlayerCount(){
@@ -64,13 +73,10 @@ public class Game{
 	}
 
 	public int getCurrPlayCount(){
-		for(int i=0; i<playerCount; i++){
-			if(players[i] == null)
-				return i;
-		}
+		return currPlayerCount;
 	}
 
-	public int getRadius(){
+	public double getRadius(){
 		return radius;
 	}
 
@@ -93,21 +99,20 @@ public class Game{
 		bases[i] = new Base(location,radius);
 	}
 
-	private boolean onBase(double longitude, double latitiude){
+	public boolean onBase(double longitude, double latitude){
 		for(int i = 0; i<baseCount; i++){
 			if(latitude == bases[i].getLatitude()){
 				if(longitude == bases[i].getLongitude()){
 					return true;
 				}
-				else return false;
 			}
-			else return false;
 		}
+		return false;
 	}
 
-	public float distanceToBase(Base a){
+/*	public float distanceToBase(Base a){
 		return a.getDistance();
-	}
+	}*/
 
 	public void drawBases(){
 		for(int i=0; i<baseCount; i++){
@@ -115,12 +120,12 @@ public class Game{
 		}
 	}
 
-	public void drawUserLoc(){
+/*	public void drawUserLoc(){
 		double[] currentLoc = new double[2];
 		currentLoc[1] = Location.getLatitude();
 		currentLoc[2] = Location.getLongitude();
 		//Draw currentLoc
-	}
+	}*/
 	
 	public void joinGame(User userID){
 		

@@ -35,6 +35,7 @@ public class TestSuite {
 					System.out.println("2- Print radius");
 					System.out.println("3- Print baseCount");
 					System.out.println("0- Main Menu");
+					choice1 = Integer.parseInt(scan.nextLine());
 					switch (choice1) {
 					case 1:
 						System.out.println(test.getPlayerCount());
@@ -52,10 +53,10 @@ public class TestSuite {
 				Game[] tests = new Game[5];
 				int[] id = new int[5];
 				for(int i=0; i<5; i++){
-					id[i] = (int)Math.random()*99999999;
+					id[i] = (int)(Math.random()*99999999);
 					for(int j=0; j<5; j++){
-						while(id[i] == id[j])
-							id[i] = (int)Math.random()*99999999;
+						if(id[i] == id[j])
+							id[i] = (int)(Math.random()*99999999);
 					}
 					tests[i] = new Game(id[i],8,10,10,100,100);
 				}
@@ -78,10 +79,48 @@ public class TestSuite {
 				System.out.println("Please enter User ID:");
 				int userID = Integer.parseInt(scan.nextLine());
 				System.out.println("Joining Game...");
-				boolean join = tests[a].joinGame(userID);
-				if(join)
+				boolean join = games.joinGame(gameID,userID);
+				if(join){
 					System.out.println("Joined game!");
-				else
+					System.out.println();
+					int choice2 = -1;
+					while(choice2 != 0){
+						System.out.println("GameJoin Test Menu:");
+						System.out.println("1- Print Games");
+						System.out.println("2- Add Client to Game");
+						System.out.println("0- Exit");
+						choice2 = Integer.parseInt(scan.nextLine());
+						switch(choice2){
+							case 1: 
+								games.printGames();
+								break;
+							case 2: 
+								games.printGames();
+								System.out.println("Please enter Game ID you would like to join:");
+								gameID = Integer.parseInt(scan.nextLine());
+								a = -1;
+								for(int i=0; i<5; i++){
+									if(gameID == tests[i].getGameID()){
+										gameChoice = i;
+										a = i;
+									}
+								}
+								if(a == -1){
+									System.out.println("Game Not Found!");
+									break;
+								}
+								System.out.println("Please enter User ID:");
+								userID = Integer.parseInt(scan.nextLine());
+								System.out.println("Joining Game...");
+								join = games.joinGame(gameID,userID);
+								if(join)
+									System.out.println("Joined Game!");
+								else
+									System.out.println("Game Full!");
+								break;
+						}
+					}
+				} else
 					System.out.println("Game full!");
 				break;
 			case 3:
@@ -89,11 +128,11 @@ public class TestSuite {
 				System.out.println("Please enter a Base Longitude:");
 				double bLon = Double.parseDouble(scan.nextLine());
 				System.out.println("Please enter a Base Latitude:");
-				int bLat = Double.parseDouble(scan.nextLine());
+				double bLat = Double.parseDouble(scan.nextLine());
 				System.out.println("Please enter a User Longitude:");
-				int uLon = Double.parseDouble(scan.nextLine());
+				double uLon = Double.parseDouble(scan.nextLine());
 				System.out.println("Please enter a User Latitude:");
-				int uLat = Double.parseDouble(scan.nextLine());
+				double uLat = Double.parseDouble(scan.nextLine());
 				double[] location = {bLon,bLat};
 				testGame.addBase(location,10);
 				if(testGame.onBase(uLon,uLat))

@@ -10,8 +10,19 @@ public class GameList{
 	}
 
 	public void printGames(){
-		for(int i=0; i<gameCount; i++){
-			System.out.print(gameList[i].getGameID()+" || "+gameList[i].getCurrPlayCount()+"/"+gameList[i].getPlayerCount());
+		for(int i=0; i<gameList.length; i++){
+			System.out.println(gameList[i].getGameID()+" || "+gameList[i].getCurrPlayCount()+"/"+gameList[i].getPlayerCount());
 		}
+	}
+	
+	public boolean joinGame(int GID, int PID){
+		for(int i=0; i<gameList.length; i++){
+			if(GID == gameList[i].getGameID()){
+				if(gameList[i].joinGame(PID)){
+					return true;
+				}
+			}
+		}
+			return false;
 	}
 }
