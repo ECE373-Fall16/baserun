@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Base Run</string>
+    <string name="app_version">Version 0.1.0</string>
+    <string name="join_game">Join Game</string>
+    <string name="create_game">Create Game</string>
+    <string name="rules">Rules</string>
+
+    // Join Game
+    <string name="join_random">Random</string>
+    <string name="join_by_id">By Game ID</string>
+
+    // Join Random
+    <string name="join_random_headline">Join Random Game:</string>
+    <string name="location">Location, LN</string>
+    <string name="total_games">0000 Total</string>
+
+    // Join By ID
+    <string name="join_by_id_headline">Join Game By ID</string>
+    <string name="enter_id">Enter game ID</string>
+    <string name="join">Join</string>
+
+</resources>
