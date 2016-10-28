@@ -59,6 +59,7 @@ public class Network{
 			send.getOutputStream().close();
 			if(receive != null){
 				InputStream in = receive.getInputStream();
+				return streamToString(in);
 			}
 		} else
 			return "CONNFAIL";
@@ -72,10 +73,29 @@ public class Network{
 			send.getOutputStream().close();
 			if(receive != null){
 				InputStream in = receive.getInputStream();
+				return streamToString(in);
 			}
 			
 		} else
 			return "CONNFAIL";
+	}
+
+	public String onBase(int GID, int PID, double[] loc){
+		if(checkConn()){
+			String buff = GID+"|"+PID+"|"loc[0]+"|"+loc[1];
+			send.getOutputStream().write(buff.getBytes());
+			ssend.getOutputStream().close();
+			if(receive != null){
+				InputStream in = recieve.getInputStream();
+				return streamToString(in);
+			}
+		} else
+			return "CONNFAIL";
+	}
+
+	public String streamToString(InputStream in){
+		Scanner scan = new Scanner(in).useDelimiter("\\A");
+		return scan.hasNext() ? scan.next() : "";
 	}
 
 	public void disconnect(){

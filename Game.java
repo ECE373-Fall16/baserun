@@ -6,7 +6,7 @@ public class Game{
 	int currPlayerCount = 0;
 	double radius;
 	int baseCount;
-	double[] location = new double[2];
+	double[] GameLocation = new double[2];
 	User[] players;
 	User[] Team1;
 	User[] Team2;
@@ -25,18 +25,15 @@ public class Game{
 		GameID = ID;
 	}
 
-	public boolean joinGame(int pid){
-		for(int i=0; i<playerCount; i++){
-			if(players[i] == null){
-				players[i] = new User(pid);
-				currPlayerCount++;
-				return true;
-			}
-		}
-		return false;
+	public void refreshGame(int currPlayers, User[] currPlay, User[] t1, User[] t2, Base[] base){
+		currPlayCount = currPlayers;
+		players = currPlay;
+		Team1 = t1;
+		Team2 = t2;
+		bases = base;
 	}
 
-	public int joinTeam(int pid){
+	/*public int joinTeam(int pid){
 		for(int i=0; i<playerCount; i++){
 			if(players[i].getID() == pid){
 				if(getTeam2Size() > getTeam1Size()){
@@ -50,7 +47,7 @@ public class Game{
 		}
 		return -1;
 
-	}
+	}*/
 
 	public int getTeam1Size(){
 		for(int i=0; i<playerCount/2; i++){
@@ -88,31 +85,22 @@ public class Game{
 		return GameID;
 	}
 
-	public void addBase(double[] location, int radius){
-		int i=0;
-		while(bases[i] != null){
-			if(i < baseCount)
-				i++;
-			else
-				return;
-		}
-		bases[i] = new Base(location,radius);
-	}
-
-	public boolean onBase(double longitude, double latitude){
+	public double[] onBase(double longitude, double latitude){
+		double[] loc = new double[2];
+		loc = {latitude,longitude};
 		for(int i = 0; i<baseCount; i++){
 			if(latitude == bases[i].getLatitude()){
 				if(longitude == bases[i].getLongitude()){
-					return true;
+					return loc;
 				}
 			}
 		}
-		return false;
+		return null;
 	}
 
-/*	public float distanceToBase(Base a){
+	public float distanceToBase(Base a){
 		return a.getDistance();
-	}*/
+	}
 
 	public void drawBases(){
 		for(int i=0; i<baseCount; i++){
@@ -120,14 +108,10 @@ public class Game{
 		}
 	}
 
-/*	public void drawUserLoc(){
+	public void drawUserLoc(){
 		double[] currentLoc = new double[2];
 		currentLoc[1] = Location.getLatitude();
 		currentLoc[2] = Location.getLongitude();
 		//Draw currentLoc
-	}*/
-	
-	public void joinGame(User userID){
-		
 	}
 }
