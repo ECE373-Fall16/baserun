@@ -3,6 +3,8 @@ public class BaseRunClient{
 	int id;
 	boolean inGame;
 	Game curr;
+	GameList games;
+	Network net = new Network();
 	public static void  main(String[] args){
 		try{
 			Scanner uid = new Scanner(new FileReader("uid.db"));
@@ -19,6 +21,7 @@ public class BaseRunClient{
 		} else if(/*JOIN GAME*/){
 			if(/*GameList*/){
 				//PrintGameList to select//
+				games = new GameList(/*info from server*/);
 				//Server call to join selected game//
 				if(/*Game is joined*/){
 					inGame == true;
@@ -34,6 +37,7 @@ public class BaseRunClient{
 			//Refresh game until starts//
 		} else if(/*ON GAME SCREEN*/&& inGame){
 			//PLAY GAME BASED ON GAME RULES//
+			//Refresh call to server when needed or pushed//
 		}
 	}
 }
