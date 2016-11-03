@@ -13,6 +13,7 @@ public:
 	void setColor(char c);
 	void setTeamNum(int n);
 	int getTeamNum();
+	void playerScore(long int pid);
 private:
 	char color;
 	player_t *playerArr;

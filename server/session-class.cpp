@@ -4,9 +4,10 @@
 #include <iostream>
 
 void session::generateLocationArray(){
-	int i;
+	baseArr = new base_t[numBases];	
 	double x,y;
 	double theta = 2*3.1415/numBases;
+	int i;
 	for(i=0; i<numBases; i++){
 		x = start_x+(i*radius*1.0/numBases)*cos(i*theta);			
 		y = start_y+(i*radius*1.0/numBases)*sin(i*theta);
@@ -14,54 +15,69 @@ void session::generateLocationArray(){
 	}
 }
 
+void session::addBase(base_t b){
+	static int baseIndex=0;
+	baseArr[baseIndex++] = b;
+}
 
-class session{
-public:
-	void session();
-	void generateLocationArray();
-	void conquerBase(int tmNum, long int id, double x, double y);
-	void init_player(long int id);
-	void setRadius(double rad);
-	void setBaseRadius(double rad);
-	int getNumPlayers();
-	base_t* getBases();
-	team_t getTeam(int tmNum);
-	void restartGame();
+void session::conquerBase(int tmNum, long int id, double x, double y){
 	
-private:
-	int numPlayers;
-	int numBases;
-	double radius;
-	double baseRadius;
-	double start_x;
-	double start_y;
-	team_t team1;
-	team_t team2;
-	base_t *baseArr;
+	team *tm;
+	if(team1.getTeamNum()==tmNum){
+		tm = &team1;
+	}else{tm = &team2;}
 
-	void addBase(double x, double y);
-	void addPlayer(player p);	
+	int i;
+	for(i=0;i<numBases;i++){
+		if(baseArr[i].x==x && baseArr[i].y==y){
+			if(tmNum==1){
+				if(baseArr[i].score == 0){
+					baseArr[i].setColor(tm->getColor());
+					tm->playerScore(id);					
+				}	
+				baseArr[i].score++;	
+			}else{			
+				if(baseArr[i].score == 0){
+					baseArr[i].setColor(tm->getColor());
+					tm->playerScore(id);
+				}
+				baseArr[i].score--;
+			}	
+		}
+	}
 
 }
 
-
-include "session-structs.h"
-include <string>;
-
-typedef struct team{
-	char color;
-	player_t *playerArr;
-	int teamPoints;
-}team_t;
-
-typedef struct base{}
-
-
-typedef struct player{
-	long int id;
-	string name;
-	int points;
+void session::init_Player(long int pid){
+	if(numPlayers<maxGameSize){
+		if(numPlayers%2==0){
+			team1.addPlayer(pid);
+		}else{
+			team2.addPlayer(pid);
+		}
+	}
 }
 
+void session::setRadius(double rad){
+	radius = rad;	
+}
 
+void session::setBaseRadius(double rad){
+	baseRadius = rad;
+}
+
+int session::getNumPlayer(){return numPlayers;}
+
+void session::setMaxPlayerSize(int n){maxGameSize=n;}
+
+base_t* session::getBases(){return baseArr;}
+
+team session::getTeam(int tmNum){
+	if(team1.getTeamNum()==tmNum){return team1;
+	}else{
+		return team2;
+	}
+}
+
+void session::restartGame(){}
 

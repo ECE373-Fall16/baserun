@@ -51,3 +51,12 @@ void team::setColor(char c){color = c;}
 void team::setTeamNum(int n){tmNum = n;}
 
 int team::getTeamNum(){return tmNum;}
+
+void team::playerScore(long int pid){
+	int i;
+	for(i=0;i<numPlayers;i++){
+		if(playerArr[i]==pid){
+			playerArr[i].points++;
+		}
+	}
+}
