@@ -12,6 +12,21 @@ public class Game{
 	User[] Team2;
 	Base[] bases;
 
+	public Game(int currPlayers, User[] currPlay, Base[] base){
+		currPlayCount = currPlayers;
+		players = currPlay;
+		j = 0;
+		k = 0;
+		for(int i=0; i<players.length; i++){
+			if(players[i].getTeam() == 0){
+				Team1[j++] = players[i];
+			} else if(players[i].getTeam() == 1){
+				Team2[k++] = players[i];
+			}
+		}
+		bases = base;
+	}
+
 	public Game(int ID, int playerCount, int radius, int baseCount, double startLat, double startLong){
 		this.playerCount = playerCount;
 		this.radius = radius;
@@ -25,12 +40,12 @@ public class Game{
 		GameID = ID;
 	}
 
-	public void refreshGame(int currPlayers, User[] currPlay, User[] t1, User[] t2, Base[] base){
-		currPlayCount = currPlayers;
-		players = currPlay;
-		Team1 = t1;
-		Team2 = t2;
-		bases = base;
+	public void refreshGame(Game refresh){
+		currPlayCount = refresh.getCurrPlayCount();
+		players = currPlay.getPlayers();
+		Team1 = t1.getTeam1();
+		Team2 = t2.getTeam2();
+		bases = base.getBases();
 	}
 
 	/*public int joinTeam(int pid){
@@ -73,6 +88,10 @@ public class Game{
 		return currPlayerCount;
 	}
 
+	public void setCurrPlayCount(int count){
+		currPlayerCount = count;
+	}
+
 	public double getRadius(){
 		return radius;
 	}
@@ -83,6 +102,22 @@ public class Game{
 	
 	public int getGameID(){
 		return GameID;
+	}
+
+	public User[] getPlayers(){
+		return players;
+	}
+
+	public User[] getTeam1(){
+		return Team1;
+	}
+
+	public User[] getTeam2(){
+		return Team2;
+	}
+
+	public Base[] getBases(){
+		return bases;
 	}
 
 	public double[] onBase(double longitude, double latitude){
