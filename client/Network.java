@@ -7,7 +7,7 @@ public class Network{
 	
 	public boolean connect(String server, int port){
 		try{
-			server = new XmlRpcClient(/*ipaddress of host*/);
+			server = new XmlRpcClient("http://"+server+":"+port);
 		} catch(UnknownHostException e){
 			return false;
 		} catch(IOException e){
@@ -27,6 +27,30 @@ public class Network{
 			return true;
 		} else 
 			return false
+	}
+
+	public Game createGame(int PID, int playerCount, double radius, int baseCount, double startLat, double startLong){
+		if(checkConn()){
+			Vector params = new Vector();
+			params.addElement(new Integer(PID));
+			
+			Vector genGID = (Vector)server.execute("server.genGID",params);
+			Integer GID = (Integer)server.get(0);
+			Vector params2 = new Vector();
+			params2.addElement(new Integer(GID));
+			params2.addElement(new Integer(playerCount));
+			params2.addElement(new Double(radius));
+			params2.addElement(new Integer(baseCount));
+			params2.addElement(new Double(startLat));
+			params2.addElement(new Double(startLong));
+			Vector createGame = (Vector)server.execute("server.createGame",params2);
+			if((Integer)createGame.get(0) == 1){
+				Game temp = new Game(GID,playerCount,radius,baseCount,startLat,startLong);
+				return temp;
+			} else
+				return null;
+		}
+		return null;
 	}
 
 	public Game joinGame(int GID, int PID){
