@@ -2,17 +2,28 @@ import java.util.Scanner;
 
 public class TestSuite {
 	public static void main(String[] args) {
+		Network net = new Network()
+		net.connect("127.0.0.1",":8080");
 		Scanner scan = new Scanner(System.in);
 		int choice = -1;
 		while (choice != 0) {
+			/* OLD CLIENT TESTING SUITE
+
 			System.out.println("Welcome to the BaseRun Client Test Suite");
 			System.out.println("1- Test Make Game");
 			System.out.println("2- Test Join Game");
-			System.out.println("3- Test onBase");
+			System.out.println("3- Test onBase");*/
+			System.out.println("Welcome to the BaseRun Client Test Suite V2");
+			System.out.println("1- Test Create Game");
+			System.out.println("2- Test Join Game");
+			System.out.println("3- Test Refresh Game");
+			System.out.println("4- Test GameList");
 			System.out.println("0- Exit");
 			choice = Integer.parseInt(scan.nextLine());
 			switch (choice) {
-			case 1:
+			/* OLD CLIENT TESTING SUITE
+
+			    case 1:
 				System.out.println("Please enter a player ID:");
 				int pid = Integer.parseInt(scan.nextLine());
 				System.out.println("Please enter a player count:");
@@ -140,7 +151,37 @@ public class TestSuite {
 				else
 					System.out.println("Off Base!");
 				break;
-			}
+			}*/
+			case 1:
+				Game test = net.createGame(1,1,1.1,1,1.1,1.1);
+				if(test != null)
+					System.out.println("GAME CREATED");
+				else
+					System.out.println("GAME CREATION FAILED");
+				break;
+			case 2:
+				Game test = net.createGame(1,1,1.1,1,1.1,1.1);
+				int testGID = test.getGID();
+				Game test2 = net.joinGame(testGID,1);
+				if(test2 != null)
+					System.out.println("GAME JOINED");
+				else
+					System.out.println("GAME NOT JOINED");
+				break;
+			case 3:
+				Game test = net.refreshGame(1,1);
+				if(test != null)
+					System.out.println("GAME REFRESHED");
+				else
+					System.out.println("GAME FAILED REFRESH");
+				break;
+			case 4:
+				GameList test = net.gameList(1);
+				if(test != null)
+					test.printGames();
+				else
+					System.out.println("GAME LIST NOT POPULATED");
+				break;
 		}
 		scan.close();
 	}
