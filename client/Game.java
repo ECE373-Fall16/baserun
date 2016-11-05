@@ -27,7 +27,7 @@ public class Game{
 		bases = base;
 	}
 
-	public Game(int ID, int playerCount, int radius, int baseCount, double startLat, double startLong){
+	public Game(int ID, int playerCount, double radius, int baseCount, double startLat, double startLong){
 		this.playerCount = playerCount;
 		this.radius = radius;
 		this.baseCount = baseCount;
