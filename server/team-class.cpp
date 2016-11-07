@@ -1,4 +1,7 @@
+#ifndef team_class_h
 #include "team-class.h"
+#define team_class_h
+#endif
 
 team::team(){
 	char color = 'n';
@@ -24,20 +27,20 @@ int team::getTeamScore(){
 	return teamScore;	
 }
 
-player* team::getPlayer(long int pid){
+player_t* team::getPlayer(long int pid){
 	int i;
 	for(i=0;i<numPlayers;i++){
 		if (playerArr[i].id == pid){
-			return &(playerArr[i])
+			return &(playerArr[i]);
 		}
 	}
-	return NULL;
+	return nullptr;
 }
 
 char team::getColor(){return color;}
 
 player_t* team::getPlayerArr(){
-	return playerArr
+	return playerArr;
 }
 
 int team::getNumPlayers(){return numPlayers;}
@@ -55,7 +58,7 @@ int team::getTeamNum(){return tmNum;}
 void team::playerScore(long int pid){
 	int i;
 	for(i=0;i<numPlayers;i++){
-		if(playerArr[i]==pid){
+		if(playerArr[i].id==pid){
 			playerArr[i].points++;
 		}
 	}

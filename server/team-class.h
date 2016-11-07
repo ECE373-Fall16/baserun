@@ -1,3 +1,8 @@
+#ifndef session_structs_h
+#include "session-structs.h"
+#define session_structs_h
+#endif
+
 class team{
 public:	
 	team();
@@ -20,5 +25,5 @@ private:
 	int teamScore;
 	int numPlayers;
 	int maxPlayers;
-	int tmNum
-}
+	int tmNum;
+};
