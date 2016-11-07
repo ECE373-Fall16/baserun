@@ -18,5 +18,5 @@ Network.class:
 	javac -classpath $(CLASSPATH) Network.java
 User.class:
 	javac User.java
-
-clean: rm *.class
+clean: 
+	rm *.class
