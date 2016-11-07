@@ -1,3 +1,5 @@
+import org.apache.xmlrpc.*;
+import java.util.*;
 
 public class Network{
 	XmlRpcClient server;
@@ -23,10 +25,10 @@ public class Network{
 		Vector check = new Vector();
 		params.addElement(new String("CHECKCON"));
 		Vector checkConn = (Vector)server.execute("server.check",check);
-		if((String)checkConn.get(0).equals("CHECKCON"){
+		if((String)checkConn.get(0).equals("CHECKCON")){
 			return true;
 		} else 
-			return false
+			return false;
 	}
 
 	public Game createGame(int PID, int playerCount, double radius, int baseCount, double startLat, double startLong){
@@ -160,6 +162,6 @@ public class Network{
 			else
 				return false;
 		} else
-			return null
+			return null;
 	}
 }
