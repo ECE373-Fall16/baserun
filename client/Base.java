@@ -10,10 +10,17 @@ public class Base{
 	}
 	
 	public Base(double centerLat, double centerLong, double rad){
-		location[1]=centerLat;
-		location[2]=centerLong;
+		location[0]=centerLat;
+		location[1]=centerLong;
 		radius = rad;
 		own = 0;
+	}
+	
+	public Base(double centerLat, double centerLong, double rad, int own){
+		location[0]=centerLat;
+		location[1]=centerLong;
+		radius = rad;
+		this.own = own;
 	}
 
 //	public  getDistance(Base a){

@@ -12,7 +12,22 @@ public class Game{
 	User[] Team2;
 	Base[] bases;
 
-	public Game(int ID, int playerCount, int radius, int baseCount, double startLat, double startLong){
+	public Game(int currPlayers, User[] currPlay, Base[] base){
+		currPlayerCount = currPlayers;
+		players = currPlay;
+		int j = 0;
+		int k = 0;
+		for(int i=0; i<players.length; i++){
+			if(players[i].getTeam() == 0){
+				Team1[j++] = players[i];
+			} else if(players[i].getTeam() == 1){
+				Team2[k++] = players[i];
+			}
+		}
+		bases = base;
+	}
+
+	public Game(int ID, int playerCount, double radius, int baseCount, double startLat, double startLong){
 		this.playerCount = playerCount;
 		this.radius = radius;
 		this.baseCount = baseCount;
@@ -20,17 +35,17 @@ public class Game{
 		players = new User[playerCount];
 		Team1 = new User[playerCount/2];
 		Team2 = new User[playerCount/2];
-		location[0] = startLat;
-		location[1] = startLong;
+		GameLocation[0] = startLat;
+		GameLocation[1] = startLong;
 		GameID = ID;
 	}
 
-	public void refreshGame(int currPlayers, User[] currPlay, User[] t1, User[] t2, Base[] base){
-		currPlayCount = currPlayers;
-		players = currPlay;
-		Team1 = t1;
-		Team2 = t2;
-		bases = base;
+	public void refreshGame(Game refresh){
+		currPlayerCount = refresh.getCurrPlayCount();
+		players = refresh.getPlayers();
+		Team1 = refresh.getTeam1();
+		Team2 = refresh.getTeam2();
+		bases = refresh.getBases();
 	}
 
 	/*public int joinTeam(int pid){
@@ -73,6 +88,10 @@ public class Game{
 		return currPlayerCount;
 	}
 
+	public void setCurrPlayCount(int count){
+		currPlayerCount = count;
+	}
+
 	public double getRadius(){
 		return radius;
 	}
@@ -85,9 +104,27 @@ public class Game{
 		return GameID;
 	}
 
+	public User[] getPlayers(){
+		return players;
+	}
+
+	public User[] getTeam1(){
+		return Team1;
+	}
+
+	public User[] getTeam2(){
+		return Team2;
+	}
+
+	public Base[] getBases(){
+		return bases;
+	}
+
+	/*//NEEDS ANDROID API TO BE FUNCTIONAL//
 	public double[] onBase(double longitude, double latitude){
 		double[] loc = new double[2];
-		loc = {latitude,longitude};
+		loc[0] = latitude;
+		loc[1] = longitude;
 		for(int i = 0; i<baseCount; i++){
 			if(latitude == bases[i].getLatitude()){
 				if(longitude == bases[i].getLongitude()){
@@ -114,4 +151,5 @@ public class Game{
 		currentLoc[2] = Location.getLongitude();
 		//Draw currentLoc
 	}
+	*/
 }

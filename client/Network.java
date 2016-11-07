@@ -1,25 +1,19 @@
-import java.net.*;
-import java.io.*;
+import org.apache.xmlrpc.*;
+import java.util.*;
 
 public class Network{
-	LocalSocket send = new LocalSocket();
-	LocalSocket recieve = new LocalSocket();
-	LocalServerSocket server;
-	Scanner scan;
-	ConnectivityManager connMgr = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+	XmlRpcClient server;
 	public Network(){
 		
 	}
 	
-	public boolean connect(String server, int port){
+	public boolean connect(String serv, int port){
 		try{
-			server = new LocalServerSocket(/*ADDRESS*/);
-			receive = server.accept();
-			send.connect(new LocalSocketAddress(/*SOCKET ADDRESS*/));
-		} catch(UnknownHostException e){
-			return false;
-		} catch(IOException e){
+			String temp  = "http://"+serv+":"+port;
+			server = new XmlRpcClient(temp);
+		} catch(Exception e){
 			e.printStackTrace();
+			return false;
 		}
 		if(checkConn())
 			return true;
@@ -28,79 +22,172 @@ public class Network{
 	}
 	
 	private boolean checkConn(){
-		NetworkInfo netInf = connMgr.getActiveNetworkInfo();
-		if(client != null){
-			if(netInf != null & netInf.isConnected())
+		try {
+			Vector check = new Vector();
+			check.addElement(new String("CHECKCON"));
+			Vector checkConn = (Vector)server.execute("server.check",check);
+			if(((String)checkConn.get(0)).equals("CHECKCON")){
 				return true;
-			else
+			} else 
 				return false;
-		} else
+		} catch(Exception e){
+			e.printStackTrace();
 			return false;
+		}
 	}
 
-	public String joinGame(int GID, int PID){
+	public Game createGame(int PID, int playerCount, double radius, int baseCount, double startLat, double startLong){
 		if(checkConn()){
+			try {
+				Vector params = new Vector();
+				params.addElement(new Integer(PID));
+				Vector genGID = (Vector)server.execute("server.genGID",params);
+				Integer GID = (Integer)genGID.get(0);
+				Vector params2 = new Vector();
+				params2.addElement(new Integer(GID));
+				params2.addElement(new Integer(playerCount));
+				params2.addElement(new Double(radius));
+				params2.addElement(new Integer(baseCount));
+				params2.addElement(new Double(startLat));
+				params2.addElement(new Double(startLong));
+				Vector createGame = (Vector)server.execute("server.createGame",params2);
+				if((Integer)createGame.get(0) == 1){
+					Game temp = new Game(GID,playerCount,radius,baseCount,startLat,startLong);
+					return temp;
+				} else
+					return null;
+			} catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+
+	public Game joinGame(int GID, int PID){
+		Game temp;
+		if(checkConn()){
+			try {
 			//CALL SERVER, RETURN GAME VALUE
-			String buff = GID+"|"+PID+"|0";
-			send.getOutputStream().write(buff.getBytes());
-			send.getOutputStream().close();
-			if(receive != null){
-				InputStream in = receive.getInputStream();
+				Vector params = new Vector();
+				params.addElement(new Integer(GID));
+				params.addElement(new Integer(PID));
+				Vector join = (Vector)server.execute("server.join",params);
+				Integer playCount = (Integer)join.get(0);
+				User[] players = new User[playCount];
+				int j = 0;
+				for(int i=1; j<playCount; i++){
+					players[j] = new User((Integer)join.get(i++));
+					players[j++].setTeam((Integer)join.get(i));
+				}
+				Integer BaseCount = (Integer)join.get(playCount+1);
+				Base[] bases = new Base[BaseCount];
+				j=0;
+				for(int i=1; j<BaseCount; i++){
+					Double lat = (Double)join.get((playCount+1)+i++);
+					Double lon = (Double)join.get((playCount+1)+i++);
+					Double rad = (Double)join.get((playCount+1)+i);
+					bases[j++] = new Base(lat,lon,rad);
+				}
+				Integer totPlayCount = (Integer)join.get(playCount+BaseCount+1);
+				Double gameLat = (Double)join.get(playCount+BaseCount+2);
+				Double gameLong = (Double)join.get(playCount+BaseCount+3);
+				Double gameRad = (Double)join.get(playCount+BaseCount+4);
+				temp = new Game(GID,totPlayCount,gameRad,BaseCount,gameLat,gameLong);
+				temp.setCurrPlayCount(playCount);
+				return temp;
+			} catch(Exception e){
+				e.printStackTrace();
+				return null;
 			}
 		} else 
-			return "CONNFAIL";
+			return null;
 	}
 
-	public String refreshGame(int GID, int PID){
+	public Game refreshGame(int GID, int PID){
+		Game temp;
 		if(checkConn()){
+			try {
 			//CALL SERVER, RETURN GAME UPDATE
-			String buff = GID+"|"+PID+"|1";
-			send.getOutputStream().write(buff.getBytes());
-			send.getOutputStream().close();
-			if(receive != null){
-				InputStream in = receive.getInputStream();
-				return streamToString(in);
+				Vector params = new Vector();
+				params.addElement(new Integer(GID));
+				params.addElement(new Integer(PID));
+				Vector refresh = (Vector)server.execute("server.join",params);
+				Integer playCount = (Integer)refresh.get(0);
+				User[] players = new User[playCount];
+				int j = 0;
+				for(int i=1; j<playCount; i++){
+					players[j] = new User((Integer)refresh.get(i++));
+					players[j++].setTeam((Integer)refresh.get(i));
+				}
+				Integer BaseCount = (Integer)refresh.get(playCount+1);
+				Base[] bases = new Base[BaseCount];
+				j=0;
+				for(int i=1; j<BaseCount; i++){
+					Double lat = (Double)refresh.get((playCount+1)+i++);
+					Double lon = (Double)refresh.get((playCount+1)+i++);
+					Double rad = (Double)refresh.get((playCount+1)+i);
+					bases[j++] = new Base(lat,lon,rad);
+				}
+				temp = new Game(playCount,players,bases);
+				return temp;
+			} catch(Exception e){
+				e.printStackTrace();
+				return null;
 			}
 		} else
-			return "CONNFAIL";
+			return null;
 	}
 
-	public String gameList(int PID){
+	public GameList gameList(int PID){
+		GameList temp;
 		if(checkConn()){
+			try {
 			//CALL SERVER, RETURN GAME LIST
-			String buff = "0|"+PID;
-			send.getOutputStream().write(buff.getBytes());
-			send.getOutputStream().close();
-			if(receive != null){
-				InputStream in = receive.getInputStream();
-				return streamToString(in);
+				Vector params = new Vector();
+				params.addElement(new Integer(PID));
+				Vector gameList = (Vector)server.execute("server.gameList", params);
+				int gcount = (Integer)gameList.get(0);
+				int[] gids = new int[gcount];
+				for(int i=0; i<gcount; i++){
+					gids[i] = (Integer)gameList.get(i+1);
+				}
+				int[] players = new int[gcount];
+				for(int i=0; i<gcount; i++){
+					players[i] = (Integer)gameList.get(gcount+i+1);
+				}
+				int[] currPlayers = new int[gcount];
+				for(int i=0; i<gcount; i++){
+					currPlayers[i] = (Integer)gameList.get(2*gcount+i+1);
+				}
+				temp = new GameList(gcount,gids, players, currPlayers);
+				return temp;
+			} catch(Exception e){
+				e.printStackTrace();
+				return null;
 			}
-			
 		} else
-			return "CONNFAIL";
+			return null;
 	}
 
-	public String onBase(int GID, int PID, double[] loc){
+	public boolean onBase(int GID, int PID, double[] loc){
+		Game temp;
 		if(checkConn()){
-			String buff = GID+"|"+PID+"|"loc[0]+"|"+loc[1];
-			send.getOutputStream().write(buff.getBytes());
-			ssend.getOutputStream().close();
-			if(receive != null){
-				InputStream in = recieve.getInputStream();
-				return streamToString(in);
+			try {
+				Vector params = new Vector();
+				params.addElement(new Integer(GID));
+				params.addElement(new Integer(PID));
+				params.addElement(new Double(loc[0]));
+				params.addElement(new Double(loc[1]));
+				Vector onBase = (Vector)server.execute("server.onBase", params);
+				if((Integer)onBase.get(0) == 1)
+					return true;
+				else
+					return false;
+			} catch(Exception e) {
+				e.printStackTrace();
+				return false;
 			}
 		} else
-			return "CONNFAIL";
-	}
-
-	public String streamToString(InputStream in){
-		Scanner scan = new Scanner(in).useDelimiter("\\A");
-		return scan.hasNext() ? scan.next() : "";
-	}
-
-	public void disconnect(){
-		send.close();
-		recieve.close();
-		server.close();
+			return false;
 	}
 }
