@@ -13,10 +13,10 @@ public class Game{
 	Base[] bases;
 
 	public Game(int currPlayers, User[] currPlay, Base[] base){
-		currPlayCount = currPlayers;
+		currPlayerCount = currPlayers;
 		players = currPlay;
-		j = 0;
-		k = 0;
+		int j = 0;
+		int k = 0;
 		for(int i=0; i<players.length; i++){
 			if(players[i].getTeam() == 0){
 				Team1[j++] = players[i];
@@ -35,17 +35,17 @@ public class Game{
 		players = new User[playerCount];
 		Team1 = new User[playerCount/2];
 		Team2 = new User[playerCount/2];
-		location[0] = startLat;
-		location[1] = startLong;
+		GameLocation[0] = startLat;
+		GameLocation[1] = startLong;
 		GameID = ID;
 	}
 
 	public void refreshGame(Game refresh){
-		currPlayCount = refresh.getCurrPlayCount();
-		players = currPlay.getPlayers();
-		Team1 = t1.getTeam1();
-		Team2 = t2.getTeam2();
-		bases = base.getBases();
+		currPlayerCount = refresh.getCurrPlayCount();
+		players = refresh.getPlayers();
+		Team1 = refresh.getTeam1();
+		Team2 = refresh.getTeam2();
+		bases = refresh.getBases();
 	}
 
 	/*public int joinTeam(int pid){
@@ -120,9 +120,11 @@ public class Game{
 		return bases;
 	}
 
+	/*//NEEDS ANDROID API TO BE FUNCTIONAL//
 	public double[] onBase(double longitude, double latitude){
 		double[] loc = new double[2];
-		loc = {latitude,longitude};
+		loc[0] = latitude;
+		loc[1] = longitude;
 		for(int i = 0; i<baseCount; i++){
 			if(latitude == bases[i].getLatitude()){
 				if(longitude == bases[i].getLongitude()){
@@ -149,4 +151,5 @@ public class Game{
 		currentLoc[2] = Location.getLongitude();
 		//Draw currentLoc
 	}
+	*/
 }

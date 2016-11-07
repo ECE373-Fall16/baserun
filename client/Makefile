@@ -1,7 +1,7 @@
 CLASSPATH=./lib/commons-codec-1.3.jar:./lib/xmlrpc-2.0.1.jar:.
 
-all: Base.class GameList.class TestServer.class TestSuite.class BaseRunClient.class Game.class Network.class User.class
-
+all: Base.class Network.java User.class TestServer.class Game.class
+	
 Base.class:
 	javac Base.java
 GameList.class:

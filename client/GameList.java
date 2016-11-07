@@ -14,7 +14,7 @@ public class GameList{
 	}
 
 	public void printGames(){
-		for(int i=0; i<gameList.length; i++){
+		for(int i=0; i<gameCount; i++){
 			System.out.println(GIDs[i]+" || "+currPlayers[i]+"/"+players[i]);
 		}
 	}
