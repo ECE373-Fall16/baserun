@@ -13,6 +13,7 @@ public class Game{
 	Base[] bases;
 
 	public Game(int currPlayers, User[] currPlay, Base[] base){
+		System.out.println("FUCK OFF AND DIE");
 		currPlayerCount = currPlayers;
 		players = currPlay;
 		int j = 0;

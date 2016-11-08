@@ -2,8 +2,8 @@ import java.util.Scanner;
 
 public class TestSuite {
 	public static void main(String[] args) {
-		Network net = new Network()
-		net.connect("127.0.0.1",":8080");
+		Network net = new Network();
+		net.connect("127.0.0.1",8080);
 		Scanner scan = new Scanner(System.in);
 		int choice = -1;
 		while (choice != 0) {
@@ -18,6 +18,7 @@ public class TestSuite {
 			System.out.println("2- Test Join Game");
 			System.out.println("3- Test Refresh Game");
 			System.out.println("4- Test GameList");
+			System.out.println("5- Test Networking");
 			System.out.println("0- Exit");
 			choice = Integer.parseInt(scan.nextLine());
 			switch (choice) {
@@ -152,36 +153,61 @@ public class TestSuite {
 					System.out.println("Off Base!");
 				break;
 			}*/
-			case 1:
-				Game test = net.createGame(1,1,1.1,1,1.1,1.1);
-				if(test != null)
-					System.out.println("GAME CREATED");
-				else
-					System.out.println("GAME CREATION FAILED");
-				break;
-			case 2:
-				Game test = net.createGame(1,1,1.1,1,1.1,1.1);
-				int testGID = test.getGID();
-				Game test2 = net.joinGame(testGID,1);
-				if(test2 != null)
-					System.out.println("GAME JOINED");
-				else
-					System.out.println("GAME NOT JOINED");
-				break;
-			case 3:
-				Game test = net.refreshGame(1,1);
-				if(test != null)
-					System.out.println("GAME REFRESHED");
-				else
-					System.out.println("GAME FAILED REFRESH");
-				break;
-			case 4:
-				GameList test = net.gameList(1);
-				if(test != null)
-					test.printGames();
-				else
-					System.out.println("GAME LIST NOT POPULATED");
-				break;
+				case 1:
+					Game test = net.createGame(1,1,1.1,1,1.1,1.1);
+					if(test != null)
+						System.out.println("GAME CREATED");
+					else
+						System.out.println("GAME CREATION FAILED");
+					break;
+				case 2:
+					Game test2 = net.createGame(1,1,1.1,1,1.1,1.1);
+					int testGID = test2.GameID;
+					Game test3 = net.joinGame(testGID,1);
+					if(test3 != null)
+						System.out.println("GAME JOINED");
+					else
+						System.out.println("GAME NOT JOINED");
+					break;
+				case 3:
+					Game test4 = net.refreshGame(1,1);
+					if(test4 != null)
+						System.out.println("GAME REFRESHED");
+					else
+						System.out.println("GAME FAILED REFRESH");
+					break;
+				case 4:
+					GameList test5 = net.gameList(1);
+					if(test5 != null)
+						test5.printGames();
+					else
+						System.out.println("GAME LIST NOT POPULATED");
+					break;
+				case 5:
+					if(net.createGame(1,1,1,1,1,1) != null)
+						System.out.println("CREATE GAME PASSED");
+					else
+						System.out.println("CREATE GAME FAILED");
+					if(net.joinGame(1,99999999) != null)
+						System.out.println("JOIN GAME PASSED");
+					else
+						System.out.println("JOIN GAME FAILED");
+					if(net.refreshGame(1,99999999) != null)
+						System.out.println("REFRESH GAME PASSED");
+					else
+						System.out.println("REFRESH GAME FAILED");
+					if(net.gameList(1) != null)
+						System.out.println("GAME LIST PASSED");
+					else
+						System.out.println("GAME LIST FAILED");
+					double[] loc = new double[2];
+					loc[0] = 1;
+					loc[1] = 1;
+					if(net.onBase(1,1,loc))
+						System.out.println("ON BASE PASSED");
+					else
+						System.out.println("ON BASE FAILED");
+			}
 		}
 		scan.close();
 	}

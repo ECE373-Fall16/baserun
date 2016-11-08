@@ -12,7 +12,6 @@ public class Network{
 			String temp  = "http://"+serv+":"+port;
 			server = new XmlRpcClient(temp);
 		} catch(Exception e){
-			e.printStackTrace();
 			return false;
 		}
 		if(checkConn())
@@ -23,15 +22,18 @@ public class Network{
 	
 	private boolean checkConn(){
 		try {
+			System.out.println("CHECKING CONNECTION");
 			Vector check = new Vector();
 			check.addElement(new String("CHECKCON"));
 			Vector checkConn = (Vector)server.execute("server.check",check);
 			if(((String)checkConn.get(0)).equals("CHECKCON")){
+				System.out.println("CONN VERIFIED");
 				return true;
-			} else 
+			} else {
+				System.out.println("CONN FAILED");
 				return false;
+			}
 		} catch(Exception e){
-			e.printStackTrace();
 			return false;
 		}
 	}
@@ -57,7 +59,7 @@ public class Network{
 				} else
 					return null;
 			} catch(Exception e){
-				e.printStackTrace();
+				return null;
 			}
 		}
 		return null;
@@ -77,15 +79,16 @@ public class Network{
 				int j = 0;
 				for(int i=1; j<playCount; i++){
 					players[j] = new User((Integer)join.get(i++));
-					players[j++].setTeam((Integer)join.get(i));
+					players[j].setTeam((Integer)join.get(i));
+					j++;
 				}
-				Integer BaseCount = (Integer)join.get(playCount+1);
+				Integer BaseCount = (Integer)join.get(playCount+3);
 				Base[] bases = new Base[BaseCount];
 				j=0;
 				for(int i=1; j<BaseCount; i++){
-					Double lat = (Double)join.get((playCount+1)+i++);
-					Double lon = (Double)join.get((playCount+1)+i++);
-					Double rad = (Double)join.get((playCount+1)+i);
+					Double lat = (Double)join.get((playCount+3)+i++);
+					Double lon = (Double)join.get((playCount+3)+i++);
+					Double rad = (Double)join.get((playCount+3)+i);
 					bases[j++] = new Base(lat,lon,rad);
 				}
 				Integer totPlayCount = (Integer)join.get(playCount+BaseCount+1);
@@ -95,8 +98,7 @@ public class Network{
 				temp = new Game(GID,totPlayCount,gameRad,BaseCount,gameLat,gameLong);
 				temp.setCurrPlayCount(playCount);
 				return temp;
-			} catch(Exception e){
-				e.printStackTrace();
+			} catch(Exception e){	
 				return null;
 			}
 		} else 
@@ -111,27 +113,27 @@ public class Network{
 				Vector params = new Vector();
 				params.addElement(new Integer(GID));
 				params.addElement(new Integer(PID));
-				Vector refresh = (Vector)server.execute("server.join",params);
+				Vector refresh = (Vector)server.execute("server.refresh",params);
 				Integer playCount = (Integer)refresh.get(0);
 				User[] players = new User[playCount];
 				int j = 0;
 				for(int i=1; j<playCount; i++){
 					players[j] = new User((Integer)refresh.get(i++));
-					players[j++].setTeam((Integer)refresh.get(i));
+					players[j].setTeam((Integer)refresh.get(i));
+					j++;
 				}
-				Integer BaseCount = (Integer)refresh.get(playCount+1);
+				Integer BaseCount = (Integer)refresh.get(playCount+3);
 				Base[] bases = new Base[BaseCount];
 				j=0;
 				for(int i=1; j<BaseCount; i++){
-					Double lat = (Double)refresh.get((playCount+1)+i++);
-					Double lon = (Double)refresh.get((playCount+1)+i++);
-					Double rad = (Double)refresh.get((playCount+1)+i);
+					Double lat = (Double)refresh.get((playCount+3)+i++);
+					Double lon = (Double)refresh.get((playCount+3)+i++);
+					Double rad = (Double)refresh.get((playCount+3)+i);
 					bases[j++] = new Base(lat,lon,rad);
 				}
 				temp = new Game(playCount,players,bases);
 				return temp;
 			} catch(Exception e){
-				e.printStackTrace();
 				return null;
 			}
 		} else
@@ -162,7 +164,6 @@ public class Network{
 				temp = new GameList(gcount,gids, players, currPlayers);
 				return temp;
 			} catch(Exception e){
-				e.printStackTrace();
 				return null;
 			}
 		} else
@@ -184,7 +185,6 @@ public class Network{
 				else
 					return false;
 			} catch(Exception e) {
-				e.printStackTrace();
 				return false;
 			}
 		} else

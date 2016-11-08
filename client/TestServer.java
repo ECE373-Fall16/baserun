@@ -1,7 +1,17 @@
 import org.apache.xmlrpc.*;
 import java.util.*;
 public class TestServer{
-	public Vector genID(int pid){
+
+	public Vector check(String check){
+		Vector ret = new Vector();
+		if(check.equals("CHECKCON"))
+			ret.addElement(check);
+		else
+			ret.addElement("FAILED");
+		return ret;
+	}
+
+	public Vector genGID(int pid){
 		Vector GID = new Vector();
 		GID.addElement(new Integer(99999999)); //would generate and store GID on server
 		System.out.println("CALLING GENID");
