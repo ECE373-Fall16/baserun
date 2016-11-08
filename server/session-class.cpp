@@ -9,6 +9,11 @@
 #define session_structs_h
 #endif
 
+#ifndef team_class_h
+#include "team-class.h"
+#define team_class_h
+#endif
+
 #ifndef math_h
 #include <cmath>
 #define session_structs_h
@@ -18,6 +23,10 @@
 #include <iostream>
 #define io_h
 #endif
+
+session::session(long int id){
+	gid = id;
+}
 
 void session::generateLocationArray(){
 	baseArr = new base_t[numBases];	
@@ -99,6 +108,10 @@ team session::getTeam(int tmNum){
 		return *team2;
 	}
 }
+
+void session::setGid(long int id){gid=id;}
+
+long int session::getGid(){return gid;}
 
 void session::restartGame(){}
 

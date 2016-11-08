@@ -10,6 +10,7 @@
 
 class session{
 public:
+	session(long int id);
 	session();
 	~session();
 	void generateLocationArray();
@@ -22,8 +23,11 @@ public:
 	base_t* getBases();
 	team getTeam(int tmNum);
 	void restartGame();
+	void setGid(long int id);
+	long int getGid();
 	
 private:
+	long int gid;
 	int numPlayers;
 	int maxGameSize;
 	int numBases;
