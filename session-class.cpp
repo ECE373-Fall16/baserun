@@ -9,6 +9,11 @@
 #define session_structs_h
 #endif
 
+#ifndef team_class_h
+#include "team-class.h"
+#define team_class_h
+#endif
+
 #ifndef math_h
 #include <cmath>
 #define session_structs_h
