@@ -18,6 +18,7 @@ public:
 	void setColor(char c);
 	void setTeamNum(int n);
 	int getTeamNum();
+	bool playerThere(long int pid);
 	void playerScore(long int pid);
 private:
 	char color;
