@@ -5,10 +5,20 @@
 
 class sessionList{
 	public:
-		void addSession(long int gid);
+		sessionList();
+		~sessionList();
+		long int addSession(long int pid);
 		session* getSession(long int gid);
 		void deleteSession(long int gid);
 		void restartSession(long int gid);
+		session* getList();
+		int getNumSession();
+		void refreshPlayerCount();
+		int getPlayerCount();
 	private:
-		session* sList;	
+		session* sList;
+		int index;
+		long int gidInd;
+		int numSession;
+		int playerCount;
 };

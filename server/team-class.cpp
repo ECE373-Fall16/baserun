@@ -34,7 +34,9 @@ player_t* team::getPlayer(long int pid){
 			return &(playerArr[i]);
 		}
 	}
-	return nullptr;
+//	return nullptr;
+	return &playerArr[0];
+
 }
 
 char team::getColor(){return color;}
@@ -54,6 +56,15 @@ void team::setColor(char c){color = c;}
 void team::setTeamNum(int n){tmNum = n;}
 
 int team::getTeamNum(){return tmNum;}
+
+bool team::playerThere(long int pid){
+	for(int i=0; i<numPlayers; i++){
+		if(playerArr[i].id == pid){
+			return true;
+		}
+	}
+	return false;
+}
 
 void team::playerScore(long int pid){
 	int i;

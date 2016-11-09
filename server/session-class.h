@@ -21,10 +21,19 @@ public:
 	int getNumPlayers();
 	void setMaxPlayerSize(int n);
 	base_t* getBases();
-	team getTeam(int tmNum);
+	team* getTeam(int tmNum);
 	void restartGame();
 	void setGid(long int id);
 	long int getGid();
+	void setNumBases(int n);
+	void setStart(double x, double y);
+	double getStartX();
+	double getStartY();
+	int getPTeamNum(long int pid);
+	int getNumBases();
+	double getRadius();
+	double getBaseRadius();	
+	int getMaxPlayerSize();
 	
 private:
 	long int gid;
