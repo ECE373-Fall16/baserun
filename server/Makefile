@@ -10,6 +10,9 @@ all: ServerTest.class server.cpp sessionList-class.cpp team-class.cpp
 client:
 	@java -classpath $(CLASSPATH) ServerTest
 
+server:
+	./xmlrpc-server
+
 ServerTest.class:
 	javac -classpath $(CLASSPATH) ServerTest.java
 
