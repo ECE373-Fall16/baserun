@@ -17,6 +17,8 @@ sessionList::sessionList(){
 	sList=new session[10]; 
 }
 
+sessionList::~sessionList(){}
+
 long int sessionList::addSession(long int pid){
 	playerCount =0;
 	numSession++;

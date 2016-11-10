@@ -28,6 +28,8 @@ session::session(long int id){
 	gid = id;
 	numBases=0;
 	numPlayers=0;	
+	team1 = new team;
+	team2 = new team;
 	team1->setTeamNum(1);
 	team2->setTeamNum(2);
 }
@@ -36,9 +38,13 @@ session::session(){
 	gid=0;
 	numBases=0;
 	numPlayers=0;	
+	team1 = new team;
+	team2 = new team;
 	team1->setTeamNum(1);
 	team2->setTeamNum(2);
 }
+
+session::~session(){}
 
 void session::generateLocationArray(){
 	baseArr = new base_t[numBases];	
@@ -59,7 +65,7 @@ void session::addBase(base_t b){
 	baseArr[baseIndex++] = b;
 }
 
-void session::conquerBase(int tmNum, long int id, double x, double y){
+int session::conquerBase(int tmNum, long int id, double x, double y){
 	
 	team *tm;
 	if(team1->getTeamNum()==tmNum){
@@ -67,23 +73,27 @@ void session::conquerBase(int tmNum, long int id, double x, double y){
 	}else{tm = team2;}
 
 	int i;
+	int success=0;
 	for(i=0;i<numBases;i++){
 		if(baseArr[i].x==x && baseArr[i].y==y){
 			if(tmNum==1){
 				if(baseArr[i].score == 0){
 					baseArr[i].color = tm->getColor();
-					tm->playerScore(id);					
+					tm->playerScore(id);
+					success = 1;					
 				}	
 				baseArr[i].score++;	
 			}else{			
 				if(baseArr[i].score == 0){
 					baseArr[i].color = tm->getColor();
 					tm->playerScore(id);
+					success = 1;
 				}
 				baseArr[i].score--;
 			}	
 		}
 	}
+	return success;
 
 }
 

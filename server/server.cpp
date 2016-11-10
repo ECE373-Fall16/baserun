@@ -46,7 +46,7 @@ public:
 
         paramList.verifyEnd(1);
 
-	long int gid = slist.addSession(pid);
+	long int gid = slist.addSession((long int)pid);
 
         vector<xmlrpc_c::value> arrayData;
         arrayData.push_back(xmlrpc_c::value_int(gid));
@@ -79,6 +79,8 @@ public:
 	game->setNumBases(numBases);
 	game->setStart(startX,startY);
 
+	game->generateLocationArray();	
+
 	int success =1;
 	
         vector<xmlrpc_c::value> arrayData;
@@ -109,7 +111,7 @@ public:
 	team* otherTm = game->getTeam((tmNum+1)%2);
 
         vector<xmlrpc_c::value> arrayData;
-        arrayData.push_back(xmlrpc_c::value_int(game->getNumPlayers()));
+        arrayData.push_back(xmlrpc_c::value_int(30));//game->getNumPlayers()));
 
 	player_t* pArr = tm->getPlayerArr();
 	player_t* pArr2 = otherTm->getPlayerArr();
@@ -153,7 +155,7 @@ public:
 class refresh : public xmlrpc_c::method {
 public:
     refresh(){
-        this->_signature = "A:ii";
+        this->_signature = "A:i";
         this->_help = "This method adds a player";
     }
     void execute(xmlrpc_c::paramList const& paramList, xmlrpc_c::value * const  retvalP) {
@@ -209,7 +211,7 @@ public:
 class gameList : public xmlrpc_c::method {
 public:
     gameList(){
-        this->_signature = "A:ii";
+        this->_signature = "A:i";
         this->_help = "This method adds a player";
     }
     void execute(xmlrpc_c::paramList const& paramList, xmlrpc_c::value * const  retvalP) {
@@ -220,59 +222,18 @@ public:
 
         vector<xmlrpc_c::value> arrayData;
 
-	
 	session* glist = slist.getList();
 	
 	int numS = slist.getNumSession();
-
-	player_t* pArr;
-	player_t* pArr2;
-	base_t* bases;
-	team* tm1;
-	team* tm2;
-	int numP,numP2,baseSize;
 	
 	arrayData.push_back(xmlrpc_c::value_int(numS));
-	for(int i=0; i<numS; i++){
-		arrayData.push_back(xmlrpc_c::value_int(glist[i].getGid()));
-	}
-
-	slist.refreshPlayerCount();
-	arrayData.push_back(xmlrpc_c::value_int(slist.getPlayerCount()));
 
 	for(int gi=0; gi<numS; gi++){
-		
-		tm1 = glist[gi].getTeam(1);
-		tm2 = glist[gi].getTeam(2);
-	
+
+		arrayData.push_back(xmlrpc_c::value_int(glist[gi].getGid()));
+		arrayData.push_back(xmlrpc_c::value_int(glist[gi].getMaxPlayerSize()));
 	        arrayData.push_back(xmlrpc_c::value_int(glist[gi].getNumPlayers()));
 
-		pArr = tm1->getPlayerArr();
-		pArr2 = tm2->getPlayerArr();
-		numP = tm1->getNumPlayers();	
-		numP2 = tm2->getNumPlayers();
-
-
-		for(int i=0; i<numP; i++){
-        		arrayData.push_back(xmlrpc_c::value_int(pArr[i].id));
-        		arrayData.push_back(xmlrpc_c::value_int(1));
-		}
-		for(int i=0; i<numP2; i++){
-        		arrayData.push_back(xmlrpc_c::value_int(pArr2[i].id));
-        		arrayData.push_back(xmlrpc_c::value_int(2));
-		}
-
-		baseSize = glist[gi].getNumBases();
-
-        	arrayData.push_back(xmlrpc_c::value_int(baseSize));
-		bases = glist[gi].getBases();
-
-		for(int i=0; i<baseSize; i++){
-        		arrayData.push_back(xmlrpc_c::value_double(bases[i].x));
-	        	arrayData.push_back(xmlrpc_c::value_double(bases[i].y));
-        		arrayData.push_back(xmlrpc_c::value_double(glist[i].getBaseRadius()));
-
-		}
 	}
  
 	xmlrpc_c::value_array array1(arrayData);
@@ -285,7 +246,7 @@ public:
 class onBase : public xmlrpc_c::method {
 public:
     onBase(){
-        this->_signature = "A:iidididd";
+        this->_signature = "A:iidd";
         this->_help = "This method initializes the session and returns it GID";
     }
     void execute(xmlrpc_c::paramList const& paramList, xmlrpc_c::value * const  retvalP) {
@@ -299,10 +260,8 @@ public:
 
 	session *game = slist.getSession(gid);
 	int tmNum = game->getPTeamNum(pid);
-	game->conquerBase(tmNum,pid,x,y);
+	int success = game->conquerBase(tmNum,pid,x,y);
 
-	int success =1;
-	
         vector<xmlrpc_c::value> arrayData;
         arrayData.push_back(xmlrpc_c::value_int(success));
         xmlrpc_c::value_array array1(arrayData);
@@ -327,7 +286,10 @@ public:
 
 int main(int const, const char ** const) {
 
+
     try {
+	cout<<"YOOOO"<<endl;
+
         xmlrpc_c::registry myRegistry;
 
         xmlrpc_c::methodPtr const genID_m(new genID);
