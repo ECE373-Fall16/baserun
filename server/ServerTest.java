@@ -10,11 +10,26 @@ public class ServerTest{
 	
 			XmlRpcClient server = new XmlRpcClient("http://127.0.0.1:8080/RPC2");
 
+			
+			Vector p1 = new Vector();
+			p1.addElement(new Integer(5));
+			Vector genID = (Vector)server.execute("server.genID",p1);
+	
+			int gid = (Integer)genID.get(0);
+			System.out.println(gid);		
+
 			Vector params = new Vector();
-			params.addElement(new Integer(111111));
-			params.addElement(new Integer(999999));
+			params.addElement(gid);
+			params.addElement(new Integer(6));
 			Vector join = (Vector)server.execute("server.join",params);
 			System.out.println((Integer)join.get(0));		
+
+			Vector p2 = new Vector();
+			p2.addElement(new Integer(7));
+			Vector genID = (Vector)server.execute("server.genID",p1);
+			System.out.println((Integer)genID.get(0));		
+
+
 	/*		if(joinGame(11111111,99999999))
 				System.out.println("JOIN GAME PASSED");
 			else

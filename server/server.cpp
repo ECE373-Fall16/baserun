@@ -111,7 +111,7 @@ public:
 	team* otherTm = game->getTeam((tmNum+1)%2);
 
         vector<xmlrpc_c::value> arrayData;
-        arrayData.push_back(xmlrpc_c::value_int(30));//game->getNumPlayers()));
+        arrayData.push_back(xmlrpc_c::value_int(game->getNumPlayers()));
 
 	player_t* pArr = tm->getPlayerArr();
 	player_t* pArr2 = otherTm->getPlayerArr();

@@ -21,9 +21,6 @@ server:
 client:
 	@java -classpath $(CLASSPATH) ServerTest
 
-server:
-	./xmlrpc-server
-
 ServerTest.class:
 	javac -classpath $(CLASSPATH) ServerTest.java
 
