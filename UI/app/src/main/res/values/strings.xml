@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Base Run</string>
-    <string name="app_version">Version 0.1.0</string>
+    <string name="app_version">0.1.0</string>
     <string name="join_game">Join Game</string>
     <string name="create_game">Create Game</string>
-    <string name="rules">Rules</string>
+    <string name="rules">How To Play</string>
 
     // Join Game
     <string name="join_random">Random</string>
@@ -19,4 +19,48 @@
     <string name="enter_id">Enter game ID</string>
     <string name="join">Join</string>
 
+    // Create Game
+    <string name="num_players">Number of Players</string>
+    <string name="num_bases">Number of Bases</string>
+    <string name="game_dur">Game Duration (Hours)</string>
+    <string name="start_game">Start Game</string>
+
+    <string-array name="num_players_array">
+        <item>2</item>
+        <item>4</item>
+        <item>6</item>
+        <item>8</item>
+        <item>10</item>
+    </string-array>
+
+    <string-array name="num_bases_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <string-array name="game_dur_array">
+        <item>0.5</item>
+        <item>1</item>
+        <item>1.5</item>
+        <item>2</item>
+        <item>2.5</item>
+        <item>3</item>
+    </string-array>
+
+    // Rules
+    <string name="rules_1">- 2 teams of equal length compete to capture the most bases within a specific time frame</string>
+    <string name="rules_2">- Teams begin from a centralized location, and bases generate within some radius around the location</string>
+    <string name="rules_3">- Every time a player enters a base, it checks how many players are on that base, if the number surpasses the opponents and that value must be greater than not equal to the opponent\'s value</string>
+    <string name="rules_4">Ex: Opposing team previously had 1 player on a base, to take command of it, you would need a minimum of 2 players to be on the base at the same time to capture that base</string>
+    <string name="rules_5">- At time end, whoever has most bases wins</string>
+    <string name="rules_6">- You do not need to stay on a base to keep it captured</string>
+    <string name="title_activity_game_screen">Map</string>
+
+    //Game Screen
+    <string name="timer">00:00:00</string>
+    <string name="red">0</string>
+    <string name="blue">0</string>
 </resources>

@@ -16,7 +16,8 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginStart="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="16dp" />
+        android:layout_marginLeft="16dp"
+        android:textSize="26sp" />
 
     <TextView
         android:text="@string/location"

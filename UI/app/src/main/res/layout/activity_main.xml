@@ -55,7 +55,8 @@
         android:layout_height="80dp"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintLeft_creator="1"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:onClick="CreateGame" />
 
     <Button
         android:text="@string/rules"
@@ -72,10 +73,10 @@
         android:layout_height="80dp"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintLeft_creator="1"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:onClick="Rules" />
 
     <TextView
-        android:text="@string/app_version"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView2"
