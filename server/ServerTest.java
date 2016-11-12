@@ -10,7 +10,7 @@ public class ServerTest{
 	
 			XmlRpcClient server = new XmlRpcClient("http://127.0.0.1:8080/RPC2");
 
-			
+/*			
 			Vector p1 = new Vector();
 			p1.addElement(new Integer(5));
 			Vector genID = (Vector)server.execute("server.genID",p1);
