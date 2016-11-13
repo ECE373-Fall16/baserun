@@ -11,7 +11,7 @@
 
     // Join Random
     <string name="join_random_headline">Join Random Game:</string>
-    <string name="location">Location, LN</string>
+    <string name="location">Amherst, MA</string>
     <string name="total_games">0000 Total</string>
 
     // Join By ID
@@ -59,8 +59,12 @@
     <string name="rules_6">- You do not need to stay on a base to keep it captured</string>
     <string name="title_activity_game_screen">Map</string>
 
-    //Game Screen
+    // Game Screen
     <string name="timer">00:00:00</string>
     <string name="red">0</string>
     <string name="blue">0</string>
+
+    // Contacting Server
+    <string name="contact">Contacting server,</string>
+    <string name="wait">please wait</string>
 </resources>

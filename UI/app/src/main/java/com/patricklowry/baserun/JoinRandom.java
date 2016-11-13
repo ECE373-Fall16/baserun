@@ -2,6 +2,9 @@ package com.patricklowry.baserun;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ListView;
+import android.widget.ProgressBar;
 
 public class JoinRandom extends AppCompatActivity {
     GameList list;
@@ -17,6 +20,9 @@ public class JoinRandom extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join_random);
-        //Intent intent = getIntent();
+        ListView random = (ListView) findViewById(R.id.randomList);
+        ProgressBar loading = (ProgressBar) findViewById(R.id.progressBar);
+        //loading.setVisibility(View.INVISIBLE);
+        //random.setVisibility(View.VISIBLE);
     }
 }
