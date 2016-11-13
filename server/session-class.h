@@ -14,7 +14,7 @@ public:
 	session();
 	~session();
 	void generateLocationArray();
-	void conquerBase(int tmNum, long int id, double x, double y);
+	int conquerBase(int tmNum, long int id, double x, double y);
 	void init_Player(long int id);
 	void setRadius(double rad);
 	void setBaseRadius(double rad);
