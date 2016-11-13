@@ -10,6 +10,17 @@ import android.widget.ArrayAdapter;
 
 
 public class CreateGame extends AppCompatActivity {
+    int players;
+    int bases;
+    Game created;
+    Network net = new Network();
+
+    public Game createGame(){
+        net.connect("127.0.0.1",8080);
+	return (created = net.createGame(1,10,1.0,10,1.0,1.0));
+	//net.createGame format is int PID, int playerCount, double radius, int baseCount, double startLat, double startLong
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
