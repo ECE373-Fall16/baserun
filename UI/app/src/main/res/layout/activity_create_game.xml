@@ -135,5 +135,6 @@
         android:textSize="18sp"
         android:layout_height="60dp"
         android:layout_width="150dp"
-        android:background="@android:color/holo_green_dark" />
+        android:background="@android:color/holo_green_dark"
+        android:onClick="startGame" />
 </android.support.constraint.ConstraintLayout>

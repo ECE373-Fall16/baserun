@@ -39,6 +39,15 @@
     </item>
     <item
         is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/src/main/java/com/patricklowry/baserun/xmlrpc-2.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="bd44503793dfa244692c215d73ee7f52016c64a3">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/2/xmlrpc-2.0.1_0589b49e490ba7d09a64823f9843d1f832ac9cb4/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/9.8.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
@@ -115,7 +124,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="d570f047fc448d6bcd9240d3462b3655d3210ba6">
+        sha1="c3a4b3680fb73bdd8b904803bd4abbd11efdf439">
         <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_47e55cf25c7d0e3a1ddc0fced298520038452f02/classes.dex" />
     </item>
     <item
@@ -444,6 +453,15 @@
     </item>
     <item
         is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/src/main/java/com/patricklowry/baserun/commons-codec-1.3.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="fd32786786e2adb664d5ecc965da47629dca14ba">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/2/commons-codec-1.3_0c523110e37db1207977c5d3c2571431dd988094/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads-lite/9.8.0/jars/classes.jar"
         jumboMode="true"
         optimize="true"
@@ -511,7 +529,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
-        sha1="37bdfd08f2cbed98cc83d328feae6776b7cfeed9">
+        sha1="239d9d590f4ec5f445016c7184f015015c3d9f9e">
         <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_0e0cec8a4dfad192a177a1c000f69eaa116c574f/classes.dex" />
     </item>
     <item
