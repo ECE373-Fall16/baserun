@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class TestSuite {
 	public static void main(String[] args) {
 		Network net = new Network();
-		net.connect("127.0.0.1",8080);
+		net.connect("104.196.221.210",3389);
 		Scanner scan = new Scanner(System.in);
 		int choice = -1;
 		while (choice != 0) {

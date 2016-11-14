@@ -9,7 +9,7 @@ public class Network{
 	
 	public boolean connect(String serv, int port){
 		try{
-			String temp  = "http://"+serv+":"+port;
+			String temp  = "http://"+serv+":"+port+"/RPC2";
 			server = new XmlRpcClient(temp);
 		} catch(Exception e){
 			return false;
