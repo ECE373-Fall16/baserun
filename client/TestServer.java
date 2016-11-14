@@ -24,6 +24,15 @@ public class TestServer{
 		System.out.println("CALLING CREATE GAME");
 		return created;
 	}
+	
+	public Vector testSend(int pc, int bc, double dur){
+		Vector send = new Vector();
+		send.addElement(new Integer(pc));
+		send.addElement(new Integer(bc));
+		send.addElement(new Double(dur));
+		System.out.println("CALLING TESTSEND");
+		return send;	
+	}
 
 	public Vector join(int gid, int pid){
 		Vector game = new Vector();
