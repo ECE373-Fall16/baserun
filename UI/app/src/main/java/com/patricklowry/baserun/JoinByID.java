@@ -19,4 +19,12 @@ public class JoinByID extends AppCompatActivity {
         setContentView(R.layout.activity_join_by_id);
         //Intent intent = getIntent();
     }
+	
+    public void GameScreen(View view) {
+	if(joined != null){
+	    Intent begin = new Intent(this, GameScreen.class);
+	    intent.putExtra("EXTRA_GAME", joined);
+	    startActivity(begin);
+	}
+    }
 }

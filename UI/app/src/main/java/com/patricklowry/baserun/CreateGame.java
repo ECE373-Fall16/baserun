@@ -12,13 +12,22 @@ import android.widget.ArrayAdapter;
 public class CreateGame extends AppCompatActivity {
     int players;
     int bases;
+    double dur;
     Game created;
     Network net = new Network();
 
-    public Game createGame(){
+    /*public Game createGame(){
         net.connect("127.0.0.1",8080);
 	return (created = net.createGame(1,10,1.0,10,1.0,1.0));
 	//net.createGame format is int PID, int playerCount, double radius, int baseCount, double startLat, double startLong
+    }*/ //WILL BE USED AFTER .1
+
+    public void VerifyGame(){
+	net.connect("104.196.195.139",8080);
+	if(net.sendToServer(players, bases, dur))
+	    //DO SOMETHING IF SERVER SEES GAME CALL
+	else
+	    //DO SOMETHING IF SERVER DOES NOT GET GAME CALL
     }
 
     @Override
@@ -43,7 +52,10 @@ public class CreateGame extends AppCompatActivity {
     }
 
     public void GameScreen(View view) {
-        Intent begin = new Intent(this, GameScreen.class);
-        startActivity(begin);
+	if(created != null){
+            Intent begin = new Intent(this, GameScreen.class);
+	    intent.putExtra("EXTRA_GAME", created);
+	    startActivity(begin);
+	}
     }
 }

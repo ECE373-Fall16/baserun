@@ -39,6 +39,18 @@ public class Network{
 			return false;
 		}
 	}
+	
+	public boolean sendToServer(int playCount, int baseCount, double dur){
+		Vector send = new Vector();
+		send.addElement(new Integer(playCount));
+		send.addElement(new Integer(baseCount));
+		send.addElement(new Double(dur));
+		Vector recv = (Vector)server.execute("server.testSend", send);
+		if((Integer)recv.get(0) == playCount && (Integer)recv.get(1) == baseCount && (Double)recv.get(2))
+			return true;
+		else 
+			return false;
+	}
 
 	public Game createGame(int PID, int playerCount, double radius, int baseCount, double startLat, double startLong){
 		if(checkConn()){
