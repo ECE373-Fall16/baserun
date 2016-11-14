@@ -288,7 +288,7 @@ int main(int const, const char ** const) {
 
 
     try {
-	cout<<"YOOOO"<<endl;
+	cout<<"SERVER INTIALIZE"<<endl;
 
         xmlrpc_c::registry myRegistry;
 
