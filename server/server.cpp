@@ -284,6 +284,34 @@ public:
     }
 };
 
+class testSend : public xmlrpc_c::method {
+public:
+    testSend(){
+        this->_signature = "A:iid";
+        this->_help = "This method shows it recieved data from client (connected to UI)";
+    }
+    void execute(xmlrpc_c::paramList const& paramList, xmlrpc_c::value * const  retvalP) {
+        
+        int const i1(paramList.getInt(0));
+        int const i2(paramList.getInt(1));
+	double const d1(paramList.getDouble(2));
+        paramList.verifyEnd(3);
+
+	cout<<"CREATING GAME"<<endl;
+	cout<<"   PLAYER COUNT: "<<i1<<endl;
+	cout<<"   BASE COUNT: "<<i2<<endl;
+	cout<<"   DURATION: "<<d1<<endl;
+	cout<<endl;	
+
+        vector<xmlrpc_c::value> arrayData;
+        arrayData.push_back(xmlrpc_c::value_int(i1));
+        arrayData.push_back(xmlrpc_c::value_int(i2));
+        arrayData.push_back(xmlrpc_c::value_double(d1));
+        xmlrpc_c::value_array array1(arrayData);
+        *retvalP = array1;
+	}
+};
+
 int main(int const, const char ** const) {
 
 
@@ -314,10 +342,13 @@ int main(int const, const char ** const) {
         xmlrpc_c::methodPtr const check_m(new check);
         myRegistry.addMethod("server.check", check_m);
 
+        xmlrpc_c::methodPtr const testSend_m(new testSend);
+        myRegistry.addMethod("server.testSend", testSend_m);
+
         xmlrpc_c::serverAbyss myAbyssServer(
             xmlrpc_c::serverAbyss::constrOpt()
             .registryP(&myRegistry)
-            .portNumber(8080));
+            .portNumber(3389));
         
         myAbyssServer.run();
         // xmlrpc_c::serverAbyss.run() never returns
