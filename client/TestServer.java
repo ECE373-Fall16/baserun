@@ -3,6 +3,7 @@ import java.util.*;
 public class TestServer{
 
 	public Vector check(String check){
+		System.out.println("CHECK REQUEST RECEIVED");
 		Vector ret = new Vector();
 		if(check.equals("CHECKCON"))
 			ret.addElement(check);
@@ -30,7 +31,11 @@ public class TestServer{
 		send.addElement(new Integer(pc));
 		send.addElement(new Integer(bc));
 		send.addElement(new Double(dur));
-		System.out.println("CALLING TESTSEND");
+		System.out.println("CREATING GAME...");
+		System.out.println("PLAYER COUNT = "+pc);
+		System.out.println("BASE COUNT = "+bc);
+		System.out.println("DURATION = "+dur);
+		System.out.println();
 		return send;	
 	}
 
@@ -96,7 +101,7 @@ public class TestServer{
 	
 	public static void main(String args[]){
 		try {
-			WebServer server = new WebServer(8080);
+			WebServer server = new WebServer(3389);
         		server.addHandler("server", new TestServer());
 			server.start();
 		} catch(Exception e){
