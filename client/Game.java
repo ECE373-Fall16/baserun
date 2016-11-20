@@ -48,22 +48,6 @@ public class Game{
 		bases = refresh.getBases();
 	}
 
-	/*public int joinTeam(int pid){
-		for(int i=0; i<playerCount; i++){
-			if(players[i].getID() == pid){
-				if(getTeam2Size() > getTeam1Size()){
-					players[i].setTeam(1);
-					return 1;
-				} else {
-					players[i].setTeam(0);
-					return 0;
-				}
-			}
-		}
-		return -1;
-
-	}*/
-
 	public int getTeam1Size(){
 		for(int i=0; i<playerCount/2; i++){
 			if(Team1[i] == null)
@@ -120,17 +104,12 @@ public class Game{
 		return bases;
 	}
 
-	//NEEDS ANDROID API TO BE FUNCTIONAL//
+	//BELOW NEEDS ANDROID API TO BE FUNCTIONAL//
 	public boolean onBase(double longitude, double latitude){
 		double[] loc = new double[2];
 		loc[0] = latitude;
 		loc[1] = longitude;
 		for(int i = 0; i<baseCount; i++){
-			//if(latitude == bases[i].getLatitude()){
-			//	if(longitude == bases[i].getLongitude()){
-			//		return true;
-			//	}
-			//}
 			if(distanceToBase(bases[i]) <= bases[i].getRadius())
 				return true;
 		}
@@ -141,16 +120,26 @@ public class Game{
 		return a.getDistance();
 	}
 
-	public void drawBases(){
+	public GoogleMap drawBases(GoogleMap map){ //call onMapReady
 		for(int i=0; i<baseCount; i++){
-			//Draw bases[i]
+			//Draw bases[i] with circle
+			double[] location = bases[i].getLocation();
+			bases[i].circle = map.addCircle(new CircleOptions()
+				.center(new LatLng(location[0],location[1]))
+				.radius(bases[i].getRadius)
+				.strokeColor(Color.BLACK)
+				.fillColor(Color.GREY));
 		}
+		return map;
 	}
 
-	public void drawUserLoc(){
+	public GoogleMap drawUserLoc(GoogleMap map){
 		double[] currentLoc = new double[2];
-		currentLoc[1] = Location.getLatitude();
-		currentLoc[2] = Location.getLongitude();
-		//Draw currentLoc
+		currentLoc[0] = Location.getLatitude();
+		currentLoc[1] = Location.getLongitude();
+		//Draw currentLoc with marker
+		map.addMarker(new MarkerOptions()
+			.position(new LatLng(currentLoc[0],currentLoc[1])));
+		return map;
 	}
 }

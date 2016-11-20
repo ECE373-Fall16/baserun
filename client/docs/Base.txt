@@ -13,5 +13,8 @@ public class Base
 	double[]|getLocation()
 	-Returns location of base
 
+	double|getRadius()
+	-Returns base radius
+
 	int|getOwner()
 	-Returns owner

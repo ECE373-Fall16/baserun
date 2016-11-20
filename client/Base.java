@@ -3,6 +3,7 @@ public class Base{
 	private double[] location = new double[2];
 	private double radius;
 	private int own;
+	Circle circle;
 
 	public Base(double[] location, double rad){
 		this.location = location;
@@ -29,6 +30,10 @@ public class Base{
 		return location;
 	}
 	
+	public double getRadius(){
+		return radius;
+	}
+
 	public int getOwner(){
 		return own;
 	}
