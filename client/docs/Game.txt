@@ -1,0 +1,54 @@
+public class Game
+    Constructors:
+	public Game(int currPlayers, User[] currPlay, Base[] base)
+	    -Used exclusively for refresh game
+        public Game(int ID, int playerCount, double radius, int baseCount, double startLat, double startLong)
+	    -Used for createGame or joinGame calls
+    Methods:
+	void|refreshGame(Game refresh)
+	    -Refreshes game when passed a game item
+
+	int|getTeam1Size()
+	    -Returns player count of Team1
+
+	int|getTeam2Size()
+	    -Returns player count of Team2
+
+	int|getPlayerCount()
+	    -Returns player capacity of game
+
+	int|getCurrPlayCount()
+	    -Returns current player count of game
+
+	double|getRadius()
+	    -Returns game radius
+
+	double|getBaseCount()
+	    -Returns number of bases in game
+
+	int|getGameID()
+	    -Returns game ID
+
+	User[]|getPlayers()
+	    -Returns all current players
+
+	User[]|getTeam1()
+	    -Returns Team1 players
+
+	User[]|getTeam2()
+	    -Returns Team2 players
+
+	Base[]|getBases()
+	    -Returns bases in game
+
+	boolean|onBase(double longitude, double latitude)
+	    -Checks if user is on a base
+
+	float|distanceToBase(Base base)
+	    -Returns the current distance to the base
+
+	void|drawBases()
+	    -Draws bases on screen
+
+	void|drawUserLoc()
+	    -Draws user location on screen

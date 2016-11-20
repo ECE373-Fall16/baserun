@@ -1,0 +1,27 @@
+public class Network
+    public methods:
+	boolean|connect()
+	    -Makes RPC connection to server at static IP address 104.196.221.210
+	
+	boolean|checkConn()
+	    -Verifies connection to server
+	
+	Game|createGame(int PID, int playerCount, double radius, int baseCount, double startLat, double startLong)
+	    -Sends game data to server, creates game
+	
+	Game|joinGame(int GID, int PID)
+	    -Requests for the client to join game
+	    -Returns game which has been requested
+
+	Game|refreshGame(int GID,int PID)
+	    -Pulls updated game info
+	    -Returns partial game (currPlayers, User[] currPlay, Base[] base)
+		-Auto-Populates User[] Team1, User[] Team2
+		-Game can be refreshed with a Game.refreshGame(Game) call
+
+	GameList|gameList(int PID)
+	    -Pulls list of current games
+	    -Returns array of current games
+
+	boolean|onBase(int GID, int PID, double[] loc)
+	    -Sends verification request to server when client is on a base

@@ -1,0 +1,12 @@
+public class User
+    constructor
+	User(int ID)
+    public methods
+	int|getID()
+	-Returns UserID
+
+	int|getTeam()
+	-Returns TeamID
+
+	void|setTeam(int teamID)
+	-Sets User team

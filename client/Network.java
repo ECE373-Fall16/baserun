@@ -2,15 +2,15 @@ import org.apache.xmlrpc.*;
 import java.util.*;
 
 public class Network{
-	XmlRpcClient server;
+	private XmlRpcClient server;
+
 	public Network(){
 		
 	}
 	
-	public boolean connect(String serv, int port){
+	public boolean connect(){
 		try{
-			String temp  = "http://"+serv+":"+port+"/RPC2";
-			server = new XmlRpcClient(temp);
+			server = new XmlRpcClient("http://104.196.221.210/RPC2");
 		} catch(Exception e){
 			return false;
 		}
@@ -66,7 +66,7 @@ public class Network{
 	}
 
 	public Game joinGame(int GID, int PID){
-		Game temp;
+		private Game temp;
 		if(checkConn()){
 			try {
 			//CALL SERVER, RETURN GAME VALUE

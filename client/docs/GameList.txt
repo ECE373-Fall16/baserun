@@ -1,0 +1,9 @@
+public class GameList
+    constructor
+	GameList(int count, int[] gids, int[] maxPlayers, int[] currPlayers)
+    public methods
+	void|printGames()
+	-Prints current games
+
+	Game|joinGame(int GID, int PID)
+	-Requests joinGame from server

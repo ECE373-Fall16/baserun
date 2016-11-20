@@ -1,24 +1,17 @@
 
 public class Base{
-	double[] location = new double[2];
-	double radius;
-	int own;
+	private double[] location = new double[2];
+	private double radius;
+	private int own;
 
-	public Base(double[] location,int rad){
+	public Base(double[] location, double rad){
 		this.location = location;
-		radius = rad;
-	}
-	
-	public Base(double centerLat, double centerLong, double rad){
-		location[0]=centerLat;
-		location[1]=centerLong;
 		radius = rad;
 		own = 0;
 	}
 	
-	public Base(double centerLat, double centerLong, double rad, int own){
-		location[0]=centerLat;
-		location[1]=centerLong;
+	public Base(double[] location, double rad, int own){
+		this.location = location;
 		radius = rad;
 		this.own = own;
 	}
@@ -34,14 +27,6 @@ public class Base{
 
 	public double[] getLocation(){
 		return location;
-	}
-	
-	public double getLatitude(){
-		return location[1];
-	}
-	
-	public double getLongitude(){
-		return location[2];
 	}
 	
 	public int getOwner(){

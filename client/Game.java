@@ -1,19 +1,18 @@
 
 
 public class Game{
-	int GameID;
-	int playerCount;
-	int currPlayerCount = 0;
-	double radius;
-	int baseCount;
-	double[] GameLocation = new double[2];
-	User[] players;
-	User[] Team1;
-	User[] Team2;
-	Base[] bases;
+	private int GameID;
+	private int playerCount;
+	private int currPlayerCount = 0;
+	private double radius;
+	private int baseCount;
+	private double[] GameLocation = new double[2];
+	private User[] players;
+	private User[] Team1;
+	private User[] Team2;
+	private Base[] bases;
 
 	public Game(int currPlayers, User[] currPlay, Base[] base){
-		System.out.println("FUCK OFF AND DIE");
 		currPlayerCount = currPlayers;
 		players = currPlay;
 		int j = 0;
@@ -89,7 +88,7 @@ public class Game{
 		return currPlayerCount;
 	}
 
-	public void setCurrPlayCount(int count){
+	private void setCurrPlayCount(int count){
 		currPlayerCount = count;
 	}
 
@@ -121,19 +120,21 @@ public class Game{
 		return bases;
 	}
 
-	/*//NEEDS ANDROID API TO BE FUNCTIONAL//
-	public double[] onBase(double longitude, double latitude){
+	//NEEDS ANDROID API TO BE FUNCTIONAL//
+	public boolean onBase(double longitude, double latitude){
 		double[] loc = new double[2];
 		loc[0] = latitude;
 		loc[1] = longitude;
 		for(int i = 0; i<baseCount; i++){
-			if(latitude == bases[i].getLatitude()){
-				if(longitude == bases[i].getLongitude()){
-					return loc;
-				}
-			}
+			//if(latitude == bases[i].getLatitude()){
+			//	if(longitude == bases[i].getLongitude()){
+			//		return true;
+			//	}
+			//}
+			if(distanceToBase(bases[i]) <= bases[i].getRadius())
+				return true;
 		}
-		return null;
+		return false;
 	}
 
 	public float distanceToBase(Base a){
@@ -152,5 +153,4 @@ public class Game{
 		currentLoc[2] = Location.getLongitude();
 		//Draw currentLoc
 	}
-	*/
 }

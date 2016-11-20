@@ -1,0 +1,17 @@
+public class Base
+    constructors:
+	Base(double[] location, double rad)
+	-Base without owner
+	
+	Base(double[] location, double rad, int own)
+	-Base with owner
+
+    public methods:
+	void|setOwner(int own)
+	-Sets base owner
+
+	double[]|getLocation()
+	-Returns location of base
+
+	int|getOwner()
+	-Returns owner
