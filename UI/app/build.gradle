@@ -27,7 +27,9 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:24.2.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta3'
-    compile 'com.google.android.gms:play-services:9.8.0'
+    compile 'com.google.android.gms:play-services:10.0.0'
     testCompile 'junit:junit:4.12'
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
+    compile files('src/main/java/com/patricklowry/baserun/commons-codec-1.3.jar')
+    compile files('src/main/java/com/patricklowry/baserun/xmlrpc-2.0.1.jar')
 }

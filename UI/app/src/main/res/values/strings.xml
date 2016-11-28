@@ -63,4 +63,6 @@
     <string name="timer">00:00:00</string>
     <string name="red">0</string>
     <string name="blue">0</string>
+    <string name="title_activity_gameplay">Map</string>
+    <string name="google_maps_key">AIzaSyC9Pn--RTnzI1I83ScjzEfS73gdTYIlLiI</string>
 </resources>

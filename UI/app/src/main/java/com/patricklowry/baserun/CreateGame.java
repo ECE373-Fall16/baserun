@@ -2,6 +2,7 @@ package com.patricklowry.baserun;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,12 +23,13 @@ public class CreateGame extends AppCompatActivity {
 	//net.createGame format is int PID, int playerCount, double radius, int baseCount, double startLat, double startLong
     }*/ //WILL BE USED AFTER .1
 
-    public void VerifyGame(){
-	net.connect("104.196.195.139",8080);
-	if(net.sendToServer(players, bases, dur))
-	    //DO SOMETHING IF SERVER SEES GAME CALL
-	else
-	    //DO SOMETHING IF SERVER DOES NOT GET GAME CALL
+    public void VerifyGame() {
+        net.connect("104.196.195.139", 8080);
+        if (net.sendToServer(players, bases, dur)) {
+            //DO SOMETHING IF SERVER SEES GAME CALL
+        } else {
+            //DO SOMETHING IF SERVER DOES NOT GET GAME CALL
+        }
     }
 
     @Override
@@ -52,10 +54,10 @@ public class CreateGame extends AppCompatActivity {
     }
 
     public void GameScreen(View view) {
-	if(created != null){
-            Intent begin = new Intent(this, GameScreen.class);
-	    intent.putExtra("EXTRA_GAME", created);
-	    startActivity(begin);
-	}
+        if(created != null){
+            Intent begin = new Intent(this, Gameplay.class);
+            begin.putExtra("EXTRA_GAME", (Parcelable) created);
+            startActivity(begin);
+        }
     }
 }

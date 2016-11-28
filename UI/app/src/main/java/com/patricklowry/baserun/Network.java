@@ -1,6 +1,8 @@
 package com.patricklowry.baserun;
 
 import org.apache.xmlrpc.*;
+
+import java.io.IOException;
 import java.util.*;
 
 public class Network{
@@ -45,8 +47,15 @@ public class Network{
 		send.addElement(new Integer(playCount));
 		send.addElement(new Integer(baseCount));
 		send.addElement(new Double(dur));
-		Vector recv = (Vector)server.execute("server.testSend", send);
-		if((Integer)recv.get(0) == playCount && (Integer)recv.get(1) == baseCount && (Double)recv.get(2))
+		Vector recv = null;
+		try {
+			recv = (Vector)server.execute("server.testSend", send);
+		} catch (XmlRpcException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		if((Integer)recv.get(0) == playCount && (Integer)recv.get(1) == baseCount && (Double)recv.get(2) == dur)
 			return true;
 		else 
 			return false;

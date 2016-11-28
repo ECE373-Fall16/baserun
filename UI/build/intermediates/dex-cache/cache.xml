@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="0ecb4b595fa0f0f8018a149ace3ea6525624f94e">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-compat-24.2.1_a932073acd57b8e8588d72a077b93dc17cb434d8/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/src/main/java/com/patricklowry/baserun/xmlrpc-2.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="bd44503793dfa244692c215d73ee7f52016c64a3">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/2/xmlrpc-2.0.1_0589b49e490ba7d09a64823f9843d1f832ac9cb4/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d5c731fc64c03dfe04d51134955b483551c35849">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-24.2.1_da28b29efa81922061f175c89977b81fd249b257/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.firebase/firebase-storage/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="5ac49e5d5aea8772c8018ce2888145f04c5fe7ca">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-storage-10.0.0_f3ffb4e2d376bc3c8b0a48632858eb94e6eeec36/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-fragment-24.2.1_eef9be1d8886a29042f65a94fbef4df153660ca8/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="8ca4ffc4d90754f1f2438dfc3e94006cfcc6be98">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-identity-10.0.0_7649ebfa668534d7ea0daab3b1efad0cf85e7137/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.firebase/firebase-database/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="41e39c7ee84e63ae18df6c6ccb96d196996add4c">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-database-10.0.0_71f83b32bc1d004ca8dd138b37021d0e8c998c26/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.firebase/firebase-analytics/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="ce6e6e59212db0893fc36e5b579cf319a84aade8">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-analytics-10.0.0_d685ba6599694e765122361b1cd87775307165ec/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3861e0294c61bf4bf968a1da1607497345dca283">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-safetynet-10.0.0_b72dab3d435f2a72e33267c7ed4789f3f7ee2522/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.firebase/firebase-iid/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="a61005619e43f203768ff3f224137def6f029e50">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-iid-10.0.0_df531195c6a81ae06db7e08d09f2fe95064ad6e3/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-tagmanager/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="b1c926efda90fbf653889fea922eacc527de8486">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-tagmanager-10.0.0_8b0053a1b1703f5f3319309f59212c36ac4a2792/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-24.2.1_df4fc1804a4fea17051f2819c1856e610abcc03c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.android.support/palette-v7/24.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="734e80dffea7bd76c18ae256822a124c30d85850">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-palette-v7-24.0.0_39fb6127fd6b64369a24afb06d3ea68706ad7e07/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.firebase/firebase-messaging/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="444a220fadbdf260b3aa47c6e858c5d1e645170f">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-messaging-10.0.0_50b47f0e132b27b43a40c8dfdc4f3560d1789eee/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-places/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="813f70b551ce5206ad15dfe6e2f5b2d86e08a723">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-places-10.0.0_34f94f289bcfa3ab607640e14b79b29d6cb1301f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-24.2.1_4adb0a03fbdde39947b508dfa1cbe9d7b8b8c2ce/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-tagmanager-api/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="80338dde5f9d8e20efe2f2a44bc424aefe4eb8f4">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-tagmanager-api-10.0.0_20781ca960ca594c60b75d4a98642dc18ffba103/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.firebase/firebase-auth/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="8bb364f67ec2eba2356872b2b4ddfe8aada2d5ac">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-auth-10.0.0_43ea0edffe33bbda53756ea6c14cbf148fe0c565/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d5fbceab6c947ee6c22f5a930c50fa3ec8bdf295">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_47e55cf25c7d0e3a1ddc0fced298520038452f02/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.firebase/firebase-database-connection/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3a05b3852a6aec21ea0a6ea4d284ee69c04c55c4">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-database-connection-10.0.0_fb473925f4c88a69beeeccae6b8178ac5129de95/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-iid/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="147c3e6b95aa3d1e83705b056777ef865d272969">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-iid-10.0.0_08eb5968a4013b4d490955b7dee86e9da5fb1d11/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="7e4389bd133359a2ff88623ff1e4ff93d6e6f780">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_b55f97b543c25dfca270e8d4dd1e50a9904d5697/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appinvite/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="73a2c740a76aa4ba46168ed8bcdee1966e48a589">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-appinvite-10.0.0_bba5af52e4876d48a9409b83228de49563eda534/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="1fabe27d7a7b7ef3fe077c6499cd0a4f08e1c427">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-panorama-10.0.0_5383b48a461721cc222b7ba6ade8759e463072be/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads-lite/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="849da156edbc1201f5cd6e237524187442a62af3">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-ads-lite-10.0.0_e0330d24530d0cf114a746e788becdb85cfdd7d6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/24.0.0/jars/libs/internal_impl-24.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="b6763651ec29b4c95e7bbe63fc393ffcc8c4c2c5">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.0.0_1ae0bd8cc3b461e52b9178285bc2122c8c7a01b3/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-awareness/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="543835521cf4f867223d9f2a4b19ce32f95b0573">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-awareness-10.0.0_66163ace2cd847c7748aaf72f67254762ec14ce8/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/src/main/java/com/patricklowry/baserun/commons-codec-1.3.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="fd32786786e2adb664d5ecc965da47629dca14ba">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/2/commons-codec-1.3_0c523110e37db1207977c5d3c2571431dd988094/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="741f550aea73f64507fc60a799fefd5a2ea2bef5">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-analytics-10.0.0_7937dc64f3573254e66f0c95b7813dc5f9d377bb/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="6cc495f5634b8aaae30a37317ba687830da545cf">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-cast-10.0.0_e0436b476a447a60f5b1574dffc12f57e97b3480/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_6163baba05ced3546fed69a7b0bb2ea33981845a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.firebase/firebase-storage-common/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="a18773c279bde7e49e09f621aea613685c108c7f">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-storage-common-10.0.0_71119237b4182639042db440f876361f3d3cc8f3/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/24.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="b327fbe2fad414bc38cf0ce8f7efe1a38f572837">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-mediarouter-v7-24.0.0_f1eecda17ee18983fbfb8a2d420a4035efa7333d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.firebase/firebase-crash/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="777627dcaf0eaacd4212220e8f2d0c63def91774">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-crash-10.0.0_c5f868347f70560ee14fd899a9415bc5cbb0621a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="5fd86107cb2d2fa2d099250066cc664cdcfd476f">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-wallet-10.0.0_f5ff0915d2615cb12764c023ec6e288d40d0f537/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-utils-24.2.1_0c9fdeea64df2bb9bdd41fe939194a2d319ea899/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="932350448ea536c5dfbc45697951f31d34e50f1f">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-location-10.0.0_693776a0e3bd6e21cf8c75a3e03456181465dae1/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-auth/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="a383a583c346ce8ea5767d77f4fe58e1d8e5f221">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-auth-10.0.0_4e18fa954c8e6fe60ef2943f47b63ff4340c247a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast-framework/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="8e2fd2b87dc79fc6c8d70fda1247ac6f4a878a28">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-cast-framework-10.0.0_b1418cab275b16bb4ee09255484418494bb65f05/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-vision/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="76863814ca24fea5a0510373d15d3ccddebc09f1">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-vision-10.0.0_bb52d85e1cf52438a4d7d18cafa5b3bf25e24e85/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/Library/Android/sdk/extras/m2repository/com/android/support/constraint/constraint-layout-solver/1.0.0-beta4/constraint-layout-solver-1.0.0-beta4.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="0a9cb567dc008f570c28531720168f19148da965">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/constraint-layout-solver-1.0.0-beta4_d5a1cc7833ae6faa60c079d161380b60acb5cb52/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-tasks/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="985be85104f6d0c5c5e51e7b7e60d8883a98ac64">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-tasks-10.0.0_1e567b99cca9252a7bdb79e9e5d6164e087a6626/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.firebase/firebase-analytics-impl/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c7ed3fd9d5a9687980dac6c504abd91ad3dfa238">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-analytics-impl-10.0.0_6d9c9f6f5dc013d0d969947aa9965d9127e38865/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/24.2.1/support-annotations-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="8de3aafecbdf98a61db6427f008f2d515bcd2544">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-24.2.1_71f5eb368e60d6677ad2c02a0e27c04d6af01600/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-tagmanager-v4-impl/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3660967212b89195e628670db181ed86e3307569">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-tagmanager-v4-impl-10.0.0_c52a73ee243abac0fc1475b571e8600129c227d3/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.android.support.constraint/constraint-layout/1.0.0-beta4/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="662d7533b25a666c649c10a16b42edfb95f25a4f">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support.constraint-constraint-layout-1.0.0-beta4_f8cbf073b3037205e17e2630c907bb21531594d2/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="4b5e25a31afae386ae4fb7d3aabc5a5c19e168e8">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_0e0cec8a4dfad192a177a1c000f69eaa116c574f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="58cd8dc3bbf63b37f0e107033257467511130e0f">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-nearby-10.0.0_d7a5d1c7a782caf6a0ed3261bc56c7b8f1897c6b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.android.support/support-v4/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-24.2.1_6cb0711e70dcf1e849e4e89e92ee50c085164624/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-auth-base/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="c2376d0ec8dbe85d3446cad64905c0395fbe220e">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-auth-base-10.0.0_5d788f5b19047009a235912e8e30aea003f17a6c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics-impl/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="ddfa80ca49f1334afea1f9aa93148be73f73cd0f">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-analytics-impl-10.0.0_a0ca806a81d22d636b3bd61d2c8991d712d78d67/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="cf60a8cd2f896314e40b2f1a9788e91e228c3671">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-maps-10.0.0_d7521117f244975a6b09e096fbf305454a66382f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-clearcut/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="fb0229499e600b485a276d4e31161a3ae31c144c">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-clearcut-10.0.0_67f93a98e4608d09e81bfe877abaf9aab98d6efd/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="09b462bbcb77650284bd6614f1a32f360ef369f8">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-24.2.1_8b6e8a531b580ade4a973714aeab419b45b45e30/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.firebase/firebase-appindexing/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="22031b047b12904b888549ba36c0c30d83b1aea1">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-appindexing-10.0.0_714f476823bf4d4fde63495feaad0ca932f7f72b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="e7f3132168957eefc46229fc32c3bd464642b71e">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-ui-24.2.1_588dd96a0c4b5743a617ac0a22afce65d263fa8c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="fbf8da429efd5ad21e02e3e5ecaa1efc4167878d">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_95de96e9c5294c3f0929e6ed60f49f071d1e74fd/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3347c3e7056fabc88bdbd8fdae65ddf2b674d977">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-base-10.0.0_caa93aad5b404b368bfe0913071417da598ec976/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-instantapps/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="2e61c07206f0568b34939e2dc0e2bc75251648dc">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-instantapps-10.0.0_dc5c5fe9c6f39f5f327e8517d038bec325107e25/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="6b7e0a45e8139272f3fe2a19d4e7b1122c769550">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-plus-10.0.0_2e5b785e835b0930e9579605b27e8a96818b2d04/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.firebase/firebase-common/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="2b410ae1fda134f470276365f4b7f846269e0d23">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-common-10.0.0_7c419f21aef565cfe79262894b89fa802750c5a2/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="75dbc3537bc912d077b3db2f5ac72d5b43644b2c">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-basement-10.0.0_eb6b7246e668edf361715e15ced5793e85a219b9/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="0e2bf5e85132c8bfed05a87b71352918815e0205">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-gcm-10.0.0_652ff98e27c4bdd495cbd20a01fcc0ac1239ed0b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="f36cf060b7f0d881ea6449c254ab8a570a3dcdbe">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-fitness-10.0.0_46559f75ce999f271aff9d2d3b93df1a543b791f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gass/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="ae809d521d9f7da5337a82edd64eea23a76e788d">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-gass-10.0.0_137f45d5fd6b03322e80a6bb2aa9970394108b22/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="5f64d657e838e8375135c0f6057a7ff8fab6a50e">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_4b379e4e1a0cb586482fbf5e8a4a5f606ce1bfdc/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="0d70f7c486d9d65ceabd0039667ae4d53bf0ae7c">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-wearable-10.0.0_17f4d23c221ae58672737f53baec0f26d4a45cb7/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="4701f9f79c8a00564912b21b0cb0cec3f51a7d23">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-drive-10.0.0_ec8cc3e7a4c95201796db21060a20771f5a6aefe/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="867dad63c33388ff8c7644b236579355036d075f">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_f6f77495c123fef2fa793274dcb0b7c3835c80e0/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="b7518f2d3fce2ebec6a0bb8d2cd97eebc9f119df">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-games-10.0.0_193795705eb11a7a0df2fd9ec941f49e6ff74e36/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.firebase/firebase-config/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="ca730ac2d72056445bf68998cec6b6b2cf4d179e">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-config-10.0.0_29058ccaf51cbe59dabd37e0886612b689a2e68f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/10.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="73fe8ab7f76e41d0cabbc4fa3399557de52efb2d">
+        <dex dex="/Users/patricklowry/AndroidStudioProjects/baserun/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-ads-10.0.0_a0437e7ac97e3b69f85e4915b15745bad92ff533/classes.dex" />
+    </item>
+
+</items>
