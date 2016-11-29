@@ -1,11 +1,11 @@
 
 
 public class Game{
-	private int GameID;
-	private int playerCount;
-	private int currPlayerCount = 0;
-	private double radius;
-	private int baseCount;
+	int GameID;
+	int playerCount;
+	int currPlayerCount = 0;
+	double radius;
+	int baseCount;
 	private double[] GameLocation = new double[2];
 	private User[] players;
 	private User[] Team1;
@@ -103,7 +103,7 @@ public class Game{
 	public Base[] getBases(){
 		return bases;
 	}
-
+	/*
 	//BELOW NEEDS ANDROID API TO BE FUNCTIONAL//
 	public boolean onBase(double longitude, double latitude){
 		double[] loc = new double[2];
@@ -141,5 +141,5 @@ public class Game{
 		map.addMarker(new MarkerOptions()
 			.position(new LatLng(currentLoc[0],currentLoc[1])));
 		return map;
-	}
+	}*/
 }

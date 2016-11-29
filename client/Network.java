@@ -66,7 +66,7 @@ public class Network{
 	}
 
 	public Game joinGame(int GID, int PID){
-		private Game temp;
+		Game temp;
 		if(checkConn()){
 			try {
 			//CALL SERVER, RETURN GAME VALUE
@@ -89,7 +89,10 @@ public class Network{
 					Double lat = (Double)join.get((playCount+3)+i++);
 					Double lon = (Double)join.get((playCount+3)+i++);
 					Double rad = (Double)join.get((playCount+3)+i);
-					bases[j++] = new Base(lat,lon,rad);
+				double[] loc = new double[2];	
+				loc[0] = lat;
+				loc[1] = lon;
+				bases[j++] = new Base(loc,rad);
 				}
 				Integer totPlayCount = (Integer)join.get(playCount+BaseCount+1);
 				Double gameLat = (Double)join.get(playCount+BaseCount+2);
@@ -129,7 +132,10 @@ public class Network{
 					Double lat = (Double)refresh.get((playCount+3)+i++);
 					Double lon = (Double)refresh.get((playCount+3)+i++);
 					Double rad = (Double)refresh.get((playCount+3)+i);
-					bases[j++] = new Base(lat,lon,rad);
+					double[] loc = new double[2];
+					loc[0] = lat;
+					loc[1] = lon;
+					bases[j++] = new Base(loc,rad);
 				}
 				temp = new Game(playCount,players,bases);
 				return temp;

@@ -3,7 +3,7 @@ public class Base{
 	private double[] location = new double[2];
 	private double radius;
 	private int own;
-	Circle circle;
+//	Circle circle;
 
 	public Base(double[] location, double rad){
 		this.location = location;
