@@ -3,6 +3,7 @@
 #include <iostream>
 #include <unistd.h>
 #include <string>
+#include <iomanip>
 
 #include "xmlrpc-c/base.hpp"
 #include "xmlrpc-c/registry.hpp"
@@ -44,6 +45,8 @@ public:
         
         long int const pid(paramList.getInt(0));
 
+	cout<<pid<<endl;
+
         paramList.verifyEnd(1);
 
 	long int gid = slist.addSession((long int)pid);
@@ -69,6 +72,8 @@ public:
 	int const numBases(paramList.getInt(3));
 	double const startX(paramList.getDouble(4));
 	double const startY(paramList.getDouble(5));
+
+	cout<<std::setprecision(6)<<radius<<" "<<numBases<<" "<<startX<<" "<<startY<<endl;
 
         paramList.verifyEnd(6);
 
@@ -100,6 +105,8 @@ public:
         
         long int const gid(paramList.getInt(0));
 	long int const pid(paramList.getInt(1));
+
+	cout<<gid<<" "<<pid<<endl;
 
         paramList.verifyEnd(2);
 
@@ -162,6 +169,8 @@ public:
         
         long int const gid(paramList.getInt(0));
 
+	cout<<gid<<endl;
+
         paramList.verifyEnd(1);
 
 	session *game = slist.getSession(gid);
@@ -217,6 +226,8 @@ public:
     void execute(xmlrpc_c::paramList const& paramList, xmlrpc_c::value * const  retvalP) {
         
         long int const pid(paramList.getInt(0));
+	
+	cout<<pid<<endl;
 
         paramList.verifyEnd(1);
 
@@ -256,6 +267,8 @@ public:
 	double const x(paramList.getDouble(2));
 	double const y(paramList.getDouble(3));
 
+	cout<<gid<<" "<<pid<<" "<<x<<" "<<y<<endl;
+
         paramList.verifyEnd(4);
 
 	session *game = slist.getSession(gid);
@@ -274,6 +287,8 @@ public:
     check(){}
     void execute(xmlrpc_c::paramList const& paramList, xmlrpc_c::value * const  retvalP) {
 	string const str(paramList.getString(0));
+	cout<<str<<endl;
+
 	paramList.verifyEnd(1);	
         
 	vector<xmlrpc_c::value> arrayData;

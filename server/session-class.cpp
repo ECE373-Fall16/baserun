@@ -111,7 +111,8 @@ void session::init_Player(long int pid){
 }
 
 void session::setRadius(double rad){
-	radius = rad;	
+	radius = rad;
+	baseRadius = 5;	
 }
 
 void session::setBaseRadius(double rad){
