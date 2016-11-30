@@ -9,6 +9,8 @@ struct node{
 	struct node *next;
 }node_t;
 
+
+
 class LL{
 public:
 	LL(void);
@@ -16,6 +18,9 @@ public:
 	int getSize();
 	struct node * getFirst();
 	struct node * getLast();
+	void addNode(struct node * aN);
+	void deleteNode(long int gid);
+	struct node * findNode(long int gid);
 private:
 	int size;
 	struct node *first;
