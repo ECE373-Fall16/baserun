@@ -29,6 +29,11 @@
 #include "team-class.h"
 #endif
 
+#ifndef linkedList_h
+#define linkedList_h
+#include "linkedList.h"
+#endif
+
 using namespace std;
 
 #define SLEEP(seconds) sleep(seconds);
@@ -233,17 +238,17 @@ public:
 
         vector<xmlrpc_c::value> arrayData;
 
-	session* glist = slist.getList();
+	node_t* glist = slist.getList();
 	
 	int numS = slist.getNumSession();
 	
 	arrayData.push_back(xmlrpc_c::value_int(numS));
 
 	for(int gi=0; gi<numS; gi++){
-
-		arrayData.push_back(xmlrpc_c::value_int(glist[gi].getGid()));
-		arrayData.push_back(xmlrpc_c::value_int(glist[gi].getMaxPlayerSize()));
-	        arrayData.push_back(xmlrpc_c::value_int(glist[gi].getNumPlayers()));
+		
+		arrayData.push_back(xmlrpc_c::value_int((glist[gi].data)->getGid()));
+		arrayData.push_back(xmlrpc_c::value_int((glist[gi].data)->getMaxPlayerSize()));
+	        arrayData.push_back(xmlrpc_c::value_int((glist[gi].data)->getNumPlayers()));
 
 	}
  

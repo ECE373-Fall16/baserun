@@ -1,4 +1,4 @@
-CC=g++
+CC=g++ -std=c++11
 CLASSPATH=./lib_java/commons-codec-1.3.jar:./lib_java/xmlrpc-2.0.1.jar:.
 DEBUG=-g
 CFLAGS=$(DEBUG) -c
@@ -12,8 +12,8 @@ CLIENT_LIB=./lib/libxmlrpc_client++.a ./lib/libxmlrpc_client.a ./lib/libxmlrpc++
 
 
 all:	ServerTest.class
-	$(CC) $(CFLAGS) $(SERVER_INCLUDE) server.cpp sessionList-class.cpp session-class.cpp team-class.cpp
-	$(CC) -o xmlrpc-server server.o sessionList-class.o session-class.o team-class.o $(SERVER_LIB)
+	$(CC) $(CFLAGS) $(SERVER_INCLUDE) server.cpp sessionList-class.cpp session-class.cpp team-class.cpp linkedList.cpp
+	$(CC) -o xmlrpc-server server.o sessionList-class.o session-class.o team-class.o linkedList.o $(SERVER_LIB)
 	
 server:
 	./xmlrpc-server

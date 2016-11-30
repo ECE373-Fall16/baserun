@@ -3,8 +3,8 @@
 #include "session-class.h"
 #endif
 
-struct node{
-	session data;
+typedef struct node{
+	session *data;
 	struct node *prev;
 	struct node *next;
 }node_t;

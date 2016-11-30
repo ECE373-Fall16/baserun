@@ -34,7 +34,7 @@ void LL::addNode(struct node * aN){
 void LL::deleteNode(long int gid){
 	struct node * cur = first;
 	for(int i=0;i<size;i++){
-		if ((cur->data).getGid()==gid){
+		if ((cur->data)->getGid()==gid){
 			if(cur->prev != nullptr){
 				(cur->next)->prev = cur->prev;
 				(cur->prev)->next = cur->next;
@@ -52,7 +52,7 @@ void LL::deleteNode(long int gid){
 struct node * LL::findNode(long int gid){
 	struct node * cur = first;
 	for(int i=0;i<size;i++){
-		if ((cur->data).getGid()==gid){
+		if ((cur->data)->getGid()==gid){
 			return cur;
 		}	
 	}

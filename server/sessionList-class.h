@@ -16,14 +16,9 @@ class sessionList{
 		session* getSession(long int gid);
 		void deleteSession(long int gid);
 		void restartSession(long int gid);
-		session* getList();
+		node_t* getList();
 		int getNumSession();
-		void refreshPlayerCount();
-		int getPlayerCount();
 	private:
 		LL* sList;
-		int index;
 		long int gidInd;
-		int numSession;
-		int playerCount;
 };
