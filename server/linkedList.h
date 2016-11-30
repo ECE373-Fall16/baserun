@@ -9,7 +9,15 @@ struct node{
 	struct node *next;
 }node_t;
 
-struct LL{
+class LL{
+public:
+	LL(void);
+	~LL(void);
+	int getSize();
+	struct node * getFirst();
+	struct node * getLast();
+private:
+	int size;
 	struct node *first;
 	struct node *last;
 };

@@ -1,3 +1,8 @@
+#ifndef linkedList_h
+#define linkedList_h
+#include "linkedList.h"
+#endif
+
 #ifndef session_class_h
 #define session_class_h
 #include "session-class.h"

@@ -3,6 +3,11 @@
 #include "session-class.h"
 #endif
 
+#ifndef linkedList_h
+#define linkedList_h
+#include "linkedList.h"
+#endif
+
 class sessionList{
 	public:
 		sessionList();
@@ -16,7 +21,7 @@ class sessionList{
 		void refreshPlayerCount();
 		int getPlayerCount();
 	private:
-		session* sList;
+		LL* sList;
 		int index;
 		long int gidInd;
 		int numSession;

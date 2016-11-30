@@ -26,5 +26,5 @@ ServerTest.class:
 
 clean:
 	rm -rf *.o xmlrpc-server xmlrpc-client
-
+	rm ServerTest.class
 
