@@ -1,3 +1,4 @@
+//header gaurds
 #ifndef session_structs_h
 #define session_structs_h
 #include "session-structs.h"
@@ -8,8 +9,11 @@
 #define team_class_h
 #endif
 
+//header for session class
+//note that descriptions for each fctn is shown in commoents in cpp file
 class session{
 public:
+	//all public functions that can be called
 	session(long int id);
 	session();
 	~session();
@@ -36,6 +40,7 @@ public:
 	int getMaxPlayerSize();
 	
 private:
+	//private variables and functions that can only be accessed within the class
 	long int gid;
 	int numPlayers;
 	int maxGameSize;

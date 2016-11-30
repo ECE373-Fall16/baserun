@@ -3,8 +3,11 @@
 #define session_structs_h
 #endif
 
+//team class
 class team{
 public:	
+	//all public functions that can be called from team class
+	//note descriptions are in comments in cpp file
 	team();
 	team(int maxP);
 	~team(); 
@@ -21,6 +24,7 @@ public:
 	bool playerThere(long int pid);
 	void playerScore(long int pid);
 private:
+	//private variables of the team class
 	char color;
 	player_t *playerArr;
 	int teamScore;
