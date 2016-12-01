@@ -36,6 +36,7 @@ public class CreateGame extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_game);
+
         Spinner num_players = (Spinner) findViewById(R.id.num_players_spinner);
         ArrayAdapter<CharSequence> players_adapter = ArrayAdapter.createFromResource(this, R.array.num_players_array, android.R.layout.simple_spinner_item);
         players_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -50,7 +51,11 @@ public class CreateGame extends AppCompatActivity {
         ArrayAdapter<CharSequence> dur_adapter = ArrayAdapter.createFromResource(this, R.array.game_dur_array, android.R.layout.simple_spinner_item);
         dur_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         game_dur.setAdapter(dur_adapter);
-        //Intent intent = getIntent();
+
+        Spinner game_rad = (Spinner) findViewById(R.id.game_rad_spinner);
+        ArrayAdapter<CharSequence> rad_adapter = ArrayAdapter.createFromResource(this, R.array.game_rad_array, android.R.layout.simple_spinner_item);
+        rad_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        game_rad.setAdapter(rad_adapter);
     }
 
     public void GameScreen(View view) {
