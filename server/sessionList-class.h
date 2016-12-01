@@ -1,3 +1,5 @@
+//header gaurds
+
 #ifndef session_class_h
 #define session_class_h
 #include "session-class.h"
@@ -8,7 +10,9 @@
 #include "linkedList.h"
 #endif
 
+//sessionList class header
 class sessionList{
+	//all public fctns that can be called by the server
 	public:
 		sessionList();
 		~sessionList();
@@ -18,6 +22,7 @@ class sessionList{
 		void restartSession(long int gid);
 		node_t* getList();
 		int getNumSession();
+	//private variables can only be held by class
 	private:
 		LL* sList;
 		long int gidInd;

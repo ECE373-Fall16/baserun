@@ -1,3 +1,4 @@
+//header w/o gaurd
 #include <cassert>
 #include <stdexcept>
 #include <iostream>
@@ -5,6 +6,7 @@
 #include <string>
 #include <iomanip>
 
+//header gaurds
 #include "xmlrpc-c/base.hpp"
 #include "xmlrpc-c/registry.hpp"
 #include "xmlrpc-c/server_abyss.hpp"
@@ -36,10 +38,9 @@
 
 using namespace std;
 
-#define SLEEP(seconds) sleep(seconds);
-
 sessionList slist;
 
+//initializes a blank game and returns the GID
 class genID : public xmlrpc_c::method {
 public:
     genID(){
@@ -63,6 +64,8 @@ public:
 	}
 };
 
+//intiializes the parameter data of the game
+//gives GID of game to initialize
 class createGame : public xmlrpc_c::method {
 public:
     createGame(){
@@ -92,7 +95,7 @@ public:
 	game->generateLocationArray();	
 
 	int success =1;
-	
+	//returns 1 for success	
         vector<xmlrpc_c::value> arrayData;
         arrayData.push_back(xmlrpc_c::value_int(success));
         xmlrpc_c::value_array array1(arrayData);
@@ -100,6 +103,7 @@ public:
 	}
 };
 
+//has a player join a game with their input pid and and gid of intended game
 class join : public xmlrpc_c::method {
 public:
     join(){
@@ -153,6 +157,11 @@ public:
 
 	}
 
+	//returns the game info includng:
+	//returns maxPlayerSize
+	//returns startX position
+	//returns startY position
+	//returns game radius
         arrayData.push_back(xmlrpc_c::value_int(game->getMaxPlayerSize()));
         arrayData.push_back(xmlrpc_c::value_double(game->getStartX()));
         arrayData.push_back(xmlrpc_c::value_double(game->getStartY()));
@@ -168,7 +177,7 @@ class refresh : public xmlrpc_c::method {
 public:
     refresh(){
         this->_signature = "A:i";
-        this->_help = "This method adds a player";
+        this->_help = "This method refreshes the game data";
     }
     void execute(xmlrpc_c::paramList const& paramList, xmlrpc_c::value * const  retvalP) {
         
@@ -195,10 +204,14 @@ public:
 	
 
 	for(int i=0; i<numP; i++){
+		//returns player ID's
+		//returns team numbers
         	arrayData.push_back(xmlrpc_c::value_int(pArr[i].id));
         	arrayData.push_back(xmlrpc_c::value_int(tm->getTeamNum()));
 	}
 	for(int i=0; i<numP2; i++){
+		//returns player ID's
+		//returns team numbers
         	arrayData.push_back(xmlrpc_c::value_int(pArr2[i].id));
         	arrayData.push_back(xmlrpc_c::value_int(otherTm->getTeamNum()));
 	}
@@ -209,6 +222,7 @@ public:
 	base_t* bases = game->getBases();
 
 	for(int i=0; i<baseSize; i++){
+		//returns base info
         	arrayData.push_back(xmlrpc_c::value_double(bases[i].x));
         	arrayData.push_back(xmlrpc_c::value_double(bases[i].y));
         	arrayData.push_back(xmlrpc_c::value_double(game->getBaseRadius()));
@@ -221,12 +235,12 @@ public:
 	}
 };
 
-
+//returns gameList
 class gameList : public xmlrpc_c::method {
 public:
     gameList(){
         this->_signature = "A:i";
-        this->_help = "This method adds a player";
+        this->_help = "method returns all games";
     }
     void execute(xmlrpc_c::paramList const& paramList, xmlrpc_c::value * const  retvalP) {
         
@@ -242,10 +256,15 @@ public:
 	
 	int numS = slist.getNumSession();
 	
+	//return number of games first
 	arrayData.push_back(xmlrpc_c::value_int(numS));
 
 	for(int gi=0; gi<numS; gi++){
 		
+		//return game data
+		//return GID
+		//max player size of that game
+		//return current players in game
 		arrayData.push_back(xmlrpc_c::value_int((glist[gi].data)->getGid()));
 		arrayData.push_back(xmlrpc_c::value_int((glist[gi].data)->getMaxPlayerSize()));
 	        arrayData.push_back(xmlrpc_c::value_int((glist[gi].data)->getNumPlayers()));
@@ -258,12 +277,12 @@ public:
 };
 
 
-
+//called when on a player is on a base
 class onBase : public xmlrpc_c::method {
 public:
     onBase(){
         this->_signature = "A:iidd";
-        this->_help = "This method initializes the session and returns it GID";
+        this->_help = "checks if base gets conquered and changes scores accordingly";
     }
     void execute(xmlrpc_c::paramList const& paramList, xmlrpc_c::value * const  retvalP) {
         
@@ -280,6 +299,7 @@ public:
 	int tmNum = game->getPTeamNum(pid);
 	int success = game->conquerBase(tmNum,pid,x,y);
 
+	//returns if base is conquered or not
         vector<xmlrpc_c::value> arrayData;
         arrayData.push_back(xmlrpc_c::value_int(success));
         xmlrpc_c::value_array array1(arrayData);
@@ -287,6 +307,9 @@ public:
 	}
 };
 
+//all further fctns are for testing
+
+//checks input by taking and returning a string
 class check : public xmlrpc_c::method {
 public:
     check(){}
@@ -304,11 +327,10 @@ public:
     }
 };
 
+//looks at the different inputs and prints them to screen
 class testSend : public xmlrpc_c::method {
 public:
     testSend(){
-        this->_signature = "A:iid";
-        this->_help = "This method shows it recieved data from client (connected to UI)";
     }
     void execute(xmlrpc_c::paramList const& paramList, xmlrpc_c::value * const  retvalP) {
         
