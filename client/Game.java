@@ -3,7 +3,7 @@
 public class Game{
 	int GameID;
 	int playerCount;
-	int currPlayerCount = 0;
+	int currPlayerCount;
 	double radius;
 	int baseCount;
 	private double[] GameLocation = new double[2];
@@ -38,6 +38,7 @@ public class Game{
 		GameLocation[0] = startLat;
 		GameLocation[1] = startLong;
 		GameID = ID;
+		currPlayerCount = 1;
 	}
 
 	public void refreshGame(Game refresh){
@@ -72,7 +73,7 @@ public class Game{
 		return currPlayerCount;
 	}
 
-	private void setCurrPlayCount(int count){
+	public void setCurrPlayCount(int count){
 		currPlayerCount = count;
 	}
 
