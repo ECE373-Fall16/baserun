@@ -10,14 +10,15 @@ public class Network{
 	
 	public boolean connect(){
 		try{
-			server = new XmlRpcClient("http://104.196.221.210/RPC2");
+			server = new XmlRpcClient("http://104.196.221.210:3389/RPC2");
 		} catch(Exception e){
 			return false;
 		}
-		if(checkConn())
+		if(checkConn()){
 			return true;
-		else
+		} else {
 			return false;
+		}
 	}
 	
 	private boolean checkConn(){
@@ -43,17 +44,15 @@ public class Network{
 			try {
 				Vector params = new Vector();
 				params.addElement(new Integer(PID));
-				Vector genGID = (Vector)server.execute("server.genGID",params);
-				Integer GID = (Integer)genGID.get(0);
-				Vector params2 = new Vector();
-				params2.addElement(new Integer(GID));
-				params2.addElement(new Integer(playerCount));
-				params2.addElement(new Double(radius));
-				params2.addElement(new Integer(baseCount));
-				params2.addElement(new Double(startLat));
-				params2.addElement(new Double(startLong));
-				Vector createGame = (Vector)server.execute("server.createGame",params2);
-				if((Integer)createGame.get(0) == 1){
+				params.addElement(new Integer(playerCount));
+				params.addElement(new Double(radius));
+				params.addElement(new Integer(baseCount));
+				params.addElement(new Double(startLat));
+				params.addElement(new Double(startLong));
+				Vector createGame = (Vector)server.execute("server.createGame",params);
+				Integer GID = (Integer)createGame.get(0);
+				System.out.println(GID);
+				if(GID != -1){
 					Game temp = new Game(GID,playerCount,radius,baseCount,startLat,startLong);
 					return temp;
 				} else
@@ -108,14 +107,13 @@ public class Network{
 			return null;
 	}
 
-	public Game refreshGame(int GID, int PID){
+	public Game refreshGame(int GID){
 		Game temp;
 		if(checkConn()){
 			try {
 			//CALL SERVER, RETURN GAME UPDATE
 				Vector params = new Vector();
 				params.addElement(new Integer(GID));
-				params.addElement(new Integer(PID));
 				Vector refresh = (Vector)server.execute("server.refresh",params);
 				Integer playCount = (Integer)refresh.get(0);
 				User[] players = new User[playCount];
@@ -148,6 +146,7 @@ public class Network{
 
 	public GameList gameList(int PID){
 		GameList temp;
+		int j = 0;
 		if(checkConn()){
 			try {
 			//CALL SERVER, RETURN GAME LIST
@@ -156,7 +155,10 @@ public class Network{
 				Vector gameList = (Vector)server.execute("server.gameList", params);
 				int gcount = (Integer)gameList.get(0);
 				int[] gids = new int[gcount];
-				for(int i=0; i<gcount; i++){
+				int[] players = new int[gcount];
+				int[] currPlayers = new int[gcount];
+				System.out.println(gcount);
+				/*for(int i=0; i<gcount; i++){
 					gids[i] = (Integer)gameList.get(i+1);
 				}
 				int[] players = new int[gcount];
@@ -166,6 +168,12 @@ public class Network{
 				int[] currPlayers = new int[gcount];
 				for(int i=0; i<gcount; i++){
 					currPlayers[i] = (Integer)gameList.get(2*gcount+i+1);
+				}*/
+				for(int i=0; i<gcount; i++){
+					gids[i] = (Integer)gameList.get(j+1);
+					players[i] = (Integer)gameList.get(j+2);
+					currPlayers[i] = (Integer)gameList.get(j+3);
+					j+=3;
 				}
 				temp = new GameList(gcount,gids, players, currPlayers);
 				return temp;
