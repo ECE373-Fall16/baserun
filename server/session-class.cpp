@@ -1,3 +1,6 @@
+#include <iostream>
+
+
 //header gaurds
 #ifndef session_class_h
 #include "session-class.h"
@@ -25,6 +28,9 @@
 #define io_h
 #endif
 
+using namespace std;
+
+
 //constructor for session class that initializes GID
 session::session(long int id){
 	gid = id;
@@ -37,12 +43,14 @@ session::session(long int id){
 }
 
 //constructor for session class
-session::session(){
+session::session(int maxS){
 	gid=0;
 	numBases=0;
-	numPlayers=0;	
-	team1 = new team;
-	team2 = new team;
+	numPlayers=0;
+ 	maxGameSize = maxS;	
+	team1 = new team(maxS/2);
+	team2 = new team(maxS/2);
+
 	team1->setTeamNum(1);
 	team2->setTeamNum(2);
 }
@@ -116,6 +124,7 @@ void session::init_Player(long int pid){
 		}else{
 			team2->addPlayer(pl);
 		}
+		numPlayers++;
 	}
 }
 

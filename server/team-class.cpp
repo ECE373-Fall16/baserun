@@ -1,7 +1,11 @@
+#include <iostream>
+
 #ifndef team_class_h
 #include "team-class.h"
 #define team_class_h
 #endif
+
+using namespace std;
 
 //constructor for team with no input parameters
 team::team(){
@@ -12,9 +16,11 @@ team::team(){
 
 //constructor for team with parameter max players
 team::team(int maxP){
+	cout<<maxP<<endl;
 	char color = 'n';
 	numPlayers = 0;
 	maxPlayers = maxP;
+	playerArr = new player_t[maxPlayers];
 }
 
 //destructor

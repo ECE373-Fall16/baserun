@@ -1,3 +1,5 @@
+#include <iostream>
+
 #ifndef linkedList_h
 #define linkedList_h
 #include "linkedList.h"
@@ -14,9 +16,11 @@
 #include "sessionList-class.h"
 #endif
 
+using namespace std;
+
 //constructor for session list
 sessionList::sessionList(){
-	gidInd=0;
+	gidInd=100;
 	sList=new LL(); 
 }
 
@@ -24,20 +28,23 @@ sessionList::sessionList(){
 sessionList::~sessionList(){}
 
 //adds a session to the list of all played sessions
-long int sessionList::addSession(long int pid){
-	node_t aN;
-	aN.next = nullptr;
-	aN.prev = nullptr;
-	aN.data = new session;
-	aN.data->setGid(gidInd);
-	aN.data->init_Player(pid);
-	sList->addNode(&aN);	
+long int sessionList::addSession(long int pid, int maxS){
+
+	node_t *aN = new node_t;
+	aN->next = nullptr;
+	aN->prev = nullptr;
+	aN->data = new session(maxS);
+	aN->data->setGid(gidInd);
+	aN->data->init_Player(pid);
+	sList->addNode(aN);	
 	return gidInd++;
 }
 
 //returns a session ptr corresponding to a GID
 session* sessionList::getSession(long int gid){
-	return (sList->findNode(gid))->data;
+	struct node *cur = sList->findNode(gid);
+	if(cur != nullptr) return cur->data;
+	return nullptr;
 }
 
 //deletes a session from list of sessions

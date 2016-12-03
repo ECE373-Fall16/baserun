@@ -41,9 +41,9 @@ using namespace std;
 sessionList slist;
 
 //initializes a blank game and returns the GID
-class genID : public xmlrpc_c::method {
+/*class genGID : public xmlrpc_c::method {
 public:
-    genID(){
+    genGID(){
         this->_signature = "A:i";
         this->_help = "This method initializes the session and returns it GID";
     }
@@ -62,43 +62,62 @@ public:
         xmlrpc_c::value_array array1(arrayData);
         *retvalP = array1;
 	}
-};
+};*/
 
 //intiializes the parameter data of the game
 //gives GID of game to initialize
 class createGame : public xmlrpc_c::method {
 public:
     createGame(){
-        this->_signature = "A:iidididd";
+        this->_signature = "A:iidididdi";
         this->_help = "This method initializes the session and returns it GID";
     }
     void execute(xmlrpc_c::paramList const& paramList, xmlrpc_c::value * const  retvalP) {
         
-        long int const gid(paramList.getInt(0));
+	int success;
+	long int gid;
+        long int const pid(paramList.getInt(0));
 	int const maxGameSize(paramList.getInt(1));
 	double const radius(paramList.getDouble(2));
 	int const numBases(paramList.getInt(3));
 	double const startX(paramList.getDouble(4));
 	double const startY(paramList.getDouble(5));
 
-	cout<<std::setprecision(6)<<radius<<" "<<numBases<<" "<<startX<<" "<<startY<<endl;
-
+	cout<<maxGameSize<<" "<<radius<<" "<<numBases<<" "<<startX<<" "<<startY<<endl;
         paramList.verifyEnd(6);
+	
+	if(pid<=1){
+	gid = slist.addSession((long int)pid,maxGameSize);
+	
 
 	session *game = slist.getSession(gid);
-
-	game->setMaxPlayerSize(maxGameSize);
+	if (game!=nullptr){
+	cout<<"NOT NULLPTR YAY"<<endl;
 	game->setRadius(radius);
 	game->setNumBases(numBases);
 	game->setStart(startX,startY);
-
 	game->generateLocationArray();	
 
-	int success =1;
-	//returns 1 for success	
+	cout<<"out gid is...."<<gid<<endl;
+
+	}else{gid=1;}
+
+	//returns gid for success	
+	success = (int)gid;
+
+	}else{
+	cout<<"NULLPTR FUUUUUU"<<endl;
+	success=-1;
+	}
+
+
+	cout<<"chk 1"<<endl;
         vector<xmlrpc_c::value> arrayData;
+	cout<<"chk 2"<<endl;
         arrayData.push_back(xmlrpc_c::value_int(success));
+	cout<<"chk 3"<<endl;
         xmlrpc_c::value_array array1(arrayData);
+	cout<<"chk 4"<<endl;
         *retvalP = array1;
 	}
 };
@@ -257,10 +276,11 @@ public:
 	int numS = slist.getNumSession();
 	
 	//return number of games first
+	cout<<numS<<endl;
 	arrayData.push_back(xmlrpc_c::value_int(numS));
 
 	for(int gi=0; gi<numS; gi++){
-		
+		cout<<"loop list..."<<gi<<endl;	
 		//return game data
 		//return GID
 		//max player size of that game
@@ -271,9 +291,11 @@ public:
 
 	}
  
+	cout<<"left method gameList"<<endl;
 	xmlrpc_c::value_array array1(arrayData);
         *retvalP = array1;
 	}
+
 };
 
 
@@ -362,8 +384,8 @@ int main(int const, const char ** const) {
 
         xmlrpc_c::registry myRegistry;
 
-        xmlrpc_c::methodPtr const genID_m(new genID);
-        myRegistry.addMethod("server.genID", genID_m);
+        //xmlrpc_c::methodPtr const genID_m(new genID);
+        //myRegistry.addMethod("server.genID", genID_m);
 
  
         xmlrpc_c::methodPtr const createGame_m(new createGame);

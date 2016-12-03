@@ -1,9 +1,16 @@
+#include <iostream>
+
 #ifndef linkedList_h
 #define linkedList_h
 #include "linkedList.h"
 #endif
 
-LL::LL(){}
+using namespace std;
+
+LL::LL(){
+	first=nullptr;
+	last=nullptr;
+}
 
 LL::~LL(){}
 
@@ -22,6 +29,8 @@ struct node * LL::getLast(){
 void LL::addNode(struct node * aN){
 	size++;
 	if(first!=nullptr){
+
+	cout<<"ADDING A SECOND NODE__________________"<<endl;
 		last->next = aN;
 		aN->prev = last;
 		last = aN;  
@@ -29,6 +38,7 @@ void LL::addNode(struct node * aN){
 		first = aN;
 		last = aN;
 	}
+cout<<"leaving addnode"<<endl;
 }
 
 void LL::deleteNode(long int gid){
@@ -51,11 +61,19 @@ void LL::deleteNode(long int gid){
 
 struct node * LL::findNode(long int gid){
 	struct node * cur = first;
+	cout<<"size is "<<size<<" and gid "<<gid<<endl;
 	for(int i=0;i<size;i++){
+	cout<<"i is "<<i<<endl;
+	cout<<"checking against gid.. "<<cur->data->getGid()<<endl;
 		if ((cur->data)->getGid()==gid){
+			cout<<"exit find"<<endl;
 			return cur;
-		}	
+		}
+		if(i!=size-1){	
+			cur = cur->next;
+		}
 	}
+	cout<<"exit find null"<<endl;
 	return nullptr;
 }
 
