@@ -15,7 +15,7 @@ class session{
 public:
 	//all public functions that can be called
 	session(long int id);
-	session();
+	session(int maxS);
 	~session();
 	void generateLocationArray();
 	int conquerBase(int tmNum, long int id, double x, double y);

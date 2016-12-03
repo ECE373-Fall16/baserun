@@ -16,7 +16,7 @@ class sessionList{
 	public:
 		sessionList();
 		~sessionList();
-		long int addSession(long int pid);
+		long int addSession(long int pid, int maxS);
 		session* getSession(long int gid);
 		void deleteSession(long int gid);
 		void restartSession(long int gid);
