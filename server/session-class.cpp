@@ -61,23 +61,24 @@ session::~session(){}
 //generates the bases
 void session::generateLocationArray(){
 	baseArr = new base_t[numBases];	
-	base_t b;
-	b.color='n';
-	b.score=0;
+	base_t *b=new base_t;
+	b->color='n';
+	b->score=0;
 	double theta = 2*3.1415/numBases;
 	int i;
 	//creates spiral set of points as bases
 	for(i=0; i<numBases; i++){
-		b.x = start_x+(i*radius*1.0/numBases)*cos(i*theta);			
-		b.y = start_y+(i*radius*1.0/numBases)*sin(i*theta);
+		b->x = start_x+(i*radius*1.0/numBases)*cos(i*theta);			
+		b->y = start_y+(i*radius*1.0/numBases)*sin(i*theta);
 		addBase(b);			
 	}
 }
 
 //add a base to the base array
-void session::addBase(base_t b){
+void session::addBase(base_t *b){
 	static int baseIndex=0;
-	baseArr[baseIndex++] = b;
+	cout<<baseIndex<<endl;
+	baseArr[baseIndex++] = *b;
 }
 
 //checks to see if base gets conquered, and scores appropriately
