@@ -53,5 +53,6 @@ private:
 	team* team2;
 	base_t *baseArr;
 	void addBase(base_t *b);
+	int baseIndex;
 };
 
