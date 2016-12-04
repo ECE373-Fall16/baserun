@@ -29,11 +29,18 @@ struct node * LL::getLast(){
 void LL::addNode(struct node * aN){
 	size++;
 	if(first!=nullptr){
-
 	cout<<"ADDING A SECOND NODE__________________"<<endl;
 		last->next = aN;
 		aN->prev = last;
-		last = aN;  
+		last = aN;
+
+		node_t * cur = first;
+		while(cur->next != nullptr){
+			cout<<cur->data->getGid();
+			cur = cur->next;
+		}
+			cout<<cur->data->getGid();
+ 
 	}else{
 		first = aN;
 		last = aN;
@@ -61,10 +68,9 @@ void LL::deleteNode(long int gid){
 
 struct node * LL::findNode(long int gid){
 	struct node * cur = first;
-	cout<<"size is "<<size<<" and gid "<<gid<<endl;
 	for(int i=0;i<size;i++){
 	cout<<"i is "<<i<<endl;
-	cout<<"checking against gid.. "<<cur->data->getGid()<<endl;
+	cout<<"checking  "<<gid<< " against gid.. "<<cur->data->getGid()<<endl;
 		if ((cur->data)->getGid()==gid){
 			cout<<"exit find"<<endl;
 			return cur;
