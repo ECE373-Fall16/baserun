@@ -40,6 +40,7 @@ session::session(long int id){
 	team2 = new team;
 	team1->setTeamNum(1);
 	team2->setTeamNum(2);
+	baseIndex = 0;
 }
 
 //constructor for session class
@@ -50,7 +51,7 @@ session::session(int maxS){
  	maxGameSize = maxS;	
 	team1 = new team(maxS/2);
 	team2 = new team(maxS/2);
-
+	baseIndex=0;
 	team1->setTeamNum(1);
 	team2->setTeamNum(2);
 }
@@ -76,7 +77,6 @@ void session::generateLocationArray(){
 
 //add a base to the base array
 void session::addBase(base_t *b){
-	static int baseIndex=0;
 	cout<<baseIndex<<endl;
 	baseArr[baseIndex++] = *b;
 }
