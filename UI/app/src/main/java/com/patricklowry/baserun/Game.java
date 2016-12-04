@@ -121,7 +121,8 @@ public class Game{
 		return bases;
 	}
 
-	/*//NEEDS ANDROID API TO BE FUNCTIONAL//
+	//NEEDS ANDROID API TO BE FUNCTIONAL//
+/*
 	public double[] onBase(double longitude, double latitude){
 		double[] loc = new double[2];
 		loc[0] = latitude;
@@ -139,18 +140,29 @@ public class Game{
 	public float distanceToBase(Base a){
 		return a.getDistance();
 	}
-
-	public void drawBases(){
+*/
+	public void drawBases(googleMap a){
+		int fill;
 		for(int i=0; i<baseCount; i++){
-			//Draw bases[i]
+			if(bases[i].getOwn() == 0)
+				fill = Color.GREY;
+			if(bases[i].getOwn() == 1)
+				fill = Color.RED;
+			if(bases[i].getOwn() == 2)
+				fill = Color.BLUE;
+			bases[i].initBase() = a.addCircle(new CircleOptions()
+				.center(new LatLng(bases[i].getLatitude(),bases[i].getLongitude()))
+				.radius(bases[i].getRadius())
+				.strokeColor(Color.BLACK)
+				.fillColor(fill));
 		}
 	}
-
+/*
 	public void drawUserLoc(){
 		double[] currentLoc = new double[2];
 		currentLoc[1] = Location.getLatitude();
 		currentLoc[2] = Location.getLongitude();
 		//Draw currentLoc
 	}
-	*/
+*/
 }

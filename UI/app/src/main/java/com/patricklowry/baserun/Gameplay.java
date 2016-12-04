@@ -19,6 +19,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class Gameplay extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private Game currGame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,30 @@ public class Gameplay extends FragmentActivity implements OnMapReadyCallback {
         CharSequence text = "Joined game " + id;
         int duration = Toast.LENGTH_LONG;
         Toast.makeText(context, text, duration).show();
+	if(mGoogleApiClient == null) {
+		mGoogleApiClient = new GoogleApiClient.Builder(this)
+			.addConnectionCallbacks(this)
+			.addOnConnectionFailedListener(this)
+			.addApi(LocationServices.API)
+			.build();
+
+    }
+
+    protected void onStart(){
+	mGoogleApiClient.connect();
+	super.onStart();
+    }
+
+    @Override
+    public void onConnected(Bundle connectionHint){
+	mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+	if(mRequestingLocationUpdates) {
+	    startLocationUpdates();
+	}
+    }
+
+    protected void startLocationUpdates() {
+	LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient
     }
 
 
@@ -51,10 +76,34 @@ public class Gameplay extends FragmentActivity implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+	/*
         LatLng curLoc = new LatLng(42.3912, -72.5267);
         mMap.addMarker(new MarkerOptions().position(curLoc).title("Marker in UMass Amherst"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(curLoc));
+	*/
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(currGame.getLatitude(),currGame.getLongitude())));
+		Circle game = mMap.addCircle(new CircleOptions()
+		.center(new LatLng(currGame.getLatitude(), currGame.getLongitude()))
+		.radius(currGame.getRadius())
+		.strokeColor(Color.BLACK)
+		.fillColor(0x88888888));
+	Marker user = mMap.addMarker(new MarkerOptions()
+		.position(new Latlng(currGame.getLatitude(), currGame.getLongitude()))
+		.setVisible(false));
+	currGame.drawBases(mMap);
+	new Timer().scheduleAtFixedRate(new TimerTask(){
+		@Overide
+		public void run(){
+			//Update User Location
+			LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+			if(mLastLocation != null) {
+			    double pLat = mLastLocation.getLatitude();
+			    double pLng = mLastLocation.getLongitude();
+			}
+			user.setPosition(new LatLng(pLat,pLng));
+			user.setVisible(true);
+			//Check On Base
+		}
+	},0,1000);
     }
 
     public void onBackPressed() {
@@ -77,5 +126,9 @@ public class Gameplay extends FragmentActivity implements OnMapReadyCallback {
                     }
                 })
                 .create();
+    }
+    protected void onStop() {
+	mGoogleApiClient.disconnect();
+	super.onStop();
     }
 }
