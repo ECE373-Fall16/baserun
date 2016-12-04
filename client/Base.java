@@ -1,18 +1,26 @@
+package com.patricklowry.baserun;
 
 public class Base{
-	private double[] location = new double[2];
-	private double radius;
-	private int own;
-//	Circle circle;
+	double[] location = new double[2];
+	double radius;
+	int own;
+	Circle base;
 
-	public Base(double[] location, double rad){
+	public Base(double[] location,int rad){
 		this.location = location;
+		radius = rad;
+	}
+	
+	public Base(double centerLat, double centerLong, double rad){
+		location[0]=centerLat;
+		location[1]=centerLong;
 		radius = rad;
 		own = 0;
 	}
 	
-	public Base(double[] location, double rad, int own){
-		this.location = location;
+	public Base(double centerLat, double centerLong, double rad, int own){
+		location[0]=centerLat;
+		location[1]=centerLong;
 		radius = rad;
 		this.own = own;
 	}
@@ -30,11 +38,19 @@ public class Base{
 		return location;
 	}
 	
-	public double getRadius(){
-		return radius;
+	public double getLatitude(){
+		return location[1];
 	}
-
+	
+	public double getLongitude(){
+		return location[2];
+	}
+	
 	public int getOwner(){
 		return own;
+	}
+	
+	public Circle initBase(){
+		return base;
 	}
 }

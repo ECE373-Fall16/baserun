@@ -1,24 +1,27 @@
+package com.patricklowry.baserun;
+
 import org.apache.xmlrpc.*;
+
+import java.io.IOException;
 import java.util.*;
 
 public class Network{
-	private XmlRpcClient server;
-
+	XmlRpcClient server;
 	public Network(){
 		
 	}
 	
-	public boolean connect(){
+	public boolean connect(String serv, int port){
 		try{
-			server = new XmlRpcClient("http://104.196.221.210:3389/RPC2");
+			String temp  = "http://"+serv+":"+port;
+			server = new XmlRpcClient(temp);
 		} catch(Exception e){
 			return false;
 		}
-		if(checkConn()){
+		if(checkConn())
 			return true;
-		} else {
+		else
 			return false;
-		}
 	}
 	
 	private boolean checkConn(){
@@ -38,21 +41,42 @@ public class Network{
 			return false;
 		}
 	}
+	
+	public boolean sendToServer(int playCount, int baseCount, double dur){
+		Vector send = new Vector();
+		send.addElement(new Integer(playCount));
+		send.addElement(new Integer(baseCount));
+		send.addElement(new Double(dur));
+		Vector recv = null;
+		try {
+			recv = (Vector)server.execute("server.testSend", send);
+		} catch (XmlRpcException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		if((Integer)recv.get(0) == playCount && (Integer)recv.get(1) == baseCount && (Double)recv.get(2) == dur)
+			return true;
+		else 
+			return false;
+	}
 
 	public Game createGame(int PID, int playerCount, double radius, int baseCount, double startLat, double startLong){
 		if(checkConn()){
 			try {
 				Vector params = new Vector();
 				params.addElement(new Integer(PID));
-				params.addElement(new Integer(playerCount));
-				params.addElement(new Double(radius));
-				params.addElement(new Integer(baseCount));
-				params.addElement(new Double(startLat));
-				params.addElement(new Double(startLong));
-				Vector createGame = (Vector)server.execute("server.createGame",params);
-				Integer GID = (Integer)createGame.get(0);
-				System.out.println(GID);
-				if(GID != -1){
+				Vector genGID = (Vector)server.execute("server.genGID",params);
+				Integer GID = (Integer)genGID.get(0);
+				Vector params2 = new Vector();
+				params2.addElement(new Integer(GID));
+				params2.addElement(new Integer(playerCount));
+				params2.addElement(new Double(radius));
+				params2.addElement(new Integer(baseCount));
+				params2.addElement(new Double(startLat));
+				params2.addElement(new Double(startLong));
+				Vector createGame = (Vector)server.execute("server.createGame",params2);
+				if((Integer)createGame.get(0) == 1){
 					Game temp = new Game(GID,playerCount,radius,baseCount,startLat,startLong);
 					return temp;
 				} else
@@ -88,10 +112,7 @@ public class Network{
 					Double lat = (Double)join.get((playCount+3)+i++);
 					Double lon = (Double)join.get((playCount+3)+i++);
 					Double rad = (Double)join.get((playCount+3)+i);
-				double[] loc = new double[2];	
-				loc[0] = lat;
-				loc[1] = lon;
-				bases[j++] = new Base(loc,rad);
+					bases[j++] = new Base(lat,lon,rad);
 				}
 				Integer totPlayCount = (Integer)join.get(playCount+BaseCount+1);
 				Double gameLat = (Double)join.get(playCount+BaseCount+2);
@@ -107,13 +128,14 @@ public class Network{
 			return null;
 	}
 
-	public Game refreshGame(int GID){
+	public Game refreshGame(int GID, int PID){
 		Game temp;
 		if(checkConn()){
 			try {
 			//CALL SERVER, RETURN GAME UPDATE
 				Vector params = new Vector();
 				params.addElement(new Integer(GID));
+				params.addElement(new Integer(PID));
 				Vector refresh = (Vector)server.execute("server.refresh",params);
 				Integer playCount = (Integer)refresh.get(0);
 				User[] players = new User[playCount];
@@ -130,10 +152,7 @@ public class Network{
 					Double lat = (Double)refresh.get((playCount+3)+i++);
 					Double lon = (Double)refresh.get((playCount+3)+i++);
 					Double rad = (Double)refresh.get((playCount+3)+i);
-					double[] loc = new double[2];
-					loc[0] = lat;
-					loc[1] = lon;
-					bases[j++] = new Base(loc,rad);
+					bases[j++] = new Base(lat,lon,rad);
 				}
 				temp = new Game(playCount,players,bases);
 				return temp;
@@ -146,7 +165,6 @@ public class Network{
 
 	public GameList gameList(int PID){
 		GameList temp;
-		int j = 0;
 		if(checkConn()){
 			try {
 			//CALL SERVER, RETURN GAME LIST
@@ -155,10 +173,7 @@ public class Network{
 				Vector gameList = (Vector)server.execute("server.gameList", params);
 				int gcount = (Integer)gameList.get(0);
 				int[] gids = new int[gcount];
-				int[] players = new int[gcount];
-				int[] currPlayers = new int[gcount];
-				System.out.println(gcount);
-				/*for(int i=0; i<gcount; i++){
+				for(int i=0; i<gcount; i++){
 					gids[i] = (Integer)gameList.get(i+1);
 				}
 				int[] players = new int[gcount];
@@ -168,12 +183,6 @@ public class Network{
 				int[] currPlayers = new int[gcount];
 				for(int i=0; i<gcount; i++){
 					currPlayers[i] = (Integer)gameList.get(2*gcount+i+1);
-				}*/
-				for(int i=0; i<gcount; i++){
-					gids[i] = (Integer)gameList.get(j+1);
-					players[i] = (Integer)gameList.get(j+2);
-					currPlayers[i] = (Integer)gameList.get(j+3);
-					j+=3;
 				}
 				temp = new GameList(gcount,gids, players, currPlayers);
 				return temp;

@@ -1,9 +1,9 @@
-
+package com.patricklowry.baserun;
 
 public class Game{
 	int GameID;
 	int playerCount;
-	int currPlayerCount;
+	int currPlayerCount = 0;
 	double radius;
 	int baseCount;
 	private double[] GameLocation = new double[2];
@@ -13,6 +13,7 @@ public class Game{
 	private Base[] bases;
 
 	public Game(int currPlayers, User[] currPlay, Base[] base){
+		System.out.println("FUCK OFF AND DIE");
 		currPlayerCount = currPlayers;
 		players = currPlay;
 		int j = 0;
@@ -104,43 +105,49 @@ public class Game{
 	public Base[] getBases(){
 		return bases;
 	}
-	/*
-	//BELOW NEEDS ANDROID API TO BE FUNCTIONAL//
-	public boolean onBase(double longitude, double latitude){
+
+	//NEEDS ANDROID API TO BE FUNCTIONAL//
+/*
+	public double[] onBase(double longitude, double latitude){
 		double[] loc = new double[2];
 		loc[0] = latitude;
 		loc[1] = longitude;
 		for(int i = 0; i<baseCount; i++){
-			if(distanceToBase(bases[i]) <= bases[i].getRadius())
-				return true;
+			if(latitude == bases[i].getLatitude()){
+				if(longitude == bases[i].getLongitude()){
+					return loc;
+				}
+			}
 		}
-		return false;
+		return null;
 	}
 
 	public float distanceToBase(Base a){
 		return a.getDistance();
 	}
-
-	public GoogleMap drawBases(GoogleMap map){ //call onMapReady
+*/
+	public void drawBases(googleMap a){
+		int fill;
 		for(int i=0; i<baseCount; i++){
-			//Draw bases[i] with circle
-			double[] location = bases[i].getLocation();
-			bases[i].circle = map.addCircle(new CircleOptions()
-				.center(new LatLng(location[0],location[1]))
-				.radius(bases[i].getRadius)
+			if(bases[i].getOwn() == 0)
+				fill = Color.GREY;
+			if(bases[i].getOwn() == 1)
+				fill = Color.RED;
+			if(bases[i].getOwn() == 2)
+				fill = Color.BLUE;
+			bases[i].initBase() = a.addCircle(new CircleOptions()
+				.center(new LatLng(bases[i].getLatitude(),bases[i].getLongitude()))
+				.radius(bases[i].getRadius())
 				.strokeColor(Color.BLACK)
-				.fillColor(Color.GREY));
+				.fillColor(fill));
 		}
-		return map;
 	}
-
-	public GoogleMap drawUserLoc(GoogleMap map){
+/*
+	public void drawUserLoc(){
 		double[] currentLoc = new double[2];
-		currentLoc[0] = Location.getLatitude();
-		currentLoc[1] = Location.getLongitude();
-		//Draw currentLoc with marker
-		map.addMarker(new MarkerOptions()
-			.position(new LatLng(currentLoc[0],currentLoc[1])));
-		return map;
-	}*/
+		currentLoc[1] = Location.getLatitude();
+		currentLoc[2] = Location.getLongitude();
+		//Draw currentLoc
+	}
+*/
 }
