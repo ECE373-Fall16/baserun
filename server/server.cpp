@@ -91,31 +91,23 @@ public:
 
 	session *game = slist.getSession(gid);
 	if (game!=nullptr){
-	cout<<"NOT NULLPTR YAY"<<endl;
 
 	game->setRadius(radius);
 	game->setNumBases(numBases);
 	game->setStart(startX,startY);
 	game->generateLocationArray();	
 
-	cout<<"out gid is...."<<gid<<endl;
-
 	//returns gid for success	
 	success = (int)gid;
 
 	}else{
-	cout<<"NULLPTR FUUUUUU"<<endl;
 	success=-1;
 	}
 
 
-	cout<<"chk 1___________________"<<success<<endl;
         vector<xmlrpc_c::value> arrayData;
-	cout<<"chk 2"<<endl;
         arrayData.push_back(xmlrpc_c::value_int(success));
-	cout<<"chk 3"<<endl;
         xmlrpc_c::value_array array1(arrayData);
-	cout<<"chk 4"<<endl;
         *retvalP = array1;
 	}
 };
@@ -278,18 +270,13 @@ public:
 	arrayData.push_back(xmlrpc_c::value_int(numS));
 
 	for(int gi=0; gi<numS; gi++){
-		cout<<"loop list..."<<gi<<endl;	
 		//return game data
 		//return GID
 		//max player size of that game
 		//return current players in game
-		cout<<"chk1__"<<endl;
 		arrayData.push_back(xmlrpc_c::value_int((glist->data)->getGid()));
-		cout<<"chk2__"<<endl;
 		arrayData.push_back(xmlrpc_c::value_int((glist->data)->getMaxPlayerSize()));
-		cout<<"chk3__"<<endl;
 	        arrayData.push_back(xmlrpc_c::value_int((glist->data)->getNumPlayers()));
-		cout<<"chk4__"<<endl;
 		glist = glist->next;
 
 	}
