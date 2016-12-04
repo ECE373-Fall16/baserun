@@ -96,7 +96,7 @@ public:
 	game->setRadius(radius);
 	game->setNumBases(numBases);
 	game->setStart(startX,startY);
-	//game->generateLocationArray();	
+	game->generateLocationArray();	
 
 	cout<<"out gid is...."<<gid<<endl;
 
