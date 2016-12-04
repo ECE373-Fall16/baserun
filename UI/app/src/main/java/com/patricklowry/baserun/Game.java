@@ -49,22 +49,6 @@ public class Game{
 		bases = refresh.getBases();
 	}
 
-	/*public int joinTeam(int pid){
-		for(int i=0; i<playerCount; i++){
-			if(players[i].getID() == pid){
-				if(getTeam2Size() > getTeam1Size()){
-					players[i].setTeam(1);
-					return 1;
-				} else {
-					players[i].setTeam(0);
-					return 0;
-				}
-			}
-		}
-		return -1;
-
-	}*/
-
 	public int getTeam1Size(){
 		for(int i=0; i<playerCount/2; i++){
 			if(Team1[i] == null)
@@ -122,21 +106,21 @@ public class Game{
 	}
 
 	//NEEDS ANDROID API TO BE FUNCTIONAL//
-/*
-	public double[] onBase(double longitude, double latitude){
+
+	public int onBase(double longitude, double latitude){
 		double[] loc = new double[2];
 		loc[0] = latitude;
 		loc[1] = longitude;
 		for(int i = 0; i<baseCount; i++){
 			if(latitude == bases[i].getLatitude()){
 				if(longitude == bases[i].getLongitude()){
-					return loc;
+					return i;
 				}
 			}
 		}
-		return null;
+		return -1;
 	}
-
+/*
 	public float distanceToBase(Base a){
 		return a.getDistance();
 	}

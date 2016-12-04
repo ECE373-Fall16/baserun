@@ -20,6 +20,8 @@ public class Gameplay extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private Game currGame;
+    private Network net = new Network();
+    private int PID = 99999999;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +78,7 @@ public class Gameplay extends FragmentActivity implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+	net.connect();
 	/*
         LatLng curLoc = new LatLng(42.3912, -72.5267);
         mMap.addMarker(new MarkerOptions().position(curLoc).title("Marker in UMass Amherst"));
@@ -102,6 +105,9 @@ public class Gameplay extends FragmentActivity implements OnMapReadyCallback {
 			user.setPosition(new LatLng(pLat,pLng));
 			user.setVisible(true);
 			//Check On Base
+			if(currGame.onBase(pLat,pLng) != -1){
+				net.onBase(currGame.getGameID(),PID,new double[pLat,pLng]);
+			}
 		}
 	},0,1000);
     }
