@@ -40,7 +40,7 @@ public class Game{
 		GameLocation[1] = startLong;
 		GameID = ID;
 		currPlayerCount = 1;
-		time = new GameTimer(2 /*duration*/);
+		time = new GameTimer(10 /*duration*/);
 	}
 
 	public void startTimer(){

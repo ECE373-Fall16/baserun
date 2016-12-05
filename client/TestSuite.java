@@ -6,7 +6,7 @@ public class TestSuite {
 		Scanner scan = new Scanner(System.in);
 		net.connect();
 		GameList games;
-		Game curr;
+		Game curr = null;
 		boolean inGame = false;
 		int a;
 		int b;
@@ -28,6 +28,7 @@ public class TestSuite {
 			System.out.println("3- Test Refresh Game");
 			System.out.println("4- Test GameList");
 			System.out.println("5- Test onBase");
+			System.out.println("6- Test Timer");
 			System.out.println("0- Exit");
 			choice = Integer.parseInt(scan.nextLine());
 			switch (choice) {
@@ -105,12 +106,25 @@ public class TestSuite {
 						f = Double.parseDouble(scan.nextLine());
 						System.out.println("Please enter a double");
 						g = Double.parseDouble(scan.nextLine());
-						if(net.onBase(a,b,new double[f,g]))
+						double[] temp = new double[2];
+						temp[0] = f;
+						temp[1] = g;
+						if(net.onBase(a,b,temp))
 							System.out.println("ON BASE");
 						else
 							System.out.println("NOT ON BASE");
 					}
 					break;
+				case 6:
+					if(inGame){
+						if(/*net.startGame(curr.getGameID())*/ true){
+							long init = System.currentTimeMillis();
+							if(curr != null)
+								curr.startTimer();
+							if((System.currentTimeMillis()-init)%100 == 0)
+								System.out.println(curr.getTime());
+						}
+					}
 			}
 		}
 		scan.close();

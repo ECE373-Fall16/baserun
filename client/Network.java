@@ -150,7 +150,9 @@ public class Network{
 				Vector gameList = (Vector)server.execute("server.gameList", params);
 				int gcount = (Integer)gameList.get(0);
 				int[] gids = new int[gcount];
-				for(int i=0; i<gcount; i++){
+				int[] players = new int[gcount];
+				int[] currPlayers = new int[gcount];
+				/*for(int i=0; i<gcount; i++){
 					gids[i] = (Integer)gameList.get(i+1);
 				}
 				int[] players = new int[gcount];
@@ -160,6 +162,11 @@ public class Network{
 				int[] currPlayers = new int[gcount];
 				for(int i=0; i<gcount; i++){
 					currPlayers[i] = (Integer)gameList.get(2*gcount+i+1);
+				}*/
+				for(int i=0; i<gcount; i++){
+					gids[i] = (Integer)gameList.get((i*3)+1);
+					players[i] = (Integer)gameList.get((i*3)+2);
+					currPlayers[i] = (Integer)gameList.get((i*3)+3);
 				}
 				temp = new GameList(gcount,gids, players, currPlayers);
 				return temp;
@@ -189,5 +196,19 @@ public class Network{
 			}
 		} else
 			return false;
+	}
+
+	public boolean startGame(int GID){
+		try {
+			Vector params = new Vector();
+			params.addElement(new Integer(GID));
+			Vector onBase = (Vector)server.execute("server.startGame", params);
+			if((Integer)onBase.get(0) == 1)
+				return true;
+			else 
+				return false;
+		} catch(Exception e) {
+			return false;
+		}
 	}
 }

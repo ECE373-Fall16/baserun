@@ -17,7 +17,7 @@ public class GameTimer extends Thread{
 	}
 
 	public void exit(){
-		thread = null;
+		time = null;
 	}
 
 	public void run(){
@@ -25,10 +25,14 @@ public class GameTimer extends Thread{
 		long init = System.currentTimeMillis();
 		double temp = dur;
 		while(time == thisThread){
-			if(((temp*1000)-(System.currentTimeMillis()-init)) > 0.0){
-				dur = ((temp*1000)-(System.currentTimeMillis()-init))/1000;
-			} else {
+			if(dur <= 0.0){
+				System.out.println("TEST");
 				exit();
+			}
+			if(dur > 0.0){
+				dur = ((temp*1000)-(System.currentTimeMillis()-init))/1000;
+				if(dur%1 == 0)
+					System.out.println(dur);
 			}
 		}
 	}
