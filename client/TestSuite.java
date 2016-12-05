@@ -27,7 +27,7 @@ public class TestSuite {
 			System.out.println("2- Test Join Game");
 			System.out.println("3- Test Refresh Game");
 			System.out.println("4- Test GameList");
-			System.out.println("5- Test Networking");
+			System.out.println("5- Test onBase");
 			System.out.println("0- Exit");
 			choice = Integer.parseInt(scan.nextLine());
 			switch (choice) {
@@ -96,57 +96,21 @@ public class TestSuite {
 						System.out.println("GAME LIST FAILED");
 					break;
 				case 5:
-					System.out.println("Please enter an int");
-					a = Integer.parseInt(scan.nextLine());
-					System.out.println("please enter an int");
-					b = Integer.parseInt(scan.nextLine());
-					System.out.println("Plsease enter a double");
-					f = Double.parseDouble(scan.nextLine());
-					System.out.println("Please enter an int");
-					c = Integer.parseInt(scan.nextLine());
-					System.out.println("Please enter a double");
-					g = Double.parseDouble(scan.nextLine());
-					System.out.println("Please enter a double");
-					h = Double.parseDouble(scan.nextLine());
-					if(net.createGame(a,b,f,c,g,h) != null)
-						System.out.println("CREATE GAME PASSED");
-					else
-						System.out.println("CREATE GAME FAILED");
-					System.out.println("Please enter an int");
-					a = Integer.parseInt(scan.nextLine());
-					System.out.println("Please enter an int");
-					b = Integer.parseInt(scan.nextLine());
-					if(net.joinGame(a,b) != null)
-						System.out.println("JOIN GAME PASSED");
-					else
-						System.out.println("JOIN GAME FAILED");
-					System.out.println("Please enter an int");
-					a = Integer.parseInt(scan.nextLine());
-					if(net.refreshGame(a) != null)
-						System.out.println("REFRESH GAME PASSED");
-					else
-						System.out.println("REFRESH GAME FAILED");
-					System.out.println("Please enter an int");
-					a = Integer.parseInt(scan.nextLine());
-					if(net.gameList(a) != null)
-						System.out.println("GAME LIST PASSED");
-					else
-						System.out.println("GAME LIST FAILED");
-					System.out.println("Please enter an int");
-					a = Integer.parseInt(scan.nextLine());
-					System.out.println("Please enter an int");
-					b = Integer.parseInt(scan.nextLine());
-					System.out.println("Please enter a double");
-					f = Double.parseDouble(scan.nextLine());
-					System.out.println("Please enter a double");
-					g = Double.parseDouble(scan.nextLine());
-					double[] loc = new double[2];
-					loc[0] = f;
-					loc[1] = g;
-					if(net.onBase(a,b,loc))
-						System.out.println("ON BASE PASSED");
-					else
-						System.out.println("ON BASE FAILED");
+					if(inGame){
+						System.out.println("Please enter an int");
+						a = Integer.parseInt(scan.nextLine());
+						System.out.println("Please enter an int");
+						b = Integer.parseInt(scan.nextLine());
+						System.out.println("Please enter a double");
+						f = Double.parseDouble(scan.nextLine());
+						System.out.println("Please enter a double");
+						g = Double.parseDouble(scan.nextLine());
+						if(net.onBase(a,b,new double[f,g]))
+							System.out.println("ON BASE");
+						else
+							System.out.println("NOT ON BASE");
+					}
+					break;
 			}
 		}
 		scan.close();

@@ -1,7 +1,7 @@
 
 public class GameTimer extends Thread{
 	double dur;
-	private volatile Thread thread;
+	private volatile Thread time;
 
 	public GameTimer(double duration){
 		dur = duration;
@@ -12,8 +12,8 @@ public class GameTimer extends Thread{
 	}
 
 	public void start() {
-		thread = new Thread(this);
-		thread.start();
+		time = new Thread(this);
+		time.start();
 	}
 
 	public void exit(){
@@ -24,7 +24,7 @@ public class GameTimer extends Thread{
 		Thread thisThread = Thread.currentThread();
 		long init = System.currentTimeMillis();
 		double temp = dur;
-		while(thread == thisThread){
+		while(time == thisThread){
 			if(((temp*1000)-(System.currentTimeMillis()-init)) > 0.0){
 				dur = ((temp*1000)-(System.currentTimeMillis()-init))/1000;
 			} else {
