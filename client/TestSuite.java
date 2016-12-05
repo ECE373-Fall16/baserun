@@ -60,12 +60,15 @@ public class TestSuite {
 					if(inGame)
 						System.out.println("CURRENTLY IN GAME");
 					else {
-						Game test2 = net.createGame(1,1,1.1,1,1.1,1.1);
-						int testGID = test2.GameID;
-						Game test3 = net.joinGame(testGID,1);
-						if(test3 != null)
+						System.out.println("Please enter an int");
+						a = Integer.parseInt(scan.nextLine());
+						System.out.println("Please enter an int");
+						b = Integer.parseInt(scan.nextLine());
+						Game test3 = net.joinGame(a,b);
+						if(test3 != null){
 							System.out.println("GAME JOINED");
-						else
+							System.out.println(test3.getGameID());
+						} else
 							System.out.println("GAME NOT JOINED");
 					}
 					break;

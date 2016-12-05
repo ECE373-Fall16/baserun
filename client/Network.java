@@ -13,7 +13,7 @@ public class Network{
 	
 	public boolean connect(){
 		try{
-			String temp  = "http://104.196.221.210:3389";
+			String temp  = "http://104.196.221.210:3389/RPC2";
 			server = new XmlRpcClient(temp);
 		} catch(Exception e){
 			return false;
@@ -42,41 +42,19 @@ public class Network{
 		}
 	}
 	
-	public boolean sendToServer(int playCount, int baseCount, double dur){
-		Vector send = new Vector();
-		send.addElement(new Integer(playCount));
-		send.addElement(new Integer(baseCount));
-		send.addElement(new Double(dur));
-		Vector recv = null;
-		try {
-			recv = (Vector)server.execute("server.testSend", send);
-		} catch (XmlRpcException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		if((Integer)recv.get(0) == playCount && (Integer)recv.get(1) == baseCount && (Double)recv.get(2) == dur)
-			return true;
-		else 
-			return false;
-	}
-
 	public Game createGame(int PID, int playerCount, double radius, int baseCount, double startLat, double startLong){
 		if(checkConn()){
 			try {
-				Vector params = new Vector();
-				params.addElement(new Integer(PID));
-				Vector genGID = (Vector)server.execute("server.genGID",params);
-				Integer GID = (Integer)genGID.get(0);
 				Vector params2 = new Vector();
-				params2.addElement(new Integer(GID));
+				params2.addElement(new Integer(PID));
 				params2.addElement(new Integer(playerCount));
 				params2.addElement(new Double(radius));
 				params2.addElement(new Integer(baseCount));
 				params2.addElement(new Double(startLat));
 				params2.addElement(new Double(startLong));
 				Vector createGame = (Vector)server.execute("server.createGame",params2);
-				if((Integer)createGame.get(0) == 1){
+				Integer GID = (Integer)createGame.get(0);
+				if(GID != -1){
 					Game temp = new Game(GID,playerCount,radius,baseCount,startLat,startLong);
 					return temp;
 				} else
