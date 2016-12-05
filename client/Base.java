@@ -1,10 +1,10 @@
-package com.patricklowry.baserun;
+//package com.patricklowry.baserun;
 
 public class Base{
 	double[] location = new double[2];
 	double radius;
 	int own;
-	Circle base;
+	//Circle base;
 
 	public Base(double[] location,int rad){
 		this.location = location;
@@ -50,7 +50,8 @@ public class Base{
 		return own;
 	}
 	
-	public Circle initBase(){
+/*	public Circle initBase(){
 		return base;
 	}
+*/
 }

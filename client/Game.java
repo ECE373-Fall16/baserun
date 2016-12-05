@@ -1,4 +1,4 @@
-package com.patricklowry.baserun;
+//package com.patricklowry.baserun;
 
 public class Game{
 	int GameID;
@@ -13,7 +13,6 @@ public class Game{
 	private Base[] bases;
 
 	public Game(int currPlayers, User[] currPlay, Base[] base){
-		System.out.println("FUCK OFF AND DIE");
 		currPlayerCount = currPlayers;
 		players = currPlay;
 		int j = 0;
@@ -125,7 +124,7 @@ public class Game{
 	public float distanceToBase(Base a){
 		return a.getDistance();
 	}
-*/
+
 	public void drawBases(googleMap a){
 		int fill;
 		for(int i=0; i<baseCount; i++){
@@ -142,7 +141,7 @@ public class Game{
 				.fillColor(fill));
 		}
 	}
-/*
+
 	public void drawUserLoc(){
 		double[] currentLoc = new double[2];
 		currentLoc[1] = Location.getLatitude();

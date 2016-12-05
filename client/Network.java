@@ -1,4 +1,4 @@
-package com.patricklowry.baserun;
+//package com.patricklowry.baserun;
 
 import org.apache.xmlrpc.*;
 
@@ -11,9 +11,9 @@ public class Network{
 		
 	}
 	
-	public boolean connect(String serv, int port){
+	public boolean connect(){
 		try{
-			String temp  = "http://"+serv+":"+port;
+			String temp  = "http://104.196.221.210:3389";
 			server = new XmlRpcClient(temp);
 		} catch(Exception e){
 			return false;
@@ -128,14 +128,13 @@ public class Network{
 			return null;
 	}
 
-	public Game refreshGame(int GID, int PID){
+	public Game refreshGame(int GID){
 		Game temp;
 		if(checkConn()){
 			try {
 			//CALL SERVER, RETURN GAME UPDATE
 				Vector params = new Vector();
 				params.addElement(new Integer(GID));
-				params.addElement(new Integer(PID));
 				Vector refresh = (Vector)server.execute("server.refresh",params);
 				Integer playCount = (Integer)refresh.get(0);
 				User[] players = new User[playCount];
