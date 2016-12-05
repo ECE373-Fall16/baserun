@@ -11,6 +11,7 @@ public class Game{
 	private User[] Team1;
 	private User[] Team2;
 	private Base[] bases;
+	private GameTimer time;
 
 	public Game(int currPlayers, User[] currPlay, Base[] base){
 		currPlayerCount = currPlayers;
@@ -27,7 +28,7 @@ public class Game{
 		bases = base;
 	}
 
-	public Game(int ID, int playerCount, double radius, int baseCount, double startLat, double startLong){
+	public Game(int ID, int playerCount, double radius, int baseCount, double startLat, double startLong/*, double duration*/){
 		this.playerCount = playerCount;
 		this.radius = radius;
 		this.baseCount = baseCount;
@@ -39,6 +40,15 @@ public class Game{
 		GameLocation[1] = startLong;
 		GameID = ID;
 		currPlayerCount = 1;
+		time = new GameTimer(2 /*duration*/);
+	}
+
+	public void startTimer(){
+		time.start();
+	}
+
+	public double getTime(){
+		return time.getDur();
 	}
 
 	public void refreshGame(Game refresh){
