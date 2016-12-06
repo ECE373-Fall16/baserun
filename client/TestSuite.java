@@ -127,7 +127,7 @@ public class TestSuite {
 				case 7:
 					if(inGame){
 						User[] temp = curr.getPlayers();
-						for(int i = 0; i < temp.length; i++){
+						for(int i = 0; i < curr.getCurrPlayCount(); i++){
 							System.out.print(temp[i].getID()+"  ");
 							System.out.println(temp[i].getTeam());
 						}
