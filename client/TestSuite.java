@@ -48,8 +48,10 @@ public class TestSuite {
 						System.out.println("Please enter a StartLong");
 						h = Double.parseDouble(scan.nextLine());
 						curr = net.createGame(a,b,f,c,g,h);
-						inGame = true;
+						Game ref = net.refreshGame(curr.getGameID());
+						curr.refreshGame(ref);
 						if(curr != null){
+							inGame = true;
 							System.out.println(curr.getGameID());
 							System.out.println(curr.getPlayerCount());
 							System.out.println(curr.getCurrPlayCount());
@@ -67,7 +69,10 @@ public class TestSuite {
 						System.out.println("Please enter a PID");
 						b = Integer.parseInt(scan.nextLine());
 						curr = net.joinGame(a,b);
+						Game ref = net.refreshGame(curr.getGameID());
+						curr.refreshGame(ref);
 						if(curr != null){
+							inGame = true;
 							System.out.println("GAME JOINED");
 							System.out.println(curr.getGameID());
 						} else
@@ -79,7 +84,11 @@ public class TestSuite {
 						System.out.println("Please enter a GID");
 						a = Integer.parseInt(scan.nextLine());
 						Game ref = net.refreshGame(a);
+						System.out.println("Previous currPlayCount: "+curr.getCurrPlayCount());
 						curr.refreshGame(ref);
+						//curr.setPlayers(ref.getPlayers(),ref.getCurrPlayCount());
+						//curr.setBases(ref.getBases());
+						System.out.println("Current currPlayCount: "+ref.getCurrPlayCount());
 						if(ref != null)
 							System.out.println("GAME REFRESHED");
 						else
@@ -117,19 +126,24 @@ public class TestSuite {
 					}
 					break;
 				case 6:
-					if(inGame){
-						if(/*net.startGame(curr.getGameID())*/ true){
-							long init = System.currentTimeMillis();
-							curr.startTimer();
-						}
-					}
+//					if(inGame){
+//						if(/*net.startGame(curr.getGameID())*/ true){
+//							long init = System.currentTimeMillis();
+//							curr.startTimer();
+//						}
+//					}
 					break;
 				case 7:
 					if(inGame){
 						User[] temp = curr.getPlayers();
+						System.out.println(curr.getCurrPlayCount());
 						for(int i = 0; i < curr.getCurrPlayCount(); i++){
-							System.out.print(temp[i].getID()+"  ");
-							System.out.println(temp[i].getTeam());
+							if(temp[i] == null){
+								System.out.println("USER IS NULL");
+							} else {
+								System.out.print(temp[i].getID()+"  ");
+								System.out.println(temp[i].getTeam());
+							}
 						}
 					}
 			}

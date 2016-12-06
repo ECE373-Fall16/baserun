@@ -42,7 +42,7 @@ public class Network{
 		}
 	}
 	
-	public Game createGame(int PID, int playerCount, double radius, int baseCount, double startLat, double startLong){
+	public Game createGame(int PID, int playerCount, double radius, int baseCount, double startLat, double startLong/*, long tts*/){
 		if(checkConn()){
 			try {
 				Vector params2 = new Vector();
@@ -55,7 +55,7 @@ public class Network{
 				Vector createGame = (Vector)server.execute("server.createGame",params2);
 				Integer GID = (Integer)createGame.get(0);
 				if(GID != -1){
-					Game temp = new Game(GID,playerCount,radius,baseCount,startLat,startLong);
+					Game temp = new Game(GID,playerCount,radius,baseCount,startLat,startLong/*,tts*/);
 					return temp;
 				} else
 					return null;
@@ -81,8 +81,10 @@ public class Network{
 				User[] players = new User[playCount];
 				int j = 0;
 				for(int i=1; j<playCount; i++){
-					players[j] = new User((Integer)join.get(k++));
-					players[j].setTeam((Integer)join.get(k++));
+					Integer id = (Integer)join.get(k++);
+					players[j] = new User(id);
+					Integer tid = (Integer)join.get(k++);
+					players[j].setTeam(tid);
 					System.out.println(players[j].getID());
 					System.out.println(players[j].getTeam());
 					j++;
@@ -111,7 +113,8 @@ public class Network{
 				temp = new Game(GID,totPlayCount,gameRad,BaseCount,gameLat,gameLong);
 				temp.setCurrPlayCount(playCount);
 				return temp;
-			} catch(Exception e){	
+			} catch(Exception e){
+				e.printStackTrace();	
 				return null;
 			}
 		} else 
@@ -120,27 +123,35 @@ public class Network{
 
 	public Game refreshGame(int GID){
 		Game temp;
+		int k = 0;
 		if(checkConn()){
 			try {
 			//CALL SERVER, RETURN GAME UPDATE
 				Vector params = new Vector();
 				params.addElement(new Integer(GID));
 				Vector refresh = (Vector)server.execute("server.refresh",params);
-				Integer playCount = (Integer)refresh.get(0);
+				int playCount = ((Integer)refresh.get(k++)).intValue();
+				System.out.println(playCount);
 				User[] players = new User[playCount];
 				int j = 0;
 				for(int i=1; j<playCount; i++){
-					players[j] = new User((Integer)refresh.get(i++));
-					players[j].setTeam((Integer)refresh.get(i));
+					players[j] = new User(((Integer)refresh.get(k++)).intValue());
+					System.out.println(players[j].getID());
+					players[j].setTeam(((Integer)refresh.get(k++)).intValue());
+					System.out.println(players[j].getTeam());
 					j++;
 				}
-				Integer BaseCount = (Integer)refresh.get(playCount+3);
+				int BaseCount = ((Integer)refresh.get(k++)).intValue();
+				System.out.println(BaseCount);
 				Base[] bases = new Base[BaseCount];
 				j=0;
 				for(int i=1; j<BaseCount; i++){
-					Double lat = (Double)refresh.get((playCount+3)+i++);
-					Double lon = (Double)refresh.get((playCount+3)+i++);
-					Double rad = (Double)refresh.get((playCount+3)+i);
+					double lat = ((Double)refresh.get(k++)).doubleValue();
+					System.out.println(lat);
+					double lon = ((Double)refresh.get(k++)).doubleValue();
+					System.out.println(lon);
+					double rad = ((Double)refresh.get(k)).doubleValue();
+					System.out.println(rad);
 					bases[j++] = new Base(lat,lon,rad);
 				}
 				temp = new Game(playCount,players,bases);
