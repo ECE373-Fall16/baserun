@@ -48,7 +48,8 @@ public class Game{
 	}
 
 	public double getTime(){
-		return time.getDur();
+		double temp = time.getDur();
+		return temp;
 	}
 
 	public void refreshGame(Game refresh){

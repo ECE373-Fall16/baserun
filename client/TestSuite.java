@@ -65,10 +65,10 @@ public class TestSuite {
 						a = Integer.parseInt(scan.nextLine());
 						System.out.println("Please enter an int");
 						b = Integer.parseInt(scan.nextLine());
-						Game test3 = net.joinGame(a,b);
-						if(test3 != null){
+						curr = net.joinGame(a,b);
+						if(curr != null){
 							System.out.println("GAME JOINED");
-							System.out.println(test3.getGameID());
+							System.out.println(curr.getGameID());
 						} else
 							System.out.println("GAME NOT JOINED");
 					}
@@ -119,10 +119,7 @@ public class TestSuite {
 					if(inGame){
 						if(/*net.startGame(curr.getGameID())*/ true){
 							long init = System.currentTimeMillis();
-							if(curr != null)
-								curr.startTimer();
-							if((System.currentTimeMillis()-init)%100 == 0)
-								System.out.println(curr.getTime());
+							curr.startTimer();
 						}
 					}
 			}
