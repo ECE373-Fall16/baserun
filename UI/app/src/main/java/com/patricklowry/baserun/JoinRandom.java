@@ -2,6 +2,7 @@ package com.patricklowry.baserun;
 
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.Network;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;

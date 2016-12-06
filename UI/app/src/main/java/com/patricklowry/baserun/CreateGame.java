@@ -2,6 +2,7 @@ package com.patricklowry.baserun;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.net.Network;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -56,6 +57,11 @@ public class CreateGame extends AppCompatActivity {
         ArrayAdapter<CharSequence> rad_adapter = ArrayAdapter.createFromResource(this, R.array.game_rad_array, android.R.layout.simple_spinner_item);
         rad_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         game_rad.setAdapter(rad_adapter);
+
+        Spinner game_start = (Spinner) findViewById(R.id.game_start_spinner);
+        ArrayAdapter<CharSequence> start_adapter = ArrayAdapter.createFromResource(this, R.array.game_start_array, android.R.layout.simple_spinner_item);
+        start_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        game_start.setAdapter(start_adapter);
     }
 
     public void GameScreen(View view) {
