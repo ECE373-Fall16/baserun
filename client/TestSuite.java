@@ -29,22 +29,23 @@ public class TestSuite {
 			System.out.println("4- Test GameList");
 			System.out.println("5- Test onBase");
 			System.out.println("6- Test Timer");
+			System.out.println("7- Print Current Players");
 			System.out.println("0- Exit");
 			choice = Integer.parseInt(scan.nextLine());
 			switch (choice) {
 				case 1:
 					if(!inGame){
-						System.out.println("Please enter an int");
+						System.out.println("Please enter a PID");
 						a = Integer.parseInt(scan.nextLine());
-						System.out.println("please enter an int");
+						System.out.println("please enter a PlayerCount");
 						b = Integer.parseInt(scan.nextLine());
-						System.out.println("Plsease enter a double");
+						System.out.println("Plsease enter a Radius");
 						f = Double.parseDouble(scan.nextLine());
-						System.out.println("Please enter an int");
+						System.out.println("Please enter a BaseCount");
 						c = Integer.parseInt(scan.nextLine());
-						System.out.println("Please enter a double");
+						System.out.println("Please enter a StartLat");
 						g = Double.parseDouble(scan.nextLine());
-						System.out.println("Please enter a double");
+						System.out.println("Please enter a StartLong");
 						h = Double.parseDouble(scan.nextLine());
 						curr = net.createGame(a,b,f,c,g,h);
 						inGame = true;
@@ -61,9 +62,9 @@ public class TestSuite {
 					if(inGame)
 						System.out.println("CURRENTLY IN GAME");
 					else {
-						System.out.println("Please enter an int");
+						System.out.println("Please enter a GID");
 						a = Integer.parseInt(scan.nextLine());
-						System.out.println("Please enter an int");
+						System.out.println("Please enter a PID");
 						b = Integer.parseInt(scan.nextLine());
 						curr = net.joinGame(a,b);
 						if(curr != null){
@@ -75,10 +76,10 @@ public class TestSuite {
 					break;
 				case 3:
 					if(inGame){
-						System.out.println("Please enter an int");
+						System.out.println("Please enter a GID");
 						a = Integer.parseInt(scan.nextLine());
 						Game ref = net.refreshGame(a);
-						//curr.refreshGame(ref);
+						curr.refreshGame(ref);
 						if(ref != null)
 							System.out.println("GAME REFRESHED");
 						else
@@ -87,7 +88,7 @@ public class TestSuite {
 						System.out.println("PLEASE JOIN/CREATE GAME");
 					break;
 				case 4:
-					System.out.println("Please enter an int");
+					System.out.println("Please enter a PID");
 
 					a = Integer.parseInt(scan.nextLine());
 					games = net.gameList(a);
@@ -98,13 +99,13 @@ public class TestSuite {
 					break;
 				case 5:
 					if(inGame){
-						System.out.println("Please enter an int");
+						System.out.println("Please enter a GID");
 						a = Integer.parseInt(scan.nextLine());
-						System.out.println("Please enter an int");
+						System.out.println("Please enter a PID");
 						b = Integer.parseInt(scan.nextLine());
-						System.out.println("Please enter a double");
+						System.out.println("Please enter a Latitude");
 						f = Double.parseDouble(scan.nextLine());
-						System.out.println("Please enter a double");
+						System.out.println("Please enter a Longitude");
 						g = Double.parseDouble(scan.nextLine());
 						double[] temp = new double[2];
 						temp[0] = f;
@@ -120,6 +121,15 @@ public class TestSuite {
 						if(/*net.startGame(curr.getGameID())*/ true){
 							long init = System.currentTimeMillis();
 							curr.startTimer();
+						}
+					}
+					break;
+				case 7:
+					if(inGame){
+						User[] temp = curr.getPlayers();
+						for(int i = 0; i < temp.length; i++){
+							System.out.print(temp[i].getID()+"  ");
+							System.out.println(temp[i].getTeam());
 						}
 					}
 			}

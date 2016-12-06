@@ -68,6 +68,7 @@ public class Network{
 
 	public Game joinGame(int GID, int PID){
 		Game temp;
+		int k = 0;
 		if(checkConn()){
 			try {
 			//CALL SERVER, RETURN GAME VALUE
@@ -75,27 +76,38 @@ public class Network{
 				params.addElement(new Integer(GID));
 				params.addElement(new Integer(PID));
 				Vector join = (Vector)server.execute("server.join",params);
-				Integer playCount = (Integer)join.get(0);
+				Integer playCount = (Integer)join.get(k++);
+				System.out.println(playCount);
 				User[] players = new User[playCount];
 				int j = 0;
 				for(int i=1; j<playCount; i++){
-					players[j] = new User((Integer)join.get(i++));
-					players[j].setTeam((Integer)join.get(i));
+					players[j] = new User((Integer)join.get(k++));
+					players[j].setTeam((Integer)join.get(k++));
+					System.out.println(players[j].getID());
+					System.out.println(players[j].getTeam());
 					j++;
 				}
-				Integer BaseCount = (Integer)join.get(playCount+3);
+				Integer BaseCount = (Integer)join.get(k++);
+				System.out.println(BaseCount);
 				Base[] bases = new Base[BaseCount];
 				j=0;
 				for(int i=1; j<BaseCount; i++){
-					Double lat = (Double)join.get((playCount+3)+i++);
-					Double lon = (Double)join.get((playCount+3)+i++);
-					Double rad = (Double)join.get((playCount+3)+i);
+					Double lat = (Double)join.get(k++);
+					System.out.println(lat);
+					Double lon = (Double)join.get(k++);
+					System.out.println(lon);
+					Double rad = (Double)join.get(k++);
+					System.out.println(rad);
 					bases[j++] = new Base(lat,lon,rad);
 				}
-				Integer totPlayCount = (Integer)join.get(playCount+BaseCount+1);
-				Double gameLat = (Double)join.get(playCount+BaseCount+2);
-				Double gameLong = (Double)join.get(playCount+BaseCount+3);
-				Double gameRad = (Double)join.get(playCount+BaseCount+4);
+				Integer totPlayCount = (Integer)join.get(k++);
+				System.out.println(totPlayCount);
+				Double gameLat = (Double)join.get(k++);
+				System.out.println(gameLat);
+				Double gameLong = (Double)join.get(k++);
+				System.out.println(gameLong);
+				Double gameRad = (Double)join.get(k);
+				System.out.println(gameRad);
 				temp = new Game(GID,totPlayCount,gameRad,BaseCount,gameLat,gameLong);
 				temp.setCurrPlayCount(playCount);
 				return temp;
