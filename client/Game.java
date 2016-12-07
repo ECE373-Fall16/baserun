@@ -1,4 +1,15 @@
-//package com.patricklowry.baserun;
+package com.patricklowry.baserun;
+
+import android.graphics.Color;
+import android.location.Location;
+import android.os.CountDownTimer;
+
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
+import com.google.android.gms.maps.model.LatLng;
+
+import static com.patricklowry.baserun.R.id.GameTime;
 
 public class Game{
 	int PID = 25; //will be changed
@@ -32,7 +43,7 @@ public class Game{
 		bases = base;
 	}
 
-	public Game(int ID, int playerCount, double radius, int baseCount, double startLat, double startLong/*,long tts*/){
+	public Game(int ID, int playerCount, double radius, int baseCount, double startLat, double startLong,long tts){
 		this.playerCount = playerCount;
 		this.radius = radius;
 		this.baseCount = baseCount;
@@ -47,14 +58,14 @@ public class Game{
 		//time = new GameTimer(10 /*duration*/);
 		players[0] = new User(PID);
 		players[0].setTeam(1);
-//		new CountDownTimer(tts, 1000) {
-//			public void onTick(long millisUntilFinished) {
-//				/*Select Text Field*/.setText(millisUntilFinished/1000);
-//			}
-//			public void onFinish() {
-//				/*Select Text Field*/.setText("BEGIN");
-//			}
-//		}.start();
+		new CountDownTimer(tts, 1000) {
+			public void onTick(long millisUntilFinished) {
+				GameTime.setText(millisUntilFinished/1000);
+			}
+			public void onFinish() {
+				GameTime.setText("BEGIN");
+			}
+		}.start();
 	}
 
 /*	public void startTimer(){
@@ -159,7 +170,7 @@ public class Game{
 	}
 
 	//NEEDS ANDROID API TO BE FUNCTIONAL//
-/*
+
 	public double[] onBase(double longitude, double latitude){
 		double[] loc = new double[2];
 		loc[0] = latitude;
@@ -174,24 +185,25 @@ public class Game{
 		return null;
 	}
 
-	public float distanceToBase(Base a){
-		return a.getDistance();
-	}
+	//public float distanceToBase(Base a){
+	//	return a.getDistance();
+	//}
 
-	public void drawBases(googleMap a){
+	public void drawBases(GoogleMap a){
 		int fill;
 		for(int i=0; i<baseCount; i++){
-			if(bases[i].getOwn() == 0)
-				fill = Color.GREY;
-			if(bases[i].getOwn() == 1)
+			if(bases[i].getOwner() == 1)
 				fill = Color.RED;
-			if(bases[i].getOwn() == 2)
+			else if(bases[i].getOwner() == 2)
 				fill = Color.BLUE;
-			bases[i].initBase() = a.addCircle(new CircleOptions()
+            else
+                fill = Color.GRAY;
+			Circle temp = a.addCircle(new CircleOptions()
 				.center(new LatLng(bases[i].getLatitude(),bases[i].getLongitude()))
 				.radius(bases[i].getRadius())
 				.strokeColor(Color.BLACK)
 				.fillColor(fill));
+            bases[i].initBase(temp);
 		}
 	}
 
@@ -201,5 +213,4 @@ public class Game{
 		currentLoc[2] = Location.getLongitude();
 		//Draw currentLoc
 	}
-*/
 }

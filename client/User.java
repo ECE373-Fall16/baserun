@@ -1,3 +1,4 @@
+package com.patricklowry.baserun;
 
 public class User {
 	
