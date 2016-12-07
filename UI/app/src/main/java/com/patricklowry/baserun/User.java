@@ -2,8 +2,8 @@ package com.patricklowry.baserun;
 
 public class User {
 	
-	int ID;
-	int TID;
+	private int ID;
+	private int TID;
 	
 	public User(int id){
 		ID = id;

@@ -1,42 +1,29 @@
 package com.patricklowry.baserun;
 
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.net.Network;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.ArrayAdapter;
 
 
 public class CreateGame extends AppCompatActivity {
+    int PID;
     int players;
     int bases;
     double dur;
     Game created;
-    Network net = new Network();
-
-    /*public Game createGame(){
-        net.connect("127.0.0.1",8080);
-	return (created = net.createGame(1,10,1.0,10,1.0,1.0));
-	//net.createGame format is int PID, int playerCount, double radius, int baseCount, double startLat, double startLong
-    }*/ //WILL BE USED AFTER .1
-
-    public void VerifyGame() {
-        net.connect("104.196.195.139", 8080);
-        if (net.sendToServer(players, bases, dur)) {
-            //DO SOMETHING IF SERVER SEES GAME CALL
-        } else {
-            //DO SOMETHING IF SERVER DOES NOT GET GAME CALL
-        }
-    }
+    GameNetwork net = new GameNetwork();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_game);
+
+        net.connect();
 
         Spinner num_players = (Spinner) findViewById(R.id.num_players_spinner);
         ArrayAdapter<CharSequence> players_adapter = ArrayAdapter.createFromResource(this, R.array.num_players_array, android.R.layout.simple_spinner_item);
@@ -62,6 +49,15 @@ public class CreateGame extends AppCompatActivity {
         ArrayAdapter<CharSequence> start_adapter = ArrayAdapter.createFromResource(this, R.array.game_start_array, android.R.layout.simple_spinner_item);
         start_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         game_start.setAdapter(start_adapter);
+
+        final Button start = (Button) findViewById(R.id.StartGame);
+        start.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                net.createGame(PID,);
+            }
+        });
     }
 
     public void GameScreen(View view) {

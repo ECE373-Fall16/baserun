@@ -5,7 +5,7 @@ public class GameList{
 	int[] GIDs = new int[gameCount];
 	int[] players = new int[gameCount];
 	int[] currPlayers = new int[gameCount];
-	Network net = new Network();
+	GameNetwork net = new GameNetwork();
 
 	public GameList(int count, int[] gids, int[] play, int[] currPlay){
 		gameCount = count;

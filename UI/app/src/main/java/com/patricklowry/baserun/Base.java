@@ -1,5 +1,7 @@
 package com.patricklowry.baserun;
 
+import com.google.android.gms.maps.model.Circle;
+
 public class Base{
 	double[] location = new double[2];
 	double radius;
@@ -49,8 +51,12 @@ public class Base{
 	public int getOwner(){
 		return own;
 	}
-	
-	public Circle initBase(){
-		return base;
+
+	public double getRadius(){
+		return radius;
+	}
+
+	public void initBase(Circle a){
+		base = a;
 	}
 }
