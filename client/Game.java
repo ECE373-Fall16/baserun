@@ -1,9 +1,21 @@
-//package com.patricklowry.baserun;
+package com.patricklowry.baserun;
+
+import android.graphics.Color;
+import android.location.Location;
+import android.os.CountDownTimer;
+
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
+import com.google.android.gms.maps.model.LatLng;
+
+import static com.patricklowry.baserun.R.id.GameTime;
 
 public class Game{
+	int PID = 25; //will be changed
 	int GameID;
 	int playerCount;
-	int currPlayerCount = 0;
+	int currPlayerCount = 1;
 	double radius;
 	int baseCount;
 	private double[] GameLocation = new double[2];
@@ -11,24 +23,30 @@ public class Game{
 	private User[] Team1;
 	private User[] Team2;
 	private Base[] bases;
-	private GameTimer time;
+	private int rScore;
+	private int bScore;
+	private long startTime;
+	private long endTime;
+//	private GameTimer time;
 
 	public Game(int currPlayers, User[] currPlay, Base[] base){
 		currPlayerCount = currPlayers;
 		players = currPlay;
+		Team1 = new User[(currPlayers/2) + 1];
+		Team2 = new User[(currPlayers/2) + 1];
 		int j = 0;
 		int k = 0;
-		for(int i=0; i<players.length; i++){
-			if(players[i].getTeam() == 0){
-				Team1[j++] = players[i];
-			} else if(players[i].getTeam() == 1){
-				Team2[k++] = players[i];
+		for(int i=0; i<currPlayers; i++){
+			if(players[i].getTeam() == 1){
+				Team1[j++] = currPlay[i];
+			} else if(players[i].getTeam() == 2){
+				Team2[k++] = currPlay[i];
 			}
 		}
 		bases = base;
 	}
 
-	public Game(int ID, int playerCount, double radius, int baseCount, double startLat, double startLong/*, double duration*/){
+	public Game(int ID, int playerCount, double radius, int baseCount, double startLat, double startLong){
 		this.playerCount = playerCount;
 		this.radius = radius;
 		this.baseCount = baseCount;
@@ -40,10 +58,12 @@ public class Game{
 		GameLocation[1] = startLong;
 		GameID = ID;
 		currPlayerCount = 1;
-		time = new GameTimer(10 /*duration*/);
+		//time = new GameTimer(10 /*duration*/);
+		players[0] = new User(PID);
+		players[0].setTeam(1);
 	}
 
-	public void startTimer(){
+/*	public void startTimer(){
 		time.start();
 	}
 
@@ -51,13 +71,36 @@ public class Game{
 		double temp = time.getDur();
 		return temp;
 	}
+*/
+	public void refreshGame(Game temp){
+		int i;
+		int j=0;
+		int k=0;
+		currPlayerCount = temp.getCurrPlayCount();
+		User[] users = temp.getPlayers();
+		User[] t1 = temp.getTeam1();
+		User[] t2 = temp.getTeam2();
+		for(i = 0; i < users.length; i++){
+			players[i] = users[i];
+			if(users[i].getTeam() == 1)
+				Team1[j++] = users[i];
+			if(users[i].getTeam() == 2)
+				Team2[k++] = users[i];
+		}
+		bases = temp.getBases();
+	}
 
-	public void refreshGame(Game refresh){
-		currPlayerCount = refresh.getCurrPlayCount();
-		players = refresh.getPlayers();
-		Team1 = refresh.getTeam1();
-		Team2 = refresh.getTeam2();
-		bases = refresh.getBases();
+	public void setStartTime(int start){
+		startTime = start;
+	}
+
+	public void setEndTime(int end){
+		endTime = end;
+	}
+
+	public void setScores(int[] score){
+		rScore = score[0];
+		rScore = score[1];
 	}
 
 	public int getTeam1Size(){
@@ -104,6 +147,20 @@ public class Game{
 		return players;
 	}
 
+	public void setPlayers(User[] temp, int count){
+		currPlayerCount = count;
+		players = temp;
+		int j = 0;
+		int k = 0;
+		for(int i=0; i< count; i++){
+			if(temp[i].getTeam() == 1){
+				Team1[j++] = temp[i];
+			} else if(temp[i].getTeam() == 2){
+				Team2[k++] = temp[i];
+			}
+		}
+	}
+
 	public User[] getTeam1(){
 		return Team1;
 	}
@@ -116,8 +173,12 @@ public class Game{
 		return bases;
 	}
 
+	public void setBases(Base[] temp){
+		bases = temp;
+	}
+
 	//NEEDS ANDROID API TO BE FUNCTIONAL//
-/*
+
 	public double[] onBase(double longitude, double latitude){
 		double[] loc = new double[2];
 		loc[0] = latitude;
@@ -132,24 +193,25 @@ public class Game{
 		return null;
 	}
 
-	public float distanceToBase(Base a){
-		return a.getDistance();
-	}
+	//public float distanceToBase(Base a){
+	//	return a.getDistance();
+	//}
 
-	public void drawBases(googleMap a){
+	public void drawBases(GoogleMap a){
 		int fill;
 		for(int i=0; i<baseCount; i++){
-			if(bases[i].getOwn() == 0)
-				fill = Color.GREY;
-			if(bases[i].getOwn() == 1)
+			if(bases[i].getOwner() == 1)
 				fill = Color.RED;
-			if(bases[i].getOwn() == 2)
+			else if(bases[i].getOwner() == 2)
 				fill = Color.BLUE;
-			bases[i].initBase() = a.addCircle(new CircleOptions()
+            else
+                fill = Color.GRAY;
+			Circle temp = a.addCircle(new CircleOptions()
 				.center(new LatLng(bases[i].getLatitude(),bases[i].getLongitude()))
 				.radius(bases[i].getRadius())
 				.strokeColor(Color.BLACK)
 				.fillColor(fill));
+            bases[i].initBase(temp);
 		}
 	}
 
@@ -159,5 +221,4 @@ public class Game{
 		currentLoc[2] = Location.getLongitude();
 		//Draw currentLoc
 	}
-*/
 }
