@@ -1,15 +1,15 @@
-package com.patricklowry.baserun;
+//package com.patricklowry.baserun;
 
-import android.graphics.Color;
-import android.location.Location;
-import android.os.CountDownTimer;
+//import android.graphics.Color;
+//import android.location.Location;
+//import android.os.CountDownTimer;
 
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.Circle;
-import com.google.android.gms.maps.model.CircleOptions;
-import com.google.android.gms.maps.model.LatLng;
+//import com.google.android.gms.maps.GoogleMap;
+//import com.google.android.gms.maps.model.Circle;
+//import com.google.android.gms.maps.model.CircleOptions;
+//import com.google.android.gms.maps.model.LatLng;
 
-import static com.patricklowry.baserun.R.id.GameTime;
+//import static com.patricklowry.baserun.R.id.GameTime;
 
 public class Game{
 	int PID = 25; //will be changed
@@ -178,7 +178,7 @@ public class Game{
 	}
 
 	//NEEDS ANDROID API TO BE FUNCTIONAL//
-
+/*
 	public double[] onBase(double longitude, double latitude){
 		double[] loc = new double[2];
 		loc[0] = latitude;
@@ -221,4 +221,5 @@ public class Game{
 		currentLoc[2] = Location.getLongitude();
 		//Draw currentLoc
 	}
+*/
 }

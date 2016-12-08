@@ -1,4 +1,4 @@
-package com.patricklowry.baserun;
+//package com.patricklowry.baserun;
 
 import org.apache.xmlrpc.*;
 
@@ -216,11 +216,11 @@ public class GameNetwork{
 			Vector params = new Vector();
 			params.addElement(new Integer(GID));
 			Vector getTime = (Vector)server.execute("server.getTime", params);
-			times[0] = Long.toString(getTime.get(0));
-			times[1] = Long.toString(getTime.get(1));
+			times[0] = Long.parseLong((String)getTime.get(0));
+			times[1] = Long.parseLong((String)getTime.get(1));
 			return times;
 		} catch(Exception e) {
-			return false;
+			return null;
 		}
 	}
 
@@ -233,7 +233,7 @@ public class GameNetwork{
 			params.addElement(dur);
 			server.execute("server.setTime", params);
 		} catch(Exception e) {
-			return false;
+			return;
 		}
 	}
 
@@ -243,11 +243,11 @@ public class GameNetwork{
 			Vector params = new Vector();
 			params.addElement(gid);
 			Vector scores = (Vector)server.execute("server.getScore",params);
-			score[0] = scores.get(0);
-			score[1] = scores.get(1);
+			score[0] = (Integer)scores.get(0);
+			score[1] = (Integer)scores.get(1);
 			return score;
 		} catch(Exception e) {
-			return false;
+			return null;
 		}
 	}
 }

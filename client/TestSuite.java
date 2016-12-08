@@ -24,6 +24,7 @@ public class TestSuite {
 			System.out.println("5- Test onBase");
 			System.out.println("6- Test Time");
 			System.out.println("7- Print Current Players");
+			System.out.println("8- Get Scores");
 			System.out.println("0- Exit");
 			choice = Integer.parseInt(scan.nextLine());
 			switch (choice) {
@@ -135,7 +136,7 @@ public class TestSuite {
 						long start = currTime+(int)(60000*f);
 						long end = start+(int)(60000*g);
 						net.setTime(start,end);
-						long[] rec = net.getTime(curr.getGameID());
+						long[] rec = (net.getTime(curr.getGameID())).clone();
 						if(start == rec[0] && end == rec[1])
 							System.out.println("TIME CORRECT");
 					}
@@ -156,7 +157,7 @@ public class TestSuite {
 					break;
 				case 8:
 					if(inGame){
-						int[] scores = net.getScore(curr.getGameID());
+						Integer[] scores = (net.getScore(curr.getGameID())).clone();
 						System.out.println(scores[0]);
 						System.out.println(scores[1]);
 					}
