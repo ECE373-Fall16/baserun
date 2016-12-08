@@ -1,4 +1,7 @@
+#include <string>
+
 //header gaurds
+
 #ifndef session_structs_h
 #define session_structs_h
 #include "session-structs.h"
@@ -38,6 +41,9 @@ public:
 	double getRadius();
 	double getBaseRadius();	
 	int getMaxPlayerSize();
+	void setTime(std::string startT, std::string endT);
+	std::string getStartTime();
+	std::string getEndTime();
 	
 private:
 	//private variables and functions that can only be accessed within the class
@@ -54,5 +60,8 @@ private:
 	base_t *baseArr;
 	void addBase(base_t *b);
 	int baseIndex;
+ 	std::string sTime;
+	std::string eTime;
+	
 };
 

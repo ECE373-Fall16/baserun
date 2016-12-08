@@ -120,11 +120,13 @@ public:
         this->_help = "This method adds a player";
     }
     void execute(xmlrpc_c::paramList const& paramList, xmlrpc_c::value * const  retvalP) {
-        
+     	
+	cout<<"_______________________________"<<endl;
+   
         long int const gid(paramList.getInt(0));
 	long int const pid(paramList.getInt(1));
 
-	cout<<gid<<" "<<pid<<endl;
+	cout<<"gid & pid: "<<gid<<" "<<pid<<endl;
 
         paramList.verifyEnd(2);
 
@@ -136,6 +138,8 @@ public:
 	team* otherTm = game->getTeam((tmNum+1)%2);
 
         vector<xmlrpc_c::value> arrayData;
+
+	cout<<"numPlayOnTeam: "<<game->getNumPlayers()<<endl;
         arrayData.push_back(xmlrpc_c::value_int(game->getNumPlayers()));
 
 	player_t* pArr = tm->getPlayerArr();
@@ -146,24 +150,31 @@ public:
 	
 
 	for(int i=0; i<numP; i++){
+		cout<<"player ID: "<<pArr[i].id<<endl;
         	arrayData.push_back(xmlrpc_c::value_int(pArr[i].id));
+		cout<<"tmNum: "<<tm->getTeamNum()<<endl;
         	arrayData.push_back(xmlrpc_c::value_int(tm->getTeamNum()));
 	}
 	for(int i=0; i<numP2; i++){
+		cout<<"player ID: "<<pArr2[i].id<<endl;
         	arrayData.push_back(xmlrpc_c::value_int(pArr2[i].id));
+		cout<<"tmNum: "<<otherTm->getTeamNum()<<endl;
         	arrayData.push_back(xmlrpc_c::value_int(otherTm->getTeamNum()));
 	}
 
 	int baseSize = game->getNumBases();
-
+	
+	cout<<"base size: "<<baseSize<<endl;
         arrayData.push_back(xmlrpc_c::value_int(baseSize));
 	base_t* bases = game->getBases();
 
 	for(int i=0; i<baseSize; i++){
+		cout<<bases[i].x<<endl;
         	arrayData.push_back(xmlrpc_c::value_double(bases[i].x));
+		cout<<bases[i].y<<endl;
         	arrayData.push_back(xmlrpc_c::value_double(bases[i].y));
+		cout<<"BASE RAD: "<<game->getBaseRadius()<<endl;
         	arrayData.push_back(xmlrpc_c::value_double(game->getBaseRadius()));
-
 	}
 
 	//returns the game info includng:
@@ -171,9 +182,13 @@ public:
 	//returns startX position
 	//returns startY position
 	//returns game radius
+	cout<<"maxP: "<<game->getMaxPlayerSize()<<endl;
         arrayData.push_back(xmlrpc_c::value_int(game->getMaxPlayerSize()));
+	cout<<"start x:"<<game->getStartX()<<endl;
         arrayData.push_back(xmlrpc_c::value_double(game->getStartX()));
+	cout<<"start y: "<<game->getStartY()<<endl;
         arrayData.push_back(xmlrpc_c::value_double(game->getStartY()));
+	cout<<"RAD: "<<game->getRadius()<<endl;
         arrayData.push_back(xmlrpc_c::value_double(game->getRadius()));
 	       
  
@@ -366,6 +381,71 @@ public:
 	}
 };
 
+
+//sets time for the game
+class setTime : public xmlrpc_c::method {
+public:
+    setTime(){
+    }
+    void execute(xmlrpc_c::paramList const& paramList, xmlrpc_c::value * const  retvalP) {
+        
+        int const gid(paramList.getInt(0));
+	string const stTime(paramList.getString(1));
+        string const enTime(paramList.getString(2));
+        paramList.verifyEnd(3);
+	
+	session *game = slist.getSession(gid);
+	game->setTime(stTime, enTime);
+
+	}
+};
+
+//gets time for the game
+class getTime : public xmlrpc_c::method {
+public:
+    getTime(){
+    }
+    void execute(xmlrpc_c::paramList const& paramList, xmlrpc_c::value * const  retvalP) {
+        
+        int const gid(paramList.getInt(0));
+        paramList.verifyEnd(1);
+	
+	session *game = slist.getSession(gid);
+	string stTime = game->getStartTime();
+	string enTime = game->getEndTime();
+
+        vector<xmlrpc_c::value> arrayData;
+        arrayData.push_back(xmlrpc_c::value_string(stTime));
+        arrayData.push_back(xmlrpc_c::value_string(enTime));
+        xmlrpc_c::value_array array1(arrayData);
+        *retvalP = array1;
+
+	}
+};
+
+//returns team scores
+class getScore : public xmlrpc_c::method {
+public:
+    getScore(){
+    }
+    void execute(xmlrpc_c::paramList const& paramList, xmlrpc_c::value * const  retvalP) {
+        
+        int const gid(paramList.getInt(0));
+        paramList.verifyEnd(1);
+	
+	session *game = slist.getSession(gid);
+	team *tm1 = game->getTeam(1);
+	team *tm2 = game->getTeam(2);	
+
+        vector<xmlrpc_c::value> arrayData;
+        arrayData.push_back(xmlrpc_c::value_int(tm1->getTeamScore()));
+        arrayData.push_back(xmlrpc_c::value_int(tm2->getTeamScore()));
+        xmlrpc_c::value_array array1(arrayData);
+        *retvalP = array1;
+
+	}
+};
+
 int main(int const, const char ** const) {
 
 
@@ -399,7 +479,16 @@ int main(int const, const char ** const) {
         xmlrpc_c::methodPtr const testSend_m(new testSend);
         myRegistry.addMethod("server.testSend", testSend_m);
 
-        xmlrpc_c::serverAbyss myAbyssServer(
+        xmlrpc_c::methodPtr const getTime_m(new getTime);
+        myRegistry.addMethod("server.getTime", getTime_m);
+
+        xmlrpc_c::methodPtr const setTime_m(new setTime);
+        myRegistry.addMethod("server.setTime", setTime_m);
+
+        xmlrpc_c::methodPtr const getScore_m(new getScore);
+        myRegistry.addMethod("server.getScore", getScore_m);
+       
+	 xmlrpc_c::serverAbyss myAbyssServer(
             xmlrpc_c::serverAbyss::constrOpt()
             .registryP(&myRegistry)
             .portNumber(3389));
