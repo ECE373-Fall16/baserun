@@ -12,6 +12,7 @@ team::team(){
 	char color = 'n';
 	numPlayers = 0;
 	maxPlayers = 0;
+	teamScore = 0;
 }
 
 //constructor for team with parameter max players
@@ -19,6 +20,7 @@ team::team(int maxP){
 	cout<<maxP<<endl;
 	char color = 'n';
 	numPlayers = 0;
+	teamScore =0;
 	maxPlayers = maxP;
 	playerArr = new player_t[maxPlayers];
 }
@@ -91,6 +93,7 @@ void team::playerScore(long int pid){
 	for(i=0;i<numPlayers;i++){
 		if(playerArr[i].id==pid){
 			playerArr[i].points++;
+			teamScore++;
 		}
 	}
 }

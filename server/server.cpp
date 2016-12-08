@@ -51,8 +51,6 @@ public:
         
         long int const pid(paramList.getInt(0));
 
-	cout<<pid<<endl;
-
         paramList.verifyEnd(1);
 
 	long int gid = slist.addSession((long int)pid);
@@ -83,7 +81,6 @@ public:
 	double const startX(paramList.getDouble(4));
 	double const startY(paramList.getDouble(5));
 
-	cout<<maxGameSize<<" "<<radius<<" "<<numBases<<" "<<startX<<" "<<startY<<endl;
         paramList.verifyEnd(6);
 	
 	gid = slist.addSession((long int)pid,maxGameSize);
@@ -121,12 +118,10 @@ public:
     }
     void execute(xmlrpc_c::paramList const& paramList, xmlrpc_c::value * const  retvalP) {
      	
-	cout<<"_______________________________"<<endl;
    
         long int const gid(paramList.getInt(0));
 	long int const pid(paramList.getInt(1));
 
-	cout<<"gid & pid: "<<gid<<" "<<pid<<endl;
 
         paramList.verifyEnd(2);
 
@@ -139,7 +134,6 @@ public:
 
         vector<xmlrpc_c::value> arrayData;
 
-	cout<<"numPlayOnTeam: "<<game->getNumPlayers()<<endl;
         arrayData.push_back(xmlrpc_c::value_int(game->getNumPlayers()));
 
 	player_t* pArr = tm->getPlayerArr();
@@ -150,15 +144,12 @@ public:
 	
 
 	for(int i=0; i<numP; i++){
-		cout<<"player ID: "<<pArr[i].id<<endl;
         	arrayData.push_back(xmlrpc_c::value_int(pArr[i].id));
 		cout<<"tmNum: "<<tm->getTeamNum()<<endl;
         	arrayData.push_back(xmlrpc_c::value_int(tm->getTeamNum()));
 	}
 	for(int i=0; i<numP2; i++){
-		cout<<"player ID: "<<pArr2[i].id<<endl;
         	arrayData.push_back(xmlrpc_c::value_int(pArr2[i].id));
-		cout<<"tmNum: "<<otherTm->getTeamNum()<<endl;
         	arrayData.push_back(xmlrpc_c::value_int(otherTm->getTeamNum()));
 	}
 
@@ -169,11 +160,8 @@ public:
 	base_t* bases = game->getBases();
 
 	for(int i=0; i<baseSize; i++){
-		cout<<bases[i].x<<endl;
         	arrayData.push_back(xmlrpc_c::value_double(bases[i].x));
-		cout<<bases[i].y<<endl;
         	arrayData.push_back(xmlrpc_c::value_double(bases[i].y));
-		cout<<"BASE RAD: "<<game->getBaseRadius()<<endl;
         	arrayData.push_back(xmlrpc_c::value_double(game->getBaseRadius()));
 	}
 
@@ -182,13 +170,9 @@ public:
 	//returns startX position
 	//returns startY position
 	//returns game radius
-	cout<<"maxP: "<<game->getMaxPlayerSize()<<endl;
         arrayData.push_back(xmlrpc_c::value_int(game->getMaxPlayerSize()));
-	cout<<"start x:"<<game->getStartX()<<endl;
         arrayData.push_back(xmlrpc_c::value_double(game->getStartX()));
-	cout<<"start y: "<<game->getStartY()<<endl;
         arrayData.push_back(xmlrpc_c::value_double(game->getStartY()));
-	cout<<"RAD: "<<game->getRadius()<<endl;
         arrayData.push_back(xmlrpc_c::value_double(game->getRadius()));
 	       
  
@@ -207,7 +191,6 @@ public:
         
         long int const gid(paramList.getInt(0));
 
-	cout<<gid<<endl;
 
         paramList.verifyEnd(1);
 
@@ -270,8 +253,6 @@ public:
         
         long int const pid(paramList.getInt(0));
 	
-	cout<<pid<<endl;
-
         paramList.verifyEnd(1);
 
         vector<xmlrpc_c::value> arrayData;
@@ -392,7 +373,10 @@ public:
         int const gid(paramList.getInt(0));
 	string const stTime(paramList.getString(1));
         string const enTime(paramList.getString(2));
-        paramList.verifyEnd(3);
+       
+	cout<<stTime<<" <--times--> "<<enTime<<endl;	
+
+	paramList.verifyEnd(3);
 	
 	session *game = slist.getSession(gid);
 	game->setTime(stTime, enTime);
@@ -414,6 +398,7 @@ public:
 	string stTime = game->getStartTime();
 	string enTime = game->getEndTime();
 
+	cout<<stTime<<" <--times--> "<<enTime<<endl;	
         vector<xmlrpc_c::value> arrayData;
         arrayData.push_back(xmlrpc_c::value_string(stTime));
         arrayData.push_back(xmlrpc_c::value_string(enTime));
@@ -437,6 +422,7 @@ public:
 	team *tm1 = game->getTeam(1);
 	team *tm2 = game->getTeam(2);	
 
+	cout<<tm1->getTeamScore()<<" <--scores--> "<<tm2->getTeamScore()<<endl;	
         vector<xmlrpc_c::value> arrayData;
         arrayData.push_back(xmlrpc_c::value_int(tm1->getTeamScore()));
         arrayData.push_back(xmlrpc_c::value_int(tm2->getTeamScore()));
