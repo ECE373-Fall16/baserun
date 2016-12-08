@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class TestSuite {
 	public static void main(String[] args) {
-		Network net = new Network();
+		GameNetwork net = new GameNetwork();
 		Scanner scan = new Scanner(System.in);
 		net.connect();
 		GameList games;
@@ -16,19 +16,13 @@ public class TestSuite {
 		double h;
 		int choice = -1;
 		while (choice != 0) {
-			/* OLD CLIENT TESTING SUITE
-
-			System.out.println("Welcome to the BaseRun Client Test Suite");
-			System.out.println("1- Test Make Game");
-			System.out.println("2- Test Join Game");
-			System.out.println("3- Test onBase");*/
 			System.out.println("Welcome to the BaseRun Client Test Suite V2");
 			System.out.println("1- Test Create Game");
 			System.out.println("2- Test Join Game");
 			System.out.println("3- Test Refresh Game");
 			System.out.println("4- Test GameList");
 			System.out.println("5- Test onBase");
-			System.out.println("6- Test Timer");
+			System.out.println("6- Test Time");
 			System.out.println("7- Print Current Players");
 			System.out.println("0- Exit");
 			choice = Integer.parseInt(scan.nextLine());
@@ -132,6 +126,19 @@ public class TestSuite {
 //							curr.startTimer();
 //						}
 //					}
+					if(inGame){
+						System.out.println("Give amount of time until Game Start in mins");
+						f = Double.parseDouble(scan.nextLine());
+						System.out.println("Give length of game in minutes");
+						g = Double.parseDouble(scan.nextLine());
+						long currTime = System.currentTimeMillis();
+						long start = currTime+(int)(60000*f);
+						long end = start+(int)(60000*g);
+						net.setTime(start,end);
+						long[] rec = net.getTime(curr.getGameID());
+						if(start == rec[0] && end == rec[1])
+							System.out.println("TIME CORRECT");
+					}
 					break;
 				case 7:
 					if(inGame){
@@ -145,6 +152,13 @@ public class TestSuite {
 								System.out.println(temp[i].getTeam());
 							}
 						}
+					}
+					break;
+				case 8:
+					if(inGame){
+						int[] scores = net.getScore(curr.getGameID());
+						System.out.println(scores[0]);
+						System.out.println(scores[1]);
 					}
 			}
 		}
