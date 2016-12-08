@@ -42,7 +42,7 @@ public class GameNetwork{
 		}
 	}
 	
-	public Game createGame(int PID, int playerCount, double radius, int baseCount, double startLat, double startLong/*, long tts*/){
+	public Game createGame(int PID, int playerCount, double radius, int baseCount, double startLat, double startLong){
 		if(checkConn()){
 			try {
 				Vector params2 = new Vector();
@@ -55,7 +55,7 @@ public class GameNetwork{
 				Vector createGame = (Vector)server.execute("server.createGame",params2);
 				Integer GID = (Integer)createGame.get(0);
 				if(GID != -1){
-					Game temp = new Game(GID,playerCount,radius,baseCount,startLat,startLong/*,tts*/);
+					Game temp = new Game(GID,playerCount,radius,baseCount,startLat,startLong);
 					return temp;
 				} else
 					return null;
@@ -175,17 +175,6 @@ public class GameNetwork{
 				int[] gids = new int[gcount];
 				int[] players = new int[gcount];
 				int[] currPlayers = new int[gcount];
-				/*for(int i=0; i<gcount; i++){
-					gids[i] = (Integer)gameList.get(i+1);
-				}
-				int[] players = new int[gcount];
-				for(int i=0; i<gcount; i++){
-					players[i] = (Integer)gameList.get(gcount+i+1);
-				}
-				int[] currPlayers = new int[gcount];
-				for(int i=0; i<gcount; i++){
-					currPlayers[i] = (Integer)gameList.get(2*gcount+i+1);
-				}*/
 				for(int i=0; i<gcount; i++){
 					gids[i] = (Integer)gameList.get((i*3)+1);
 					players[i] = (Integer)gameList.get((i*3)+2);
@@ -221,15 +210,42 @@ public class GameNetwork{
 			return false;
 	}
 
-	public boolean startGame(int GID){
+	public long[] getTime(int GID){
+		long[] times = new long[2];
 		try {
 			Vector params = new Vector();
 			params.addElement(new Integer(GID));
-			Vector onBase = (Vector)server.execute("server.startGame", params);
-			if((Integer)onBase.get(0) == 1)
-				return true;
-			else 
-				return false;
+			Vector getTime = (Vector)server.execute("server.getTime", params);
+			times[0] = Long.toString(getTime.get(0));
+			times[1] = Long.toString(getTime.get(1));
+			return times;
+		} catch(Exception e) {
+			return false;
+		}
+	}
+
+	public void setTime(long startl, long durl){
+		String start = Long.toString(startl);
+		String dur = Long.toString(durl);
+		try{
+			Vector params = new Vector();
+			params.addElement(start);
+			params.addElement(dur);
+			server.execute("server.setTime", params);
+		} catch(Exception e) {
+			return false;
+		}
+	}
+
+	public Integer[] getScore(int gid){
+		Integer[] score = new Integer[2];
+		try{
+			Vector params = new Vector();
+			params.addElement(gid);
+			Vector scores = (Vector)server.execute("server.getScore",params);
+			score[0] = scores.get(0);
+			score[1] = scores.get(1);
+			return score;
 		} catch(Exception e) {
 			return false;
 		}
