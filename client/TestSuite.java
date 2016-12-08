@@ -132,10 +132,9 @@ public class TestSuite {
 						f = Double.parseDouble(scan.nextLine());
 						System.out.println("Give length of game in minutes");
 						g = Double.parseDouble(scan.nextLine());
-						long currTime = System.currentTimeMillis();
-						long start = currTime+(int)(60000*f);
-						long end = start+(int)(60000*g);
-						net.setTime(start,end);
+						long start = (int)(60000*f);
+						long end = (int)(60000*g);
+						net.setTime(curr.getGameID(),start,end);
 						long[] rec = (net.getTime(curr.getGameID())).clone();
 						if(start == rec[0] && end == rec[1])
 							System.out.println("TIME CORRECT");
