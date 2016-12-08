@@ -373,6 +373,8 @@ public:
         int const gid(paramList.getInt(0));
 	string const stTime(paramList.getString(1));
         string const enTime(paramList.getString(2));
+	cout<<stTime<<" <--times--> "<<enTime<<endl;	
+        paramList.verifyEnd(3);
        
 	cout<<stTime<<" <--times--> "<<enTime<<endl;	
 
@@ -381,6 +383,9 @@ public:
 	session *game = slist.getSession(gid);
 	game->setTime(stTime, enTime);
 
+        vector<xmlrpc_c::value> arrayData;
+        xmlrpc_c::value_array array1(arrayData);
+        *retvalP = array1;
 	}
 };
 
