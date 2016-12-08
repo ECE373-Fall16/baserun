@@ -1,7 +1,9 @@
 #include <iostream>
+#include <string>
 
 
 //header gaurds
+
 #ifndef session_class_h
 #include "session-class.h"
 #define session_class_h
@@ -200,3 +202,16 @@ double session::getBaseRadius(){return baseRadius;}
 
 //return max player size of game
 int session::getMaxPlayerSize(){return maxGameSize;}
+
+//sets start and end time of game
+void session::setTime(string startT, string endT){
+	sTime = startT;
+	eTime = endT;
+}
+
+//return start time
+string session::getStartTime(){return sTime;}
+
+//return end time
+string session::getEndTime(){return eTime;}
+
