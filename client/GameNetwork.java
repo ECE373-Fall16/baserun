@@ -42,6 +42,16 @@ public class GameNetwork{
 		}
 	}
 	
+	public int getPID(){
+		try{
+			Vector params = new Vector();
+			Vector getPID = (Vector)server.execute("server.getPID",params);
+			return ((Integer)getPID.get(0)).intValue();
+		} catch(Exception e){
+			return 0;
+		}
+	}
+
 	public Game createGame(int PID, int playerCount, double radius, int baseCount, double startLat, double startLong){
 		if(checkConn()){
 			try {
