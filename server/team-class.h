@@ -23,6 +23,7 @@ public:
 	int getTeamNum();
 	bool playerThere(long int pid);
 	void playerScore(long int pid);
+	void downByOne();
 private:
 	//private variables of the team class
 	char color;
