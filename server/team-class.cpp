@@ -97,3 +97,8 @@ void team::playerScore(long int pid){
 		}
 	}
 }
+
+
+void team::downByOne(){
+	teamScore--;
+}

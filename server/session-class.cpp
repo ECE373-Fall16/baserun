@@ -87,29 +87,34 @@ void session::addBase(base_t *b){
 int session::conquerBase(int tmNum, long int id, double x, double y){
 	
 	team *tm;
+	team *otherTm;
 	if(team1->getTeamNum()==tmNum){
 		tm = team1;
-	}else{tm = team2;}
+		otherTm = team2;
+	}else{
+		otherTm = team1;
+		tm = team2;
+	}
 
 	int i;
 	int success=0;
 	for(i=0;i<numBases;i++){
 		if(baseArr[i].x==x && baseArr[i].y==y){
-			if(tmNum==1){
-				if(baseArr[i].score == 0){
-					baseArr[i].color = tm->getColor();
+			if(baseArr[i].score == 0){
+				if(tm->getColor() != baseArr[i].color){
 					tm->playerScore(id);
-					success = 1;					
-				}	
-				baseArr[i].score++;	
-			}else{			
-				if(baseArr[i].score == 0){
+					if(otherTm->getColor() == baseArr[i].color){
+						otherTm->downByOne();
+					}
 					baseArr[i].color = tm->getColor();
-					tm->playerScore(id);
-					success = 1;
 				}
+					success = 1;					
+			}
+			if(tm->getTeamNum() == 1){	
+				baseArr[i].score++;	
+			}else{
 				baseArr[i].score--;
-			}	
+			}
 		}
 	}
 	return success;
