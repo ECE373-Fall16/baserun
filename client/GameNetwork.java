@@ -42,6 +42,16 @@ public class GameNetwork{
 		}
 	}
 	
+	public int getPID(){
+		try{
+			Vector params = new Vector();
+			Vector getPID = (Vector)server.execute("server.getPID",params);
+			return ((Integer)getPID.get(0)).intValue();
+		} catch(Exception e){
+			return 0;
+		}
+	}
+
 	public Game createGame(int PID, int playerCount, double radius, int baseCount, double startLat, double startLong){
 		if(checkConn()){
 			try {
@@ -217,21 +227,26 @@ public class GameNetwork{
 			params.addElement(new Integer(GID));
 			Vector getTime = (Vector)server.execute("server.getTime", params);
 			times[0] = Long.parseLong((String)getTime.get(0));
+			System.out.println(times[0]);
 			times[1] = Long.parseLong((String)getTime.get(1));
+			System.out.println(times[1]);
 			return times;
 		} catch(Exception e) {
 			return null;
 		}
 	}
 
-	public void setTime(long startl, long durl){
+	public void setTime(int gid, long startl, long durl){
 		String start = Long.toString(startl);
+		System.out.println(start);
 		String dur = Long.toString(durl);
+		System.out.println(dur);
 		try{
 			Vector params = new Vector();
+			params.addElement(new Integer(gid));
 			params.addElement(start);
 			params.addElement(dur);
-			server.execute("server.setTime", params);
+			Vector setTime = (Vector)server.execute("server.setTime", params);
 		} catch(Exception e) {
 			return;
 		}
@@ -241,12 +256,13 @@ public class GameNetwork{
 		Integer[] score = new Integer[2];
 		try{
 			Vector params = new Vector();
-			params.addElement(gid);
+			params.addElement(new Integer(gid));
 			Vector scores = (Vector)server.execute("server.getScore",params);
 			score[0] = (Integer)scores.get(0);
 			score[1] = (Integer)scores.get(1);
 			return score;
 		} catch(Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 	}
