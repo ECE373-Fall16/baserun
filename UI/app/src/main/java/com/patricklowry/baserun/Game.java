@@ -9,7 +9,7 @@ import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 
-import static com.patricklowry.baserun.R.id.GameTime;
+//import static com.patricklowry.baserun.R.id.GameTime;
 
 public class Game{
 	int PID = 25; //will be changed
@@ -23,8 +23,11 @@ public class Game{
 	private User[] Team1;
 	private User[] Team2;
 	private Base[] bases;
-//	private long timeToStart;
-//	private GameTimer time;
+	private int rScore;
+	private int bScore;
+	private long startTime;
+	private long endTime;
+	//private GameTimer time;
 
 	public Game(int currPlayers, User[] currPlay, Base[] base){
 		currPlayerCount = currPlayers;
@@ -43,7 +46,7 @@ public class Game{
 		bases = base;
 	}
 
-	public Game(int ID, int playerCount, double radius, int baseCount, double startLat, double startLong,long tts){
+	public Game(int ID, int playerCount, double radius, int baseCount, double startLat, double startLong){
 		this.playerCount = playerCount;
 		this.radius = radius;
 		this.baseCount = baseCount;
@@ -58,14 +61,6 @@ public class Game{
 		//time = new GameTimer(10 /*duration*/);
 		players[0] = new User(PID);
 		players[0].setTeam(1);
-		new CountDownTimer(tts, 1000) {
-			public void onTick(long millisUntilFinished) {
-				GameTime.setText(millisUntilFinished/1000);
-			}
-			public void onFinish() {
-				GameTime.setText("BEGIN");
-			}
-		}.start();
 	}
 
 /*	public void startTimer(){
@@ -93,6 +88,19 @@ public class Game{
 				Team2[k++] = users[i];
 		}
 		bases = temp.getBases();
+	}
+
+	public void setStartTime(int start){
+		startTime = start;
+	}
+
+	public void setEndTime(int end){
+		endTime = end;
+	}
+
+	public void setScores(int[] score){
+		rScore = score[0];
+		rScore = score[1];
 	}
 
 	public int getTeam1Size(){
@@ -213,4 +221,5 @@ public class Game{
 		currentLoc[2] = Location.getLongitude();
 		//Draw currentLoc
 	}
+
 }

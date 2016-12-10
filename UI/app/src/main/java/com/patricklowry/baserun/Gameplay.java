@@ -5,14 +5,19 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Location;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Game;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -27,13 +32,16 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Gameplay extends FragmentActivity implements OnMapReadyCallback {
+public class Gameplay extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
 
     private GoogleMap mMap;
     private Game currGame;
     private GameNetwork net = new GameNetwork();
     private int PID = 99999999;
     private GoogleApiClient client;
+    private Location mLastLocation;
+    private LocationRequest LocRequest = new LocationRequest();
+    private LocationListener listen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +61,8 @@ public class Gameplay extends FragmentActivity implements OnMapReadyCallback {
         Toast.makeText(context, text, duration).show();
         if (client == null) {
             client = new GoogleApiClient.Builder(this)
-                    .addConnectionCallbacks(this)
                     .addOnConnectionFailedListener(this)
+                    .addConnectionCallbacks(this)
                     .addApi(LocationServices.API)
                     .build();
 
@@ -78,13 +86,34 @@ public class Gameplay extends FragmentActivity implements OnMapReadyCallback {
             return;
         }
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(client);
-        if (mRequestingLocationUpdates) {
+        if (mLastLocation != null) {
             startLocationUpdates();
         }
     }
 
+    protected void createLocationRequest() {
+        LocRequest.setInterval(1000);
+        LocRequest.setFastestInterval(500);
+        LocRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
     protected void startLocationUpdates() {
-        LocationServices.FusedLocationApi.requestLocationUpdates();
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        LocationServices.FusedLocationApi.requestLocationUpdates(client, LocRequest, listen);
     }
 
 
@@ -163,7 +192,12 @@ public class Gameplay extends FragmentActivity implements OnMapReadyCallback {
     }
 
     protected void onStop() {
-        mGoogleApiClient.disconnect();
+        client.disconnect();
         super.onStop();
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
     }
 }

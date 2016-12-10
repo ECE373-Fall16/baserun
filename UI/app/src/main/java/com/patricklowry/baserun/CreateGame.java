@@ -15,8 +15,6 @@ public class CreateGame extends AppCompatActivity {
     int players;
     int bases;
     double dur;
-    double rad;
-    int startT;
     Game created;
     GameNetwork net = new GameNetwork();
 
@@ -52,30 +50,11 @@ public class CreateGame extends AppCompatActivity {
         start_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         game_start.setAdapter(start_adapter);
 
-        final Button start = (Button) findViewById(R.id.button7);
+        final Button start = (Button) findViewById(R.id.StartGame);
         start.setOnClickListener(new View.OnClickListener(){
+
             @Override
             public void onClick(View v) {
-                Spinner numPlayers = (Spinner) findViewById(R.id.num_players_spinner);
-                Spinner numBases = (Spinner) findViewById(R.id.num_bases_spinner);
-                Spinner gameDur = (Spinner) findViewById(R.id.game_dur_spinner);
-                Spinner gameRad = (Spinner) findViewById(R.id.game_rad_spinner);
-                Spinner gameStart = (Spinner) findViewById(R.id.game_start_spinner);
-                int numPlayersPos = numPlayers.getSelectedItemPosition();
-                int numBasesPos = numBases.getSelectedItemPosition();
-                int gameDurPos = gameDur.getSelectedItemPosition();
-                int gameRadPos = gameRad.getSelectedItemPosition();
-                int gameStartPos = gameStart.getSelectedItemPosition();
-                String[] num_players_array = getResources().getStringArray(R.array.num_players_array);
-                String[] num_bases_array = getResources().getStringArray(R.array.num_bases_array);
-                String[] game_dur_array = getResources().getStringArray(R.array.game_dur_array);
-                String[] game_rad_array = getResources().getStringArray(R.array.game_rad_array);
-                String[] game_start_array = getResources().getStringArray(R.array.game_start_array);
-                players = Integer.valueOf(num_players_array[numPlayersPos]);
-                bases = Integer.valueOf(num_bases_array[numBasesPos]);
-                dur = Double.valueOf(game_dur_array[gameDurPos]);
-                rad = Double.valueOf(game_rad_array[gameRadPos]);
-                startT = Integer.valueOf(game_start_array[gameStartPos]);
                 net.createGame(PID,);
             }
         });
