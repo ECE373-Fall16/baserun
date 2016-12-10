@@ -90,7 +90,8 @@ public:
         this->_help = "This method initializes the session and returns it GID";
     }
     void execute(xmlrpc_c::paramList const& paramList, xmlrpc_c::value * const  retvalP) {
-        
+       
+	cout<<"FINNNALLLYYYY"<<endl; 
 	int success;
 	long int gid;
         long int const pid(paramList.getInt(0));
@@ -102,8 +103,10 @@ public:
 
         paramList.verifyEnd(6);
 	
+	cout<<"CREATE GAME___"<<endl;
+
 	gid = slist.addSession((long int)pid,maxGameSize);
-	
+ 		
 
 	session *game = slist.getSession(gid);
 	if (game!=nullptr){
@@ -143,6 +146,8 @@ public:
 
 
         paramList.verifyEnd(2);
+	
+	cout<<"PLAYER "<<pid<<" JOINED"<<endl;
 
 	session *game = slist.getSession(gid);
 	game->init_Player(pid);
