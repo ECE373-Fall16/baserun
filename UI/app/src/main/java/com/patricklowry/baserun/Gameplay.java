@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
@@ -41,7 +42,9 @@ public class Gameplay extends FragmentActivity implements OnMapReadyCallback, Go
     private GoogleApiClient client;
     private Location mLastLocation;
     private LocationRequest LocRequest = new LocationRequest();
-    private LocationListener listen;
+    private double currLat, currLong;
+    private Handler handler = new Handler();
+    private Marker user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +90,8 @@ public class Gameplay extends FragmentActivity implements OnMapReadyCallback, Go
         }
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(client);
         if (mLastLocation != null) {
-            startLocationUpdates();
+            currLat = mLastLocation.getLatitude();
+            currLong = mLastLocation.getLongitude();
         }
     }
 
@@ -100,20 +104,6 @@ public class Gameplay extends FragmentActivity implements OnMapReadyCallback, Go
     @Override
     public void onConnectionSuspended(int i) {
 
-    }
-
-    protected void startLocationUpdates() {
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        LocationServices.FusedLocationApi.requestLocationUpdates(client, LocRequest, listen);
     }
 
 
@@ -140,34 +130,44 @@ public class Gameplay extends FragmentActivity implements OnMapReadyCallback, Go
                 .radius(currGame.getRadius())
                 .strokeColor(Color.BLACK)
                 .fillColor(0x88888888));
-        final Marker user = mMap.addMarker(new MarkerOptions()
+        user = mMap.addMarker(new MarkerOptions()
                 .position(new LatLng(currGame.getLatitude(), currGame.getLongitude()))
                 .setVisible(false));
         currGame.drawBases(mMap);
-        new Timer().scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                //Update User Location
-                LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-                double pLat;
-                double pLng;
-
-                if (mLastLocation != null) {
-                    pLat = mLastLocation.getLatitude();
-                    pLng = mLastLocation.getLongitude();
-                }
-                user.setPosition(new LatLng(pLat, pLng));
-                user.setVisible(true);
-                //Check On Base
-                if (currGame.onBase(pLat, pLng) != -1) {
-                    double[] location = new double[2];
-                    location[0] = pLat;
-                    location[1] = pLng;
-                    net.onBase((currGame.getGameID()), PID, location);
-                }
-            }
-        }, 0, 1000);
+        handler.postDelayed(runnable, 500);
     }
+
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            //Update User Location
+            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
+            mLastLocation = LocationServices.FusedLocationApi.getLastLocation(client);
+            if (mLastLocation != null) {
+                currLat = mLastLocation.getLatitude();
+               currLong = mLastLocation.getLongitude();
+            }
+            user.setPosition(new LatLng(currLat, currLong));
+            user.setVisible(true);
+            //Check On Base
+            if (currGame.onBase(currLat, currLong) != -1) {
+                double[] location = new double[2];
+                location[0] = currLat;
+                location[1] = currLong;
+                net.onBase((currGame.getGameID()), PID, location);
+            }
+            handler.postDelayed(this,500);
+        }
+    };
 
     public void onBackPressed() {
         AlertDialog exit = LeaveGame();
