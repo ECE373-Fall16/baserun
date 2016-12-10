@@ -5,6 +5,8 @@ import org.apache.xmlrpc.*;
 import java.io.IOException;
 import java.util.*;
 
+import static java.lang.Integer.valueOf;
+
 public class GameNetwork{
 	XmlRpcClient server;
 	public GameNetwork(){
@@ -252,14 +254,14 @@ public class GameNetwork{
 		}
 	}
 
-	public Integer[] getScore(int gid){
-		Integer[] score = new Integer[2];
+	public int[] getScore(int gid){
+		int[] score = new int[2];
 		try{
 			Vector params = new Vector();
 			params.addElement(new Integer(gid));
 			Vector scores = (Vector)server.execute("server.getScore",params);
-			score[0] = (Integer)scores.get(0);
-			score[1] = (Integer)scores.get(1);
+			score[0] = valueOf((Integer)scores.get(0));
+			score[1] = valueOf((Integer)scores.get(1));
 			return score;
 		} catch(Exception e) {
 			e.printStackTrace();

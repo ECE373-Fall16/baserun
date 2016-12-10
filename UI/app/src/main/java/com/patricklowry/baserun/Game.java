@@ -1,8 +1,6 @@
 package com.patricklowry.baserun;
 
 import android.graphics.Color;
-import android.location.Location;
-import android.os.CountDownTimer;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Circle;
