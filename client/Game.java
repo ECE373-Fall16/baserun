@@ -193,8 +193,8 @@ public class Game{
 		return null;
 	}
 
-	//public float distanceToBase(Base a){
-	//	return a.getDistance();
+	//public float distanceToBase(Base a, double lat, double lon){
+	//	return a.getDistance(lat,lon);
 	//}
 
 	public void drawBases(GoogleMap a){

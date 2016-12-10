@@ -27,7 +27,7 @@ public class Base{
 		this.own = own;
 	}
 
-//	public  getDistance(Base a){
+//	public  getDistance(double lat, double lon){
 		//get distance from location of base a to current location
 		
 //	}
