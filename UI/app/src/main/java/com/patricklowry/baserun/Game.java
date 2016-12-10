@@ -214,12 +214,4 @@ public class Game{
             bases[i].initBase(temp);
 		}
 	}
-
-	public void drawUserLoc(){
-		double[] currentLoc = new double[2];
-		currentLoc[1] = Location.getLatitude();
-		currentLoc[2] = Location.getLongitude();
-		//Draw currentLoc
-	}
-
 }

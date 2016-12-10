@@ -10,14 +10,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class JoinByID extends AppCompatActivity {
-    int GID;
-    Game joined;
-    Network net = new Network();
-
-    public Game joinGame(){
-        net.connect("127.0.0.1",8080);
-        return (joined = net.joinGame(11111111,1));
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +25,6 @@ public class JoinByID extends AppCompatActivity {
             if (!id.isEmpty()) {
                 Bundle params = new Bundle();
                 params.putString("EXTRA_ID", id);
-                params.putParcelable("EXTRA_GAME", (Parcelable) joined);
                 begin.putExtras(params);
                 startActivity(begin);
             }
