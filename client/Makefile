@@ -1,6 +1,6 @@
 CLASSPATH=./lib/commons-codec-1.3.jar:./lib/xmlrpc-2.0.1.jar:.
 
-all: GameTimer.class Base.class User.class GameNetwork.class GameList.class  Game.class TestSuite.class 
+all: Base.class User.class GameNetwork.class GameList.class Game.class TestSuite.class 
 
 server:
 	@java -classpath $(CLASSPATH) TestServer
@@ -8,8 +8,6 @@ server:
 client:
 	@java -classpath $(CLASSPATH) TestSuite
 	
-GameTimer.class:
-	javac GameTimer.java
 Base.class:
 	javac  Base.java
 GameList.class:
