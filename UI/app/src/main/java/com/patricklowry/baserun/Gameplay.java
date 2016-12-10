@@ -134,6 +134,7 @@ public class Gameplay extends FragmentActivity implements OnMapReadyCallback, Go
                 .position(new LatLng(currGame.getLatitude(), currGame.getLongitude()))
                 .setVisible(false));
         currGame.drawBases(mMap);
+        //UPDATE GAME AND SCORE
         handler.postDelayed(runnable, 500);
     }
 
@@ -159,12 +160,15 @@ public class Gameplay extends FragmentActivity implements OnMapReadyCallback, Go
             user.setPosition(new LatLng(currLat, currLong));
             user.setVisible(true);
             //Check On Base
-            if (currGame.onBase(currLat, currLong) != -1) {
+            if (net.onBase(PID,currGame.getGameID(),currGame.onBase(currLat, currLong)) != -1) {
                 double[] location = new double[2];
                 location[0] = currLat;
                 location[1] = currLong;
                 net.onBase((currGame.getGameID()), PID, location);
             }
+            currGame.refreshGame(net.refreshGame(currGame.getGameID()));
+            currGame.drawBases(mMap);
+            currGame.setScores(net.getScore(currGame.getGameID()));
             handler.postDelayed(this,500);
         }
     };
