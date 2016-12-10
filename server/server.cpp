@@ -39,6 +39,25 @@
 using namespace std;
 
 sessionList slist;
+long int genPid;
+
+class getPID : public xmlrpc_c::method {
+public:
+    getPID(){
+        this->_signature = "A:";
+        this->_help = "This method returns a unique pid";
+    }
+    void execute(xmlrpc_c::paramList const& paramList, xmlrpc_c::value * const  retvalP) {
+
+        paramList.verifyEnd(0);
+
+        vector<xmlrpc_c::value> arrayData;
+        arrayData.push_back(xmlrpc_c::value_int(genPid++));
+        xmlrpc_c::value_array array1(arrayData);
+        *retvalP = array1;
+	}
+};
+
 
 //initializes a blank game and returns the GID
 /*class genGID : public xmlrpc_c::method {
@@ -448,6 +467,8 @@ int main(int const, const char ** const) {
         //xmlrpc_c::methodPtr const genID_m(new genID);
         //myRegistry.addMethod("server.genID", genID_m);
 
+        xmlrpc_c::methodPtr const getPID_m(new getPID);
+        myRegistry.addMethod("server.getPID", getPID_m);
  
         xmlrpc_c::methodPtr const createGame_m(new createGame);
         myRegistry.addMethod("server.createGame", createGame_m);
