@@ -3,6 +3,7 @@ package com.patricklowry.baserun;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,14 @@ public class MainActivity extends AppCompatActivity {
     GameNetwork net = new GameNetwork();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if(ActivityCompat.shouldShowRequestPermissionRationale(this,android.Manifest.permission.ACCESS_FINE_LOCATION)){
+
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+            }
+            return;
+        }
         super.onCreate(savedInstanceState);
         net.connect();
         setContentView(R.layout.activity_main);

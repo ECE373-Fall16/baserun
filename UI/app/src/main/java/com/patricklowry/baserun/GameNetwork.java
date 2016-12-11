@@ -31,7 +31,9 @@ public class GameNetwork{
 			System.out.println("CHECKING CONNECTION");
 			Vector check = new Vector();
 			check.addElement(new String("CHECKCON"));
+            System.out.println("ADDED ELEMENT");
 			Vector checkConn = (Vector)server.execute("server.check",check);
+			System.out.println("SERVER CALLED");
 			if(((String)checkConn.get(0)).equals("CHECKCON")){
 				System.out.println("CONN VERIFIED");
 				return true;
@@ -64,10 +66,14 @@ public class GameNetwork{
 				params2.addElement(new Integer(baseCount));
 				params2.addElement(new Double(startLat));
 				params2.addElement(new Double(startLong));
+                System.out.println("GAME DATA IN VECTOR");
 				Vector createGame = (Vector)server.execute("server.createGame",params2);
+                System.out.println("GAME DATA RECIEVED");
 				Integer GID = (Integer)createGame.get(0);
 				if(GID != -1){
+                    System.out.println("GAME CREATED");
 					Game temp = new Game(GID,playerCount,radius,baseCount,startLat,startLong);
+                    temp.refreshGame(refreshGame(GID));
 					return temp;
 				} else
 					return null;
@@ -162,7 +168,7 @@ public class GameNetwork{
 					System.out.println(lat);
 					double lon = ((Double)refresh.get(k++)).doubleValue();
 					System.out.println(lon);
-					double rad = ((Double)refresh.get(k)).doubleValue();
+					double rad = ((Double)refresh.get(k++)).doubleValue();
 					System.out.println(rad);
 					bases[j++] = new Base(lat,lon,rad);
 				}

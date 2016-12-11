@@ -121,6 +121,10 @@ public class Game{
 		return playerCount;
 	}
 
+	public double[] getGameLocation(){
+		return GameLocation;
+	}
+
 	public int getCurrPlayCount(){
 		return currPlayerCount;
 	}
@@ -197,7 +201,9 @@ public class Game{
 
 	public void drawBases(GoogleMap a){
 		int fill;
-		for(int i=0; i<baseCount; i++){
+		for(int i=0; i<baseCount-1; i++){
+            System.out.print("PRINTING BASE LOCS");
+            System.out.print(bases[i].getLatitude() + " " + bases[i].getLongitude());
 			if(bases[i].getOwner() == 1)
 				fill = Color.RED;
 			else if(bases[i].getOwner() == 2)

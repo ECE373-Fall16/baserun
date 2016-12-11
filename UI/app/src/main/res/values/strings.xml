@@ -36,11 +36,8 @@
     </string-array>
 
     <string-array name="num_bases_array">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
         <item>4</item>
-        <item>5</item>
+        <item>8</item>
     </string-array>
 
     <string-array name="game_dur_array">

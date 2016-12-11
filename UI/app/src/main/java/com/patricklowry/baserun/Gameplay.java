@@ -1,24 +1,22 @@
 package com.patricklowry.baserun;
 
+import android.*;
+import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.games.Game;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -29,169 +27,170 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class Gameplay extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
+public class Gameplay extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private com.patricklowry.baserun.Game currGame;
+    private com.patricklowry.baserun.Game currGame = null;
     private GameNetwork net = new GameNetwork();
     private int PID = 99999999;
-    private GoogleApiClient client;
-    private Location mLastLocation;
-    private LocationRequest LocRequest = new LocationRequest();
+    private android.location.LocationManager locman;
+    private android.location.LocationListener loclisten;
+    private android.location.Location currLoc;
     private double currLat, currLong;
     private Handler handler = new Handler();
     private Marker user;
     private int players;
     private int bases;
-    private int dur;
-    private int rad;
+    private double dur;
+    private double rad;
     private int startT;
+    private Circle[] baseCircles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if(ActivityCompat.shouldShowRequestPermissionRationale(this,android.Manifest.permission.ACCESS_FINE_LOCATION)){
+
+            } else {
+                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+            }
+            return;
+        }
         super.onCreate(savedInstanceState);
-        players = getIntent().getIntExtra("players", -1);
-        bases = getIntent().getIntExtra("bases", -1);
-        dur = getIntent().getIntExtra("dur", -1);
-        rad = getIntent().getIntExtra("rad", -1);
-        startT = getIntent().getIntExtra("startT", -1);
+        players = Integer.parseInt(getIntent().getStringExtra("EXTRA_PLAYERS_INT"));
+        bases = Integer.parseInt(getIntent().getStringExtra("EXTRA_BASES_INT"));
+        dur = Double.parseDouble(getIntent().getStringExtra("EXTRA_DUR_DOUB"));
+        rad = Double.parseDouble(getIntent().getStringExtra("EXTRA_RAD_DOUB"));
+        startT = Integer.parseInt(getIntent().getStringExtra("EXTRA_START_INT"));
+        System.out.println(players);
+        System.out.println(bases);
+        System.out.println(dur);
+        System.out.println(rad);
+        System.out.println(startT);
         setContentView(R.layout.activity_gameplay);
-        Intent intent = getIntent();
-        Bundle params = intent.getExtras();
-        Game game = params.getParcelable("EXTRA_GAME");
-        String id = params.getString("EXTRA_ID");
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        Context context = getApplicationContext();
-        CharSequence text = "Joined game " + id;
-        int duration = Toast.LENGTH_LONG;
-        Toast.makeText(context, text, duration).show();
-        if (client == null) {
-            client = new GoogleApiClient.Builder(this)
-                    .addOnConnectionFailedListener(this)
-                    .addConnectionCallbacks(this)
-                    .addApi(LocationServices.API)
-                    .build();
+        locman = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        loclisten = new LocationListener() {
+            public void onLocationChanged(Location location) {
+                if(location == null)
+                    System.out.print(currLat + " " + currLong);
+                else {
+                    currLat = location.getLatitude();
+                    currLong = location.getLongitude();
+                }
+            }
 
-        }
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+            }
+
+            public void onProviderEnabled(String provider) {
+            }
+
+            ;
+
+            public void onProviderDisabled(String provider) {
+            }
+
+            ;
+        };
+        locman.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, loclisten);
+        locman.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0,0,loclisten);
     }
 
-    protected void onStart() {
-        client.connect();
-        super.onStart();
-    }
+    //public void onConnected(Bundle connectionHint) {}
 
-    public void onConnected(Bundle connectionHint) {
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(client);
-        if (mLastLocation != null) {
-            currLat = mLastLocation.getLatitude();
-            currLong = mLastLocation.getLongitude();
-        }
-    }
-
-    protected void createLocationRequest() {
-        LocRequest.setInterval(1000);
-        LocRequest.setFastestInterval(500);
-        LocRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        net.connect();
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
+        currLoc = locman.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        if (currLoc != null){
+            currLat = currLoc.getLatitude();
+            currLong = currLoc.getLongitude();
+        } else {
+            currLoc = locman.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            if(currLoc != null){
+                currLat = currLoc.getLatitude();
+                currLong = currLoc.getLongitude();
+            }else
+                System.out.print(currLat + " " + currLong);
         }
-        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(client);
-        if (currGame == null) {
-            currGame = net.createGame(PID, players, (double) rad, bases, mLastLocation.getLatitude(), mLastLocation.getLongitude());
-        }
+        locman.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, loclisten);
+        locman.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0,0,loclisten);
+        System.out.println(currLat+"  "+currLong);
+        checkCon();
+        createGame();
+        while(currGame == null){}
+        baseCircles = new Circle[currGame.getBaseCount()];
+        drawBases();
+        System.out.println("GameID: "+currGame.getGameID());
+
     /*
         LatLng curLoc = new LatLng(42.3912, -72.5267);
         mMap.addMarker(new MarkerOptions().position(curLoc).title("Marker in UMass Amherst"));
 	*/
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude())));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(currLat, currLong)));
         Circle game = mMap.addCircle(new CircleOptions()
-                .center(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude()))
-                .radius(currGame.getRadius())
+                .center(new LatLng(currLat, currLong))
+                .radius(currGame.getRadius()*1609.34)
                 .strokeColor(Color.BLACK)
                 .fillColor(0x88888888));
         user = mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude())));
+                .position(new LatLng(currLat, currLong)));
+        System.out.println(currLat+"  "+currLong);
         currGame.drawBases(mMap);
         //UPDATE GAME AND SCORE
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                //Update User Location
-                if (ActivityCompat.checkSelfPermission(Gameplay.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(Gameplay.this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
+                if (ActivityCompat.checkSelfPermission(Gameplay.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    if(ActivityCompat.shouldShowRequestPermissionRationale(Gameplay.this,android.Manifest.permission.ACCESS_FINE_LOCATION)){
+
+                    } else {
+                        ActivityCompat.requestPermissions(Gameplay.this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+                    }
                     return;
                 }
-                mLastLocation = LocationServices.FusedLocationApi.getLastLocation(client);
-                if (mLastLocation != null) {
-                    currLat = mLastLocation.getLatitude();
-                    currLong = mLastLocation.getLongitude();
-                }
+                locman.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, loclisten);
+                locman.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0,0,loclisten);
+                System.out.println("ENTERS LOOP");
+                //Update User Location
                 user.setPosition(new LatLng(currLat, currLong));
                 user.setVisible(true);
                 //Check On Base
-                if (net.onBase(PID,currGame.getGameID(),currGame.onBase(currLat, currLong))) {
-                    double[] location = new double[2];
-                    location[0] = currLat;
-                    location[1] = currLong;
-                    net.onBase((currGame.getGameID()), PID, location);
-                }
-                currGame.refreshGame(net.refreshGame(currGame.getGameID()));
-                currGame.drawBases(mMap);
-                currGame.setScores(net.getScore(currGame.getGameID()));
-                handler.postDelayed(this,500);
+                Thread refresh = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (net.onBase(currGame.getGameID(),PID,currGame.getGameLocation())) {
+                            double[] location = new double[2];
+                            location[0] = currLat;
+                            location[1] = currLong;
+                            net.onBase((/*currGame.getGameID()*/100), PID, location);
+                        }
+                        currGame.refreshGame(net.refreshGame(currGame.getGameID()));
+                        //currGame.drawBases(mMap);
+                        currGame.setScores(net.getScore(currGame.getGameID()));
+                    }
+                });
+                refresh.start();
+                handler.postDelayed(this,1000);
             }
-        }, 500);
+        }, 1000);
     }
 
 
     public void onBackPressed() {
+        if (ActivityCompat.checkSelfPermission(Gameplay.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if(ActivityCompat.shouldShowRequestPermissionRationale(Gameplay.this,android.Manifest.permission.ACCESS_FINE_LOCATION)){
+
+            } else {
+                ActivityCompat.requestPermissions(Gameplay.this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+            }
+            return;
+        }
+        locman.removeUpdates(loclisten);
         AlertDialog exit = LeaveGame();
         exit.show();
     }
@@ -213,13 +212,49 @@ public class Gameplay extends FragmentActivity implements OnMapReadyCallback, Go
                 .create();
     }
 
-    protected void onStop() {
-        client.disconnect();
-        super.onStop();
+    private void checkCon(){
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                net.connect();
+            }
+        });
+        thread.start();
     }
 
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+    private void createGame(){
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                currGame = net.createGame(PID,players,rad,bases,currLat,currLong);
+            }
+        });
+        thread.start();
+    }
 
+    private void refreshGame(){
+
+    }
+
+    private void drawBases(){
+        Base[] bases = currGame.getBases();
+        int fill;
+        for(int i=0; i<currGame.getBaseCount(); i++){
+            System.out.println("PRINTING BASE LOCS");
+            System.out.println(bases[i].getLatitude() + " " + bases[i].getLongitude());
+            System.out.println(bases[i].getRadius());
+            if(bases[i].getOwner() == 1)
+                fill = Color.RED;
+            else if(bases[i].getOwner() == 2)
+                fill = Color.BLUE;
+            else
+                fill = Color.GRAY;
+            baseCircles[i] = mMap.addCircle(new CircleOptions()
+                    .center(new LatLng(bases[i].getLatitude(),bases[i].getLongitude()))
+                    .radius(bases[i].getRadius())
+                    .strokeColor(Color.BLACK)
+                    .fillColor(fill));
+            bases[i].initBase(baseCircles[i]);
+        }
     }
 }

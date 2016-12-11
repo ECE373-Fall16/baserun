@@ -41,11 +41,11 @@ public class Base{
 	}
 	
 	public double getLatitude(){
-		return location[1];
+		return location[0];
 	}
 	
 	public double getLongitude(){
-		return location[2];
+		return location[1];
 	}
 	
 	public int getOwner(){

@@ -11,7 +11,9 @@ import java.util.List;
 import java.util.Locale;
 
 public class JoinRandom extends AppCompatActivity {
-    GameList list;
+    private GameNetwork net = new GameNetwork();
+    private GameList list;
+    private int PID = 99999999;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,5 +29,16 @@ public class JoinRandom extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        createGame();
+    }
+
+    private void createGame(){
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                list = net.gameList(PID);
+            }
+        });
+        thread.start();
     }
 }
