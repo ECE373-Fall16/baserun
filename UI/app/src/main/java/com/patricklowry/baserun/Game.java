@@ -21,8 +21,8 @@ public class Game{
 	private User[] Team1;
 	private User[] Team2;
 	private Base[] bases;
-	private int rScore;
-	private int bScore;
+	public int rScore = 0;
+	public int bScore = 0;
 	private long startTime;
 	private long endTime;
 	//private GameTimer time;
@@ -70,7 +70,19 @@ public class Game{
 		return temp;
 	}
 */
+
+    public int getPlayerTeam(int playerID){
+        for(int i=0; i<players.length; i++){
+            if(players[i].getID() == playerID){
+                return players[i].getTeam();
+            }
+        }
+        return -1;
+    }
+
 	public void refreshGame(Game temp){
+        if(temp == null)
+            return;
 		int i;
 		int j=0;
 		int k=0;
@@ -97,8 +109,11 @@ public class Game{
 	}
 
 	public void setScores(int[] score){
+        if(score == null){
+            return;
+        }
 		rScore = score[0];
-		rScore = score[1];
+		bScore = score[1];
 	}
 
 	public int getTeam1Size(){

@@ -170,7 +170,9 @@ public class GameNetwork{
 					System.out.println(lon);
 					double rad = ((Double)refresh.get(k++)).doubleValue();
 					System.out.println(rad);
-					bases[j++] = new Base(lat,lon,rad);
+                    int own = ((Integer)refresh.get(k++));
+					bases[j] = new Base(lat,lon,rad);
+                    bases[j++].setOwner(own);
 				}
 				temp = new Game(playCount,players,bases);
 				return temp;
@@ -217,6 +219,7 @@ public class GameNetwork{
 				params.addElement(new Double(loc[0]));
 				params.addElement(new Double(loc[1]));
 				Vector onBase = (Vector)server.execute("server.onBase", params);
+                System.out.println("ON BASE RECIEVED");
 				if((Integer)onBase.get(0) == 1)
 					return true;
 				else

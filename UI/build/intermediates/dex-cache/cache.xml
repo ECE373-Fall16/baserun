@@ -133,7 +133,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.1"
-        sha1="a4112b0ff00128763001e2f39991d974d7fbed98">
+        sha1="c66928304fcb5d26bee88b86bc79b6012bc4cb7d">
         <dex dex="/home/dan/brlocal/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_6bc61fd05ceaeddfba29a0e69979dfb909293a7f/classes.dex" />
     </item>
     <item
@@ -169,7 +169,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.1"
-        sha1="55088b92b9ec6391932913a461f18737c57e86a6">
+        sha1="b67c88d5e596165605c202c65fee1f6aae7c1746">
         <dex dex="/home/dan/brlocal/UI/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_47a197878ecb7e031a376c6eb057736a9e39a77e/classes.dex" />
     </item>
     <item
