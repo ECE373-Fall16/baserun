@@ -188,7 +188,7 @@ public class GameNetwork{
 			return null;
 	}
 
-	public GameList gameList(int PID){
+	public /*GameList*/ String[] gameList(int PID){
 		GameList temp;
 		if(checkConn()){
 			try {
@@ -197,6 +197,7 @@ public class GameNetwork{
 				params.addElement(new Integer(PID));
 				Vector gameList = (Vector)server.execute("server.gameList", params);
 				int gcount = (Integer)gameList.get(0);
+				String[] tempStr = new String[gcount];
 				int[] gids = new int[gcount];
 				int[] players = new int[gcount];
 				int[] currPlayers = new int[gcount];
@@ -204,9 +205,11 @@ public class GameNetwork{
 					gids[i] = (Integer)gameList.get((i*3)+1);
 					players[i] = (Integer)gameList.get((i*3)+2);
 					currPlayers[i] = (Integer)gameList.get((i*3)+3);
+					tempStr[i] = gids[i] + " " + currPlayers[i] + "/" + players[i] + " Players";
 				}
-				temp = new GameList(gcount,gids, players, currPlayers);
-				return temp;
+				//temp = new GameList(gcount,gids, players, currPlayers);
+				//return temp;
+				return tempStr;
 			} catch(Exception e){
 				return null;
 			}

@@ -18,6 +18,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
@@ -148,18 +149,18 @@ public class Gameplay extends FragmentActivity implements OnMapReadyCallback {
             public void onTick(long millisUntilFinished){
                 mils = millisUntilFinished-endTime;
                 if(mils >= 0) {
-                    int sec = (int) ((mils) / 1000) % 60;
-                    int min = (int) ((mils) / (1000 * 60)) % 60;
-                    int hrs = (int) ((mils) / (1000 * 60 * 60)) % 24;
+                    int sec = (int) (((mils) / 1000) % 60);
+                    int min = (int) (((mils) / (1000 * 60)) % 60);
+                    int hrs = (int) (((mils) / (1000 * 60 * 60)) % 24);
                     String time = String.format("%02d:%02d:%02d", hrs, min, sec);
                     System.out.println("TICK1");
                     timer.setText(time);
                 } else {
                     gameStart = true;
                     mils2 = millisUntilFinished;
-                    int sec2 = (int)(mils2 /1000)%60;
-                    int min2 = (int)(mils2 /(1000*60))%60;
-                    int hrs2 = (int)(mils2 /(1000*3600))%24;
+                    int sec2 = (int)((mils2 /1000)%60);
+                    int min2 = (int)((mils2 /(1000*60))%60);
+                    int hrs2 = (int)((mils2 /(1000*60*60))%24);
                     String time2 = String.format("%02d:%02d:%02d", hrs2, min2, sec2);
                     System.out.println("TICK2");
                     timer.setText(time2);
@@ -173,11 +174,17 @@ public class Gameplay extends FragmentActivity implements OnMapReadyCallback {
         drawBases();
         System.out.println("GameID: "+currGame.getGameID());
         Circle game = mMap.addCircle(new CircleOptions()
-                .center(new LatLng(currLat, currLong))
+                .center(new LatLng(currGame.getGameLocation()[0], currGame.getGameLocation()[1]))
                 .radius(currGame.getRadius()*1609.34)
                 .strokeColor(Color.BLACK)
                 .fillColor(0x88888888));
+        float color;
+        if(currGame.getPlayerTeam(PID) == 1)
+            color = 0;
+        else
+            color = 240;
         user = mMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.defaultMarker(color))
                 .position(new LatLng(currLat, currLong)));
         System.out.println(currLat+"  "+currLong);
 
