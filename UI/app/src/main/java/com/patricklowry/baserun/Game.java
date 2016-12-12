@@ -100,12 +100,20 @@ public class Game{
 		bases = temp.getBases();
 	}
 
-	public void setStartTime(int start){
+	public void setStartTime(long start){
 		startTime = start;
 	}
 
-	public void setEndTime(int end){
+	public void setEndTime(long end){
 		endTime = end;
+	}
+
+	public long getStartTime(){
+		return startTime;
+	}
+
+	public long getEndTime(){
+		return endTime;
 	}
 
 	public void setScores(int[] score){

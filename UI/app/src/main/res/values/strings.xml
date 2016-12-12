@@ -4,21 +4,19 @@
     <string name="join_game">Join Game</string>
     <string name="create_game">Create Game</string>
     <string name="rules">How To Play</string>
-
     // Join Game
     <string name="join_random">Random</string>
     <string name="join_by_id">By Game ID</string>
-
     // Join Random
     <string name="join_random_headline">Join Random Game:</string>
     <string name="location">Location, LN</string>
-    <string name="total_games">0000 Total</string>
-
+    <string name="zero">0</string>
+    <string name="total_games">Games</string>
+    <string name="retry">Retry</string>
     // Join By ID
     <string name="join_by_id_headline">Join Game By ID</string>
     <string name="enter_id">Enter game ID</string>
     <string name="join">Join</string>
-
     // Create Game
     <string name="num_players">Number of Players</string>
     <string name="num_bases">Number of Bases</string>
@@ -26,7 +24,6 @@
     <string name="game_rad">Radius of Game Area (Miles)</string>
     <string name="game_start">Time Before Start (Minutes)</string>
     <string name="start_game">Start Game</string>
-
     <string-array name="num_players_array">
         <item>2</item>
         <item>4</item>
@@ -34,12 +31,10 @@
         <item>8</item>
         <item>10</item>
     </string-array>
-
     <string-array name="num_bases_array">
         <item>4</item>
         <item>8</item>
     </string-array>
-
     <string-array name="game_dur_array">
         <item>0.5</item>
         <item>1.0</item>
@@ -48,14 +43,12 @@
         <item>2.5</item>
         <item>3.0</item>
     </string-array>
-
     <string-array name="game_rad_array">
         <item>0.25</item>
         <item>0.50</item>
         <item>0.75</item>
         <item>1.00</item>
     </string-array>
-
     <string-array name="game_start_array">
         <item>1</item>
         <item>2</item>
@@ -63,7 +56,6 @@
         <item>4</item>
         <item>5</item>
     </string-array>
-
     // Rules
     <string name="rules_1">- 2 teams of equal length compete to capture the most bases within a specific time frame</string>
     <string name="rules_2">- Teams begin from a centralized location, and bases generate within some radius around the location</string>
@@ -72,7 +64,6 @@
     <string name="rules_5">- At time end, whoever has most bases wins</string>
     <string name="rules_6">- You do not need to stay on a base to keep it captured</string>
     <string name="title_activity_game_screen">Map</string>
-
     //Game Screen
     <string name="timer">00:00:00</string>
     <string name="red">0</string>

@@ -56,7 +56,7 @@ public class GameNetwork{
 		}
 	}
 
-	public Game createGame(int PID, int playerCount, double radius, int baseCount, double startLat, double startLong){
+	public Game createGame(int PID, int playerCount, double radius, int baseCount, double startLat, double startLong, long start, long end){
 		if(checkConn()){
 			try {
 				Vector params2 = new Vector();
@@ -74,6 +74,7 @@ public class GameNetwork{
                     System.out.println("GAME CREATED");
 					Game temp = new Game(GID,playerCount,radius,baseCount,startLat,startLong);
                     temp.refreshGame(refreshGame(GID));
+					setTime(GID,start,end);
 					return temp;
 				} else
 					return null;
@@ -130,6 +131,10 @@ public class GameNetwork{
 				System.out.println(gameRad);
 				temp = new Game(GID,totPlayCount,gameRad,BaseCount,gameLat,gameLong);
 				temp.setCurrPlayCount(playCount);
+				temp.refreshGame(refreshGame(GID));
+				long[] times = getTime(GID);
+				temp.setStartTime(times[0]);
+				temp.setEndTime(times[1]);
 				return temp;
 			} catch(Exception e){
 				e.printStackTrace();	

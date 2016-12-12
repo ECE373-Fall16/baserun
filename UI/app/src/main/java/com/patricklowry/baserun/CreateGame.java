@@ -14,6 +14,7 @@ public class CreateGame extends AppCompatActivity {
     String dur;
     String rad;
     String startT;
+    String act = "creategame";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +70,7 @@ public class CreateGame extends AppCompatActivity {
         rad = game_rad_array[gameRadPos];
         startT = game_start_array[gameStartPos];
         Bundle params = new Bundle();
+        params.putString("EXTRA_ACTIVITY", act);
         params.putString("EXTRA_PLAYERS_INT", players);
         params.putString("EXTRA_BASES_INT", bases);
         params.putString("EXTRA_DUR_DOUB", dur);

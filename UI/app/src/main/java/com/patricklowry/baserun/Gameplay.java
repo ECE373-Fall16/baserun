@@ -32,7 +32,8 @@ public class Gameplay extends FragmentActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     private com.patricklowry.baserun.Game currGame = null;
     private GameNetwork net = new GameNetwork();
-    private int PID = 99999999;
+    private int PID;
+    private int gameID;
     private android.location.LocationManager locman;
     private android.location.LocationListener loclisten;
     private android.location.Location currLoc;
@@ -51,9 +52,14 @@ public class Gameplay extends FragmentActivity implements OnMapReadyCallback {
     private long mils;
     private long mils2;
     private boolean gameStart = false;
+    private boolean join = false;
+    private long startTime;
+    private long endTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        net.connect();
+        getPID();
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             if(ActivityCompat.shouldShowRequestPermissionRationale(this,android.Manifest.permission.ACCESS_FINE_LOCATION)){
             } else {
@@ -62,16 +68,23 @@ public class Gameplay extends FragmentActivity implements OnMapReadyCallback {
             return;
         }
         super.onCreate(savedInstanceState);
-        players = Integer.parseInt(getIntent().getStringExtra("EXTRA_PLAYERS_INT"));
-        bases = Integer.parseInt(getIntent().getStringExtra("EXTRA_BASES_INT"));
-        dur = Double.parseDouble(getIntent().getStringExtra("EXTRA_DUR_DOUB"));
-        rad = Double.parseDouble(getIntent().getStringExtra("EXTRA_RAD_DOUB"));
-        startT = Integer.parseInt(getIntent().getStringExtra("EXTRA_START_INT"));
-        System.out.println(players);
-        System.out.println(bases);
-        System.out.println(dur);
-        System.out.println(rad);
-        System.out.println(startT);
+        String activity = getIntent().getStringExtra("EXTRA_ACTIVITY");
+        if(activity.equals("creategame")) {
+            players = Integer.parseInt(getIntent().getStringExtra("EXTRA_PLAYERS_INT"));
+            bases = Integer.parseInt(getIntent().getStringExtra("EXTRA_BASES_INT"));
+            dur = Double.parseDouble(getIntent().getStringExtra("EXTRA_DUR_DOUB"));
+            rad = Double.parseDouble(getIntent().getStringExtra("EXTRA_RAD_DOUB"));
+            startT = Integer.parseInt(getIntent().getStringExtra("EXTRA_START_INT"));
+            System.out.println(players);
+            System.out.println(bases);
+            System.out.println(dur);
+            System.out.println(rad);
+            System.out.println(startT);
+            join = false;
+        } else {
+            gameID = Integer.parseInt(getIntent().getStringExtra("EXTRA_ID"));
+            join = true;
+        }
         setContentView(R.layout.activity_gameplay);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -102,30 +115,6 @@ public class Gameplay extends FragmentActivity implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        timer = (TextView)findViewById(R.id.textView9);
-        new CountDownTimer(startT*60*1000+(long)(dur*3600*1000),1000) {
-            public void onTick(long millisUntilFinished){
-                mils = millisUntilFinished-(long)(dur*3600*1000);
-                if(mils >= 0) {
-                    int sec = (int) ((mils) / 1000) % 60;
-                    int min = (int) ((mils) / (1000 * 60)) % 60;
-                    int hrs = (int) ((mils) / (1000 * 3600)) % 24;
-                    String time = String.format("%02d:%02d:%02d", hrs, min, sec);
-                    timer.setText(time);
-                } else {
-                    gameStart = true;
-                    mils2 = millisUntilFinished;
-                    int sec2 = (int)(mils2 /1000)%60;
-                    int min2 = (int)(mils2 /(1000*60))%60;
-                    int hrs2 = (int)(mils2 /(1000*3600))%24;
-                    String time2 = String.format("%02d:%02d:%02d", hrs2, min2, sec2);
-                    timer.setText(time2);
-                }
-            }
-            public void onFinish(){
-                timer.setText("GAME OVER");
-            }
-        }.start();
         redScore = (TextView)findViewById(R.id.RedScore);
         blueScore = (TextView)findViewById(R.id.BlueScore);
         mMap = googleMap;
@@ -143,10 +132,43 @@ public class Gameplay extends FragmentActivity implements OnMapReadyCallback {
         }
         locman.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, loclisten);
         locman.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0,0,loclisten);
-        System.out.println(currLat+"  "+currLong);
-        checkCon();
-        createGame();
-        while(currGame == null){}
+        if(join) {
+            joinGame();
+            while(currGame == null){}
+            startTime = currGame.getStartTime()-System.currentTimeMillis();
+            endTime = currGame.getEndTime()-System.currentTimeMillis();
+        } else {
+            createGame();
+            while(currGame == null){}
+            startTime = startT*60*1000;
+            endTime = (long)(dur*24*60*1000);
+        }
+        timer = (TextView)findViewById(R.id.textView9);
+        new CountDownTimer(startTime+endTime,1000) {
+            public void onTick(long millisUntilFinished){
+                mils = millisUntilFinished-endTime;
+                if(mils >= 0) {
+                    int sec = (int) ((mils) / 1000) % 60;
+                    int min = (int) ((mils) / (1000 * 60)) % 60;
+                    int hrs = (int) ((mils) / (1000 * 60 * 60)) % 24;
+                    String time = String.format("%02d:%02d:%02d", hrs, min, sec);
+                    System.out.println("TICK1");
+                    timer.setText(time);
+                } else {
+                    gameStart = true;
+                    mils2 = millisUntilFinished;
+                    int sec2 = (int)(mils2 /1000)%60;
+                    int min2 = (int)(mils2 /(1000*60))%60;
+                    int hrs2 = (int)(mils2 /(1000*3600))%24;
+                    String time2 = String.format("%02d:%02d:%02d", hrs2, min2, sec2);
+                    System.out.println("TICK2");
+                    timer.setText(time2);
+                }
+            }
+            public void onFinish(){
+                timer.setText("GAME OVER");
+            }
+        }.start();
         baseCircles = new Circle[currGame.getBaseCount()];
         drawBases();
         System.out.println("GameID: "+currGame.getGameID());
@@ -188,7 +210,7 @@ public class Gameplay extends FragmentActivity implements OnMapReadyCallback {
                     tempBase.setLongitude(currGame.getBases()[i].getLongitude());
                     float distance = UserLoc.distanceTo(tempBase);
                     System.out.println(distance);
-                    if (distance <= currGame.getBases()[i].getRadius() && gameStart) {
+                    if (distance <= currGame.getBases()[i].getRadius() && currGame.getPlayerTeam(PID) != currGame.getBases()[i].getOwner() /*&& gameStart*/) {
                         onBase(i);
                     }
                 }
@@ -243,7 +265,7 @@ public class Gameplay extends FragmentActivity implements OnMapReadyCallback {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                currGame = net.createGame(PID,players,rad,bases,currLat,currLong);
+                currGame = net.createGame(PID,players,rad,bases,currLat,currLong,(startT*60*1000)+System.currentTimeMillis(),(long)(dur*24*60*1000)+System.currentTimeMillis());
             }
         });
         thread.start();
@@ -260,18 +282,17 @@ public class Gameplay extends FragmentActivity implements OnMapReadyCallback {
     }
 
     private void onBase(final int i){
-        Thread thread = new Thread(new Runnable() {
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 System.out.println("CALLING ON BASE");
                 net.onBase((currGame.getGameID()), PID, currGame.getBases()[i].getLocation());
             }
-        });
-        thread.start();
+        }).start();
     }
 
     private void setScore(){
-        Thread thread = new Thread(new Runnable() {
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 currGame.setScores(net.getScore(currGame.getGameID()));
@@ -297,8 +318,25 @@ public class Gameplay extends FragmentActivity implements OnMapReadyCallback {
                     }
                 });
             }
-        });
-        thread.start();
+        }).start();
+    }
+
+    private void joinGame(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                currGame = net.joinGame(gameID,PID);
+            }
+        }).start();
+    }
+
+    private void getPID(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                PID = net.getPID();
+            }
+        }).start();
     }
 
     private void drawBases(){

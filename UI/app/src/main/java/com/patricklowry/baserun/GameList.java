@@ -19,13 +19,25 @@ public class GameList{
 			System.out.println(GIDs[i]+" || "+currPlayers[i]+"/"+players[i]);
 		}
 	}
-	
-	public Game joinGame(int GID, int PID){
+
+	public int getGameCount(){
+		return gameCount;
+	}
+
+	public String[] getStrings(){
+		String[] temp = new String[gameCount];
+		for(int i=0; i<gameCount; i++){
+			temp[i] = GIDs[i] + " " + players[i] + "/" + currPlayers[i]+" Players";
+		}
+		return temp;
+	}
+
+	/*public Game joinGame(int GID, int PID){
 		for(int i=0; i<gameCount; i++){
 			if(GID == GIDs[i]){
 				return net.joinGame(GID,PID);
 			}
 		}
 			return null;
-	}
+	}*/
 }
