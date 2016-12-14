@@ -7,4 +7,4 @@ compiler:
   - g++
 
 script:
-  - maker.sh
+  - sh maker.sh
