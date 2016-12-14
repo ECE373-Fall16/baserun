@@ -1,10 +1,16 @@
+sudo: false
 language: c++
-
 os:
   - linux
-
 compiler:
   - g++
-
+install:
+  - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8"; fi
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+      packages:
+        - g++-4.8
 script:
   - sh maker.sh
