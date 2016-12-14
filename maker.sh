@@ -1,5 +1,5 @@
 #!/bin/sh
-cd $TRAVIS_BUILD_DIR/server
+cd ./server
 set -e
 make test
 ./tester

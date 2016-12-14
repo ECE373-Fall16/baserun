@@ -33,23 +33,65 @@
 #endif
 
 using namespace std;
-//
+
 int main () {
-  cout<<"Beginning team_class tests..."<<endl;
-  cout<<"Creating team with the following number of players: ";
-  team testTeam(4);
-  player_t *pl = new player_t;
-  pl->id = 1;
-  pl->points = 0;
-  pl->baseN = -1;
-
-  testTeam.addPlayer(*pl);
-
-  int testOne = testTeam.getNumPlayers();
-  if (testOne != 1) {
-    cout<<"getNumPlayers returned incrorrect value."<<endl;
-    cout<<"    Expected: "<<1<<", Actual: "<<testOne<<endl;
+  cout<<"\nBeginning team_class tests...\n"<<endl;
+  cout<<"Creating first test team with the following number of players: ";
+  //Create a test team
+  team testTeamOne(4);
+  cout<<"\nCreating second test team with the following number of players: ";
+  team testTeamTwo(4);
+  // Create a two test players
+  cout<<"\nCreating four test players\n"<<endl;
+  player_t *testPlayerOne = new player_t;
+  player_t *testPlayerTwo = new player_t;
+  player_t *testPlayerThree = new player_t;
+  player_t *testPlayerFour = new player_t;
+  testPlayerOne->id = 1;
+  testPlayerOne->points = 0;
+  testPlayerOne->baseN = -1;
+  testPlayerTwo->id = 2;
+  testPlayerTwo->points = 0;
+  testPlayerTwo->baseN = -1; // Is this right?
+  testPlayerThree->id = 3;
+  testPlayerThree->points = 0;
+  testPlayerThree->baseN = -1; // Is this right?
+  testPlayerFour->id = 4;
+  testPlayerFour->points = 0;
+  testPlayerFour->baseN = -1; // Is this right?
+  // Add test player one to test team one
+  cout<<"Adding first test player to first test team and verifying"<<endl;
+  testTeamOne.addPlayer(*testPlayerOne);
+  if (testTeamOne.getNumPlayers() != 1) {
+    int result = testTeamOne.getNumPlayers();
+    cout<<"ERROR: getNumPlayers of testTeamOne returned incorrect value."<<endl;
+    cout<<"    Expected: "<<1;
+    cout<<", Actual: "<<result<<endl;
+    exit(1);
   }
-  delete pl;
-  cout<<"SUCCESS: team_class tests finished."<<endl;
+  // Add the rest of the players to teams
+  cout<<"\nAdding remaining test players amongst the two test teams and verifying"<<endl;
+  testTeamTwo.addPlayer(*testPlayerTwo);
+  testTeamOne.addPlayer(*testPlayerThree);
+  testTeamTwo.addPlayer(*testPlayerFour);
+  if (testTeamOne.getNumPlayers() != 2) {
+    int result = testTeamOne.getNumPlayers();
+    cout<<"ERROR: getNumPlayers of testTeamOne returned incorrect value"<<endl;
+    cout<<"    Expected: "<<2;
+    cout<<", Actual: "<<result<<endl;
+    exit(1);
+  }
+  if (testTeamTwo.getNumPlayers() != 2) {
+    int result = testTeamOne.getNumPlayers();
+    cout<<"ERROR: getNumPlayers of testTeamTwo returned incorrect value"<<endl;
+    cout<<"    Expected: "<<2;
+    cout<<", Actual: "<<result<<endl;
+    exit(1);
+  }
+  cout<<"\nDeleting test players from memory\n"<<endl;
+  delete testPlayerOne;
+  delete testPlayerTwo;
+  delete testPlayerThree;
+  delete testPlayerFour;
+  cout<<"SUCCESS"<<endl;
 }
