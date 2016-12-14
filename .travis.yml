@@ -1,21 +1,18 @@
-sudo: false
-
 language: cpp
 
 os:
   - linux
 
 compiler:
-  - gcc
+  - g++
+
+before_install:
+  - sudo add-apt-get-repository -y ppa:ubuntu-toolchain-r/test
+  - sudo apt-get update -qq
 
 install:
-  - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8"; fi
-
-sources:
-      - ubuntu-toolchain-r-test
-      
-packages:
-        - g++-4.8
-
+  - sudo apt-get install -qq g++-4.8
+  - export CXX="g++-4.8"
+  
 script:
   - sh maker.sh
