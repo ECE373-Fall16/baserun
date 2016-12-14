@@ -1,9 +1,9 @@
 sudo: false
-language: c++
+language: cpp
 os:
   - linux
 compiler:
-  - g++
+  - gcc
 install:
   - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8"; fi
 addons:
