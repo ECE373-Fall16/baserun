@@ -41,7 +41,9 @@ session::session(long int id){
 	team1 = new team;
 	team2 = new team;
 	team1->setTeamNum(1);
+	team1->setColor('r');
 	team2->setTeamNum(2);
+	team2->setColor('b');
 	baseIndex = 0;
 }
 
@@ -55,7 +57,9 @@ session::session(int maxS){
 	team2 = new team(maxS/2);
 	baseIndex=0;
 	team1->setTeamNum(1);
+	team1->setColor('r');
 	team2->setTeamNum(2);
+	team2->setColor('b');
 }
 
 //destructor
@@ -67,12 +71,13 @@ void session::generateLocationArray(){
 	base_t *b=new base_t;
 	b->color='n';
 	b->score=0;
-	double theta = 2*3.1415/numBases;
+	double theta = 2*M_PI/numBases;
 	int i;
 	//creates spiral set of points as bases
-	for(i=0; i<numBases; i++){
-		b->x = start_x+(i*radius*1.0/numBases)*cos(i*theta);			
-		b->y = start_y+(i*radius*1.0/numBases)*sin(i*theta);
+	for(i=1; i<numBases+1; i++){
+		b->x = start_x+(i*1609.34*radius*1.0/(numBases+1.0))*cos(i*theta)*(180/M_PI)/(6371000);			
+		b->y = start_y+(i*1609.34*radius*1.0/(numBases+1.0))*sin(i*theta)*(180/M_PI)/(6371000*cos(b->x*M_PI/180));
+		cout<<"for base i, the x is: "<< b->x << " and the y is: " <<b->y<<endl;
 		addBase(b);			
 	}
 }
@@ -98,11 +103,31 @@ int session::conquerBase(int tmNum, long int id, double x, double y){
 
 	int i;
 	int success=0;
+	double con_x;
+	double con_y;
+	double diff;
+
+	player_t *pl = tm->getPlayer(id);
+
 	for(i=0;i<numBases;i++){
-		if(baseArr[i].x==x && baseArr[i].y==y){
+		con_x = (baseArr[i].x - x)*(M_PI/180)*6378137;
+		con_y = (baseArr[i].y - y)*(M_PI/180)*6378137*cos(y*M_PI/180);
+		diff = sqrt((con_x*con_x)+(con_y*con_y));
+		cout<<"DIFFERENCE:::: "<<diff<<endl;
+
+		if(diff <= baseRadius && pl->baseN != i){
 			if(baseArr[i].score == 0){
 				if(tm->getColor() != baseArr[i].color){
 					tm->playerScore(id);
+					if(pl->baseN != 1){
+						if(tm->getTeamNum() == 1){	
+							baseArr[pl->baseN].score--;	
+						}else{
+							baseArr[pl->baseN].score++;
+					}
+						
+					}
+					pl->baseN = i;
 					if(otherTm->getColor() == baseArr[i].color){
 						otherTm->downByOne();
 					}
@@ -126,6 +151,7 @@ void session::init_Player(long int pid){
 	player_t pl;
 	pl.id=pid;
 	pl.points=0;
+	pl.baseN = -1;
 	if(numPlayers<maxGameSize){
 		if(numPlayers%2==0){
 			team1->addPlayer(pl);
@@ -139,7 +165,7 @@ void session::init_Player(long int pid){
 //set the radius of the game
 void session::setRadius(double rad){
 	radius = rad;
-	baseRadius = 5;	
+	baseRadius = 25;	
 }
 
 //set the base radius for the game

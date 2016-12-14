@@ -9,6 +9,7 @@ typedef struct base{
 typedef struct player{
 	long int id;
 	int points;
+	int baseN;
 }player_t;
 
 

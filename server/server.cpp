@@ -257,6 +257,12 @@ public:
         	arrayData.push_back(xmlrpc_c::value_double(bases[i].x));
         	arrayData.push_back(xmlrpc_c::value_double(bases[i].y));
         	arrayData.push_back(xmlrpc_c::value_double(game->getBaseRadius()));
+		if (bases[i].color == 'r')
+	        arrayData.push_back(xmlrpc_c::value_int(1));
+		else if(bases[i].color == 'b')
+	        arrayData.push_back(xmlrpc_c::value_int(2));
+		else
+	        arrayData.push_back(xmlrpc_c::value_int(0));
 
 	}
 
@@ -322,7 +328,7 @@ public:
 	long int const pid(paramList.getInt(1));
 	double const x(paramList.getDouble(2));
 	double const y(paramList.getDouble(3));
-
+	cout<<"__________________________________________"<<endl;
 	cout<<gid<<" "<<pid<<" "<<x<<" "<<y<<endl;
 
         paramList.verifyEnd(4);
@@ -400,7 +406,7 @@ public:
 	cout<<stTime<<" <--times--> "<<enTime<<endl;	
         paramList.verifyEnd(3);
        
-	cout<<stTime<<" <--times--> "<<enTime<<endl;	
+	cout<<"SET TIME: "<<stTime<<" <--times--> "<<enTime<<endl;	
 
 	paramList.verifyEnd(3);
 	
@@ -427,7 +433,7 @@ public:
 	string stTime = game->getStartTime();
 	string enTime = game->getEndTime();
 
-	cout<<stTime<<" <--times--> "<<enTime<<endl;	
+	cout<<"GET TIME: "<<stTime<<" <--times--> "<<enTime<<endl;	
         vector<xmlrpc_c::value> arrayData;
         arrayData.push_back(xmlrpc_c::value_string(stTime));
         arrayData.push_back(xmlrpc_c::value_string(enTime));

@@ -2,8 +2,6 @@ CC=g++ -std=c++11
 CLASSPATH=./lib_java/commons-codec-1.3.jar:./lib_java/xmlrpc-2.0.1.jar:.
 DEBUG=-g
 CFLAGS=$(DEBUG) -c
-linkFlag=-l
-sqlLink=sqlite3
 SERVER_SOURCE=server.cpp
 SERVER_INCLUDE=-I. -I./include -I./include
 SERVER_LIB=./lib/libxmlrpc_server_abyss++.a ./lib/libxmlrpc_server++.a ./lib/libxmlrpc_abyss++.a ./lib/libxmlrpc_server_abyss.a ./lib/libxmlrpc_server.a ./lib/libxmlrpc_abyss.a -lssl -lcrypto ./lib/libxmlrpc++.a ./lib/libxmlrpc_util++.a ./lib/libxmlrpc.a ./lib/libxmlrpc_xmlparse.a ./lib/libxmlrpc_xmltok.a ./lib/libxmlrpc_util.a -lpthread     
@@ -14,8 +12,8 @@ CLIENT_LIB=./lib/libxmlrpc_client++.a ./lib/libxmlrpc_client.a ./lib/libxmlrpc++
 
 
 all:	ServerTest.class
-	$(CC) $(CFLAGS) $(SERVER_INCLUDE) server.cpp sessionList-class.cpp session-class.cpp team-class.cpp linkedList.cpp sqdata.cpp database.cpp $(linkFlag) $(sqlLink)
-	$(CC) -o xmlrpc-server server.o sessionList-class.o session-class.o team-class.o linkedList.o sqdata.o database.o $(SERVER_LIB)
+	$(CC) $(CFLAGS) $(SERVER_INCLUDE) server.cpp sessionList-class.cpp session-class.cpp team-class.cpp linkedList.cpp
+	$(CC) -o xmlrpc-server server.o sessionList-class.o session-class.o team-class.o linkedList.o $(SERVER_LIB)
 	
 server:
 	./xmlrpc-server
