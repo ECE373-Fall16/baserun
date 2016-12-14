@@ -17,6 +17,9 @@ all:	ServerTest.class
 	
 server:
 	./xmlrpc-server
+test:
+	$(CC) $(CFLAGS) test.cpp sessionList-class.cpp session-class.cpp team-class.cpp linkedList.cpp
+	$(CC) -o tester test.o sessionList-class.o session-class.o team-class.o linkedList.o
 
 client:
 	@java -classpath $(CLASSPATH) ServerTest
