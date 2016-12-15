@@ -126,11 +126,20 @@ int main () {
     exit(1);
   }
   cout<<"\n  Getting team 1's score and verifying"<<endl;
-  int score = teamOne->getTeamScore();
-  if (score != 1) {
+  int scoreOne = teamOne->getTeamScore();
+  if (scoreOne != 1) {
     cout<<"  ERROR: Failed to update team's score\n"<<endl;
     cout<<"    Expected: "<<1;
-    cout<<", Actual: "<<score<<endl;
+    cout<<", Actual: "<<scoreOne<<endl;
+    cout<<"FAILURE"<<endl;
+    exit(1);
+  }
+  cout<<"\n  Getting team 2's score and verifying"<<endl;
+  int scoreTwo = teamTwo->getTeamScore();
+  if (scoreTwo != 0) {
+    cout<<"  ERROR: Updated incorrect team's score\n"<<endl;
+    cout<<"    Expected: "<<0;
+    cout<<", Actual: "<<scoreTwo<<endl;
     cout<<"FAILURE"<<endl;
     exit(1);
   }
