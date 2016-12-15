@@ -102,33 +102,5 @@ int main () {
     exit(1);
   }
 
-  // if (testTeamOne.getNumPlayers() != 1) {
-  //   int result = testTeamOne.getNumPlayers();
-  //   cout<<"  ERROR: getNumPlayers of testTeamOne returned incorrect value."<<endl;
-  //   cout<<"    Expected: "<<1;
-  //   cout<<", Actual: "<<result<<endl;
-  //   cout<<"\nFAILURE"<<endl;
-  //   exit(1);
-  // }
-  // // Add the rest of the players to teams
-  // cout<<"\n  Adding remaining test players amongst the two test teams and verifying"<<endl;
-  //
-  // if (testTeamOne.getNumPlayers() != 2) {
-  //   int result = testTeamOne.getNumPlayers();
-  //   cout<<"  ERROR: getNumPlayers of testTeamOne returned incorrect value"<<endl;
-  //   cout<<"    Expected: "<<2;
-  //   cout<<", Actual: "<<result<<endl;
-  //   cout<<"\nFAILURE"<<endl;
-  //   exit(1);
-  // }
-  // if (testTeamTwo.getNumPlayers() != 2) {
-  //   int result = testTeamOne.getNumPlayers();
-  //   cout<<"  ERROR: getNumPlayers of testTeamTwo returned incorrect value"<<endl;
-  //   cout<<"    Expected: "<<2;
-  //   cout<<", Actual: "<<result<<endl;
-  //   cout<<"\nFAILURE"<<endl;
-  //   exit(1);
-  // }
-
   cout<<"SUCCESS"<<endl;
 }
