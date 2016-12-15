@@ -17,6 +17,8 @@ using namespace std;
 pthread_mutex_t count_mutex;
 pthread_mutex_t callback_mutex;
 
+
+// function that converts the returned struct to a struct containing array that can be used by the server easily
 array_struct convert(return_structure fun){
       array_struct water;
       water.temp_row_count1 = fun.temp_row_count;
@@ -66,13 +68,12 @@ static int select_callback(void* data, int argc, char **argv, char **azColName)
    return_value->angle[return_value->temp_row_count]=argv[i]; 
       }
    }
-  // printf("\n");
    return_value->temp_row_count++;
    pthread_mutex_unlock(&callback_mutex);
 
    return 0;
 }
-
+ //callback function designed to return the number of columns so that we know how many times we need to call the select callback function
 static int count_callback(void* data, int argc, char **argv, char **azColName) 
 {
    pthread_mutex_lock(&count_mutex);
@@ -82,8 +83,12 @@ static int count_callback(void* data, int argc, char **argv, char **azColName)
 
    return 0;
  }
-
+// function that is passed the map number and returns associated map
 return_structure query(int here){
+
+// Initializing the mutex locks
+   pthread_mutex_init(&count_mutex, NULL);
+   pthread_mutex_init(&callback_mutex, NULL);
 
 
 return_structure return_value;
@@ -94,14 +99,14 @@ return_structure return_value;
    const char* sql;
    string sql_string;  
    const char* data = "Callback function called";
-
+// takes the integer that was passed and converts it into a string that can be converted to a character array so that it can be executed as sql statements
    ostringstream z;
    z << here;
    string c = z.str();
    string d = "SELECT * from BASELAYOUTS where BASE_NUMBER = " + c;
    c = "SELECT COUNT(*) from BASELAYOUTS where BASE_NUMBER = " + c;
    sql = c.c_str();
-   
+ //   open the datatbase
 rc = sqlite3_open("baselayouts.db", &db);
    if( rc ){
       fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
@@ -109,33 +114,38 @@ rc = sqlite3_open("baselayouts.db", &db);
    }else{
       fprintf(stderr, "Opened database successfully\n");
    }
-
+// figure out how many times we need to query from the database
    return_value.count_done = -1;
-   //sql = "SELECT COUNT(*) from BASELAYOUTS WHERE BASE_NUMBER = 4";
    rc = sqlite3_exec(db, sql, count_callback, (void*)&return_value, &zErrMsg);
    if( rc != SQLITE_OK ){
       fprintf(stderr, "SQL error: %s\n", zErrMsg);
       sqlite3_free(zErrMsg);
    }
-
+// Wait until the count_callback function from above is finished executing. We 
+   // loop until count_done is not -1.  count_done stores the total number of rows we
+   // expect from our SQL query. Note here that we need to hold the lock, since the 
+   // callback function is also modifying count_done.
    while (1) {
      pthread_mutex_lock(&count_mutex);
-     //cout << return_value.temp_row_count << endl;
      if (return_value.count_done != -1) {
    break;
      }
      pthread_mutex_unlock(&count_mutex);
    }
-
+// We now execute our SQL query from above. We give it a separate callback function, and pass in
+   // a pointer to the same structure as before. Below, we wait until the callback function has been
+   // called for each row expected by the query.
 return_value.temp_row_count = 0;
    sql = d.c_str();
-   //sql = "SELECT * from BASELAYOUTS WHERE BASE_NUMBER = 4";
    rc = sqlite3_exec(db, sql, select_callback, (void*)&return_value, &zErrMsg);
    if( rc != SQLITE_OK ){
       fprintf(stderr, "SQL error: %s\n", zErrMsg);
       sqlite3_free(zErrMsg);
    }
-
+// The select_callback function above increments temp_row_count each time it is called. Once temp_row_count
+   // equals count_done, we know that the select_callback function has been called the expected number of 
+   // times, and we can move on. We need to hold the lock here, since the callback functions are modifying
+   // temp_row_count.
 while (1) {
      pthread_mutex_lock(&callback_mutex);
      if (return_value.temp_row_count == return_value.count_done) {
@@ -144,37 +154,10 @@ while (1) {
      pthread_mutex_unlock(&callback_mutex);
    }
 
-    // Here, we just print out the results from the query that we stored in the select_callback function.
-   // for(int i = 0; i < return_value.count_done; i++) {
-   //    cout << "BASE_NUMBER = " << return_value.number[i] << endl;
-   //   cout << "NORMALIZED_RADIUS = " << return_value.radii[i] << endl;
-   //   cout << "ANGLE = " << return_value.angle[i] << endl;
-   // } 
-
+//we close the database then return our struct to be converted and used by the server
    sqlite3_close(db);
    return return_value;
 }
 
 
-
-
-/*
-   ostringstream z;
-   z << 6;
-   string c = z.str();
-   c = "SELECT * from BASELAYOUTS where BASE_NUMBER = " + c;
-   sql = c.c_str();
-  Execute SQL statement 
-   rc = sqlite3_exec(db, sql, callback, (void*)data, &zErrMsg);
-   if( rc != SQLITE_OK ){
-      fprintf(stderr, "SQL error: %s\n", zErrMsg);
-      sqlite3_free(zErrMsg);
-   }else{
-      fprintf(stdout, "Operation done successfully\n");
-   }
-   sqlite3_close(db);
-   return 0;
-
-}
-*/
 
