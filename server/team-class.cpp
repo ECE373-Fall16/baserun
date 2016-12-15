@@ -17,7 +17,6 @@ team::team(){
 
 //constructor for team with parameter max players
 team::team(int maxP){
-	cout<<maxP<<endl;
 	char color = 'n';
 	numPlayers = 0;
 	teamScore =0;
@@ -32,12 +31,12 @@ team::~team(){}
 void team::addPlayer(player_t p){
 	if (numPlayers<maxPlayers){
 		playerArr[numPlayers++] = p;
-	} 
+	}
 }
 
 //returns total score of the team
 int team::getTeamScore(){
-	return teamScore;	
+	return teamScore;
 }
 
 //returns player when given their player id

@@ -37,7 +37,7 @@ using namespace std;
 session::session(long int id){
 	gid = id;
 	numBases=0;
-	numPlayers=0;	
+	numPlayers=0;
 	team1 = new team;
 	team2 = new team;
 	team1->setTeamNum(1);
@@ -52,7 +52,7 @@ session::session(int maxS){
 	gid=0;
 	numBases=0;
 	numPlayers=0;
- 	maxGameSize = maxS;	
+ 	maxGameSize = maxS;
 	team1 = new team(maxS/2);
 	team2 = new team(maxS/2);
 	baseIndex=0;
@@ -67,7 +67,7 @@ session::~session(){}
 
 //generates the bases
 void session::generateLocationArray(){
-	baseArr = new base_t[numBases];	
+	baseArr = new base_t[numBases];
 	base_t *b=new base_t;
 	b->color='n';
 	b->score=0;
@@ -75,22 +75,20 @@ void session::generateLocationArray(){
 	int i;
 	//creates spiral set of points as bases
 	for(i=1; i<numBases+1; i++){
-		b->x = start_x+(i*1609.34*radius*1.0/(numBases+1.0))*cos(i*theta)*(180/M_PI)/(6371000);			
+		b->x = start_x+(i*1609.34*radius*1.0/(numBases+1.0))*cos(i*theta)*(180/M_PI)/(6371000);
 		b->y = start_y+(i*1609.34*radius*1.0/(numBases+1.0))*sin(i*theta)*(180/M_PI)/(6371000*cos(b->x*M_PI/180));
-		cout<<"for base i, the x is: "<< b->x << " and the y is: " <<b->y<<endl;
-		addBase(b);			
+		addBase(b);
 	}
 }
 
 //add a base to the base array
 void session::addBase(base_t *b){
-	cout<<baseIndex<<endl;
 	baseArr[baseIndex++] = *b;
 }
 
 //checks to see if base gets conquered, and scores appropriately
 int session::conquerBase(int tmNum, long int id, double x, double y){
-	
+
 	team *tm;
 	team *otherTm;
 	if(team1->getTeamNum()==tmNum){
@@ -120,12 +118,12 @@ int session::conquerBase(int tmNum, long int id, double x, double y){
 				if(tm->getColor() != baseArr[i].color){
 					tm->playerScore(id);
 					if(pl->baseN != 1){
-						if(tm->getTeamNum() == 1){	
-							baseArr[pl->baseN].score--;	
+						if(tm->getTeamNum() == 1){
+							baseArr[pl->baseN].score--;
 						}else{
 							baseArr[pl->baseN].score++;
 					}
-						
+
 					}
 					pl->baseN = i;
 					if(otherTm->getColor() == baseArr[i].color){
@@ -133,10 +131,10 @@ int session::conquerBase(int tmNum, long int id, double x, double y){
 					}
 					baseArr[i].color = tm->getColor();
 				}
-					success = 1;					
+					success = 1;
 			}
-			if(tm->getTeamNum() == 1){	
-				baseArr[i].score++;	
+			if(tm->getTeamNum() == 1){
+				baseArr[i].score++;
 			}else{
 				baseArr[i].score--;
 			}
@@ -165,7 +163,7 @@ void session::init_Player(long int pid){
 //set the radius of the game
 void session::setRadius(double rad){
 	radius = rad;
-	baseRadius = 25;	
+	baseRadius = 25;
 }
 
 //set the base radius for the game
@@ -204,7 +202,7 @@ void session::setNumBases(int n){numBases = n;}
 int session::getPTeamNum(long int pid){
 	if(team1->playerThere(pid)){return 1;}
 	if(team2->playerThere(pid)){return 2;}
-	return 0;	
+	return 0;
 }
 
 //restarts the game -- yet to be implemented
@@ -245,4 +243,3 @@ string session::getStartTime(){return sTime;}
 
 //return end time
 string session::getEndTime(){return eTime;}
-
