@@ -58,6 +58,7 @@ int main () {
     cout<<"FAILURE"<<endl;
     exit(1);
   }
+  cout<<"  Verifying that game has correct number of basses"<<endl;
   int numBases = game->getNumBases();
   if (numBases != 8) {
     cout<<"  ERROR: The returned number of bases for the game is incorrect\n"<<endl;
@@ -66,6 +67,7 @@ int main () {
     cout<<"FAILURE"<<endl;
     exit(1);
   }
+  cout<<"\n  Verifying that game has correct gameplay radius"<<endl;
   double radius = game->getRadius();
   if (radius != 0.25) {
     cout<<"  ERROR: The returned radius for the game is incorrect\n"<<endl;
@@ -75,6 +77,7 @@ int main () {
     exit(1);
   }
   // Verify that first player was added on create
+  cout<<"\n  Verifying that the first player was added to team one on game creation"<<endl;
   int teamNumOne = game->getPTeamNum(0);
   if (teamNumOne != 1) {
     cout<<"  ERROR: Failed to create and add initial player to first team\n"<<endl;
@@ -82,19 +85,23 @@ int main () {
     exit(1);
   }
   // Add 3 more players to game
+  cout<<"\n  Adding three more players to the game\n"<<endl;
   game->init_Player(1);
   game->init_Player(2);
   game->init_Player(3);
+  cout<<"  Getting the two teams from the current game\n"<<endl;
   // Get teams from game
   team* teamOne = game->getTeam(teamNumOne);
   team* teamTwo = game->getTeam(teamNumOne+1);
 
+  cout<<"  Verifying that team one only has two players"<<endl;
   int numPlayersTeamOne = teamOne->getNumPlayers();
   if (numPlayersTeamOne != 2) {
     cout<<"  ERROR: Failed to add the third player to team one\n"<<endl;
     cout<<"FAILURE"<<endl;
     exit(1);
   }
+  cout<<"\n  Verifying that team two only has two players"<<endl;
   int numPlayersTeamTwo = teamTwo->getNumPlayers();
   if (numPlayersTeamTwo != 2) {
     cout<<"  ERROR: Failed to add the second and fourth players to team two\n"<<endl;
@@ -102,5 +109,5 @@ int main () {
     exit(1);
   }
 
-  cout<<"SUCCESS"<<endl;
+  cout<<"\nSUCCESS"<<endl;
 }
