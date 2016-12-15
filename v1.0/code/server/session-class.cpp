@@ -111,7 +111,7 @@ int session::conquerBase(int tmNum, long int id, double x, double y){
 		con_x = (baseArr[i].x - x)*(M_PI/180)*6378137;
 		con_y = (baseArr[i].y - y)*(M_PI/180)*6378137*cos(y*M_PI/180);
 		diff = sqrt((con_x*con_x)+(con_y*con_y));
-		cout<<"DIFFERENCE:::: "<<diff<<endl;
+		//cout<<"DIFFERENCE:::: "<<diff<<endl;
 
 		if(diff <= baseRadius && pl->baseN != i){
 			if(baseArr[i].score == 0){

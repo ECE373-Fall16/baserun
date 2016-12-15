@@ -58,7 +58,7 @@ int main () {
     cout<<"FAILURE"<<endl;
     exit(1);
   }
-  cout<<"  Verifying that game has correct number of basses"<<endl;
+  cout<<"  Verifying that game has correct number of bases"<<endl;
   int numBases = game->getNumBases();
   if (numBases != 8) {
     cout<<"  ERROR: The returned number of bases for the game is incorrect\n"<<endl;
@@ -77,10 +77,12 @@ int main () {
     exit(1);
   }
   // Verify that first player was added on create
-  cout<<"\n  Verifying that the first player was added to team one on game creation"<<endl;
+  cout<<"\n  Verifying that player 1 was added to team 1 on game creation"<<endl;
   int teamNumOne = game->getPTeamNum(0);
   if (teamNumOne != 1) {
-    cout<<"  ERROR: Failed to create and add initial player to first team\n"<<endl;
+    cout<<"  ERROR: Failed to create and add player 1 to team 1\n"<<endl;
+    cout<<"    Expected: "<<1;
+    cout<<", Actual: "<<teamNumOne<<endl;
     cout<<"FAILURE"<<endl;
     exit(1);
   }
@@ -94,20 +96,43 @@ int main () {
   team* teamOne = game->getTeam(teamNumOne);
   team* teamTwo = game->getTeam(teamNumOne+1);
 
-  cout<<"  Verifying that team one only has two players"<<endl;
+  cout<<"  Verifying that team 1 only has two players"<<endl;
   int numPlayersTeamOne = teamOne->getNumPlayers();
   if (numPlayersTeamOne != 2) {
-    cout<<"  ERROR: Failed to add the third player to team one\n"<<endl;
+    cout<<"  ERROR: Failed to add player 3 to the team 1\n"<<endl;
+    cout<<"    Expected: "<<2;
+    cout<<", Actual: "<<numPlayersTeamOne<<endl;
     cout<<"FAILURE"<<endl;
     exit(1);
   }
-  cout<<"\n  Verifying that team two only has two players"<<endl;
+  cout<<"\n  Verifying that team 2 only has two players"<<endl;
   int numPlayersTeamTwo = teamTwo->getNumPlayers();
   if (numPlayersTeamTwo != 2) {
-    cout<<"  ERROR: Failed to add the second and fourth players to team two\n"<<endl;
+    cout<<"  ERROR: Failed to add players 2 and 4 to team 2\n"<<endl;
+    cout<<"    Expected: "<<2;
+    cout<<", Actual: "<<numPlayersTeamTwo<<endl;
     cout<<"FAILURE"<<endl;
     exit(1);
   }
 
+  // Have player one capture a base
+  cout<<"\n  Capturing first base with player 1"<<endl;
+  int capture = game->conquerBase(teamNumOne, 0, 0.000284279, 0.000284279);
+  if (capture != 1) {
+    cout<<"  ERROR: Failed to capture first base with exact coordinates\n"<<endl;
+    cout<<"    Expected: "<<1;
+    cout<<", Actual: "<<capture<<endl;
+    cout<<"FAILURE"<<endl;
+    exit(1);
+  }
+  cout<<"\n  Getting team 1's score and verifying"<<endl;
+  int score = teamOne->getTeamScore();
+  if (score != 1) {
+    cout<<"  ERROR: Failed to update team's score\n"<<endl;
+    cout<<"    Expected: "<<1;
+    cout<<", Actual: "<<score<<endl;
+    cout<<"FAILURE"<<endl;
+    exit(1);
+  }
   cout<<"\nSUCCESS"<<endl;
 }
